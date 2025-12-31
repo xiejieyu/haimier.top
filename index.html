@@ -7,28 +7,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333;line-height:1.8}/* ↑ 统一行高 */
+        body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333;line-height:1.8}
+        
+        /* 头部样式保持不变 */
         header{background:#FBC500;color:#fff;padding:25px 0}
-        .wrap{width:90%;max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+        .wrap{width:90%;max-width:1100px;margin:auto}
+        
+        /* 只有header中的.wrap保持flex布局 */
+        header .wrap {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+        
+        /* 其他部分的.wrap都是block布局 */
+        section .wrap {
+            display:block;
+        }
+        
         .logo-txt{display:flex;align-items:center;gap:12px}
         .logo-txt img{height:64px}
         h1{font-size:2.2rem;margin-bottom:10px}
+        
+        /* Banner区域 */
         .banner{background:#FBC500 url(slogan.png) center/cover no-repeat;height:420px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}
         .banner img{max-width:640px;width:90%}
-        section{padding:60px 0;margin-bottom:40px}/* ↑ 板块间换行 */
-        h3{font-size:1.8rem;margin-bottom:20px;color:#FBC500;border-left:5px solid #FBC500;padding-left:10px}
-        p{line-height:1.8;margin-bottom:15px}
-        .works{display:flex;gap:20px;flex-wrap:wrap}
+        
+        /* 内容区域 - 确保标题和内容分行 */
+        section{padding:60px 0;margin-bottom:40px}
+        h3{font-size:1.8rem;margin-bottom:20px;color:#FBC500;border-left:5px solid #FBC500;padding-left:10px;display:block;width:100%}
+        p{line-height:1.8;margin-bottom:15px;display:block;width:100%}
+        
+        /* 作品展示区域 */
+        .works{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
         .works a{flex:1 1 250px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
         .works img{width:100%;display:block;transition:.3s}
         .works a:hover img{transform:scale(1.05)}
+        
+        /* 二维码区域 */
         .qr{text-align:center}
         .qr img{width:200px;margin-top:10px}
-        .team{display:flex;gap:20px;flex-wrap:wrap}
+        
+        /* 管理团队区域 */
+        .team{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
         .card{flex:1 1 220px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:20px;text-align:center}
         .card img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:10px}
+        
+        /* 联系信息 */
+        .contact-info {margin-top:20px}
+        
+        /* 底部样式 */
         footer{background:#FBC500;color:#fff;padding:40px 0;text-align:center}
-        @media(max-width:700px){.banner h2{font-size:1.8rem}}
+        
+        /* 间距元素 */
+        .spacer {height:20px;display:block}
+        
+        /* 响应式设计 */
+        @media(max-width:700px){
+            .banner h2{font-size:1.8rem}
+            .team, .works {flex-direction:column}
+            .card, .works a {flex:1 1 auto}
+        }
     </style>
 </head>
 <body>
@@ -60,9 +99,8 @@
         <div class="spacer"></div>
         <div class="works">
            <a href="https://www.bilibili.com/video/BV1Tx4y1f7Uw?spm_id_from=333.788.player.switch&vd_source=48e557edd3bf164f1acf9453d12b659c" target="_blank"><img src="新封面.png" alt="2024AmongUs拜年祭"></a>
-<a href="https://www.bilibili.com/video/BV1gPFpezEZP?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c" target="_blank"><img src="封面.jpg" alt="2025AmongUs拜年纪"></a>
-
-<a href="https://www.bilibili.com/video/BV1M2mYYqE2F?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c" target="_blank"><img src="坏人与好人（7）-封面.jpg" alt="坏人与好人(7)"></a>
+           <a href="https://www.bilibili.com/video/BV1gPFpezEZP?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c" target="_blank"><img src="封面.jpg" alt="2025AmongUs拜年纪"></a>
+           <a href="https://www.bilibili.com/video/BV1M2mYYqE2F?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c" target="_blank"><img src="坏人与好人（7）-封面.jpg" alt="坏人与好人(7)"></a>
         </div>
     </div>
 </section>
@@ -127,9 +165,11 @@
 <section>
     <div class="wrap">
         <h3>联系我们</h3>
-        <p>电话：16617152404<br>
-        邮箱：<a href="mailto:lvjianze@haimier.top">lvjianze@haimier.top</a> &nbsp;<a href="mailto:haimier@qq.com">haimier@qq.com</a><br>
-        地址：吉林省四平市伊通满族自治县靠山镇九龙村二组</p>
+        <div class="contact-info">
+            <p>电话：16617152404<br>
+            邮箱：<a href="mailto:lvjianze@haimier.top">lvjianze@haimier.top</a> &nbsp;<a href="mailto:haimier@qq.com">haimier@qq.com</a><br>
+            地址：吉林省四平市伊通满族自治县靠山镇九龙村二组</p>
+        </div>
     </div>
 </section>
 
