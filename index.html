@@ -7,26 +7,32 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333}
-        header{background:#003366;color:#fff;padding:20px 0}
-        .wrap{width:90%;max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between}
-        .logo{height:42px}
+        header{background:#003366;color:#fff;padding:25px 0}
+        .wrap{width:90%;max-width:1100px;margin:auto}
         h1{font-size:2.2rem;margin-bottom:10px}
         .banner{background:url(https://raw.githubusercontent.com/xiejieyu/haimier.top/main/slogan.png) center/cover no-repeat;height:420px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}
         .banner h2{font-size:2.4rem;font-weight:400;letter-spacing:1px}
-        main{padding:60px 0}
-        section{margin-bottom:60px}
-        h3{font-size:1.8rem;margin-bottom:15px;color:#003366}
-        p{line-height:1.8}
+        section{padding:60px 0}
+        h3{font-size:1.8rem;margin-bottom:20px;color:#003366;border-left:5px solid #003366;padding-left:10px}
+        p{line-height:1.8;margin-bottom:15px}
+        .works{display:flex;gap:20px;flex-wrap:wrap}
+        .works a{flex:1 1 250px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+        .works img{width:100%;display:block;transition:.3s}
+        .works a:hover img{transform:scale(1.05)}
+        .qr{text-align:center}
+        .qr img{width:200px;margin-top:10px}
+        .team{display:flex;gap:20px;flex-wrap:wrap}
+        .card{flex:1 1 220px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:20px;text-align:center}
+        .card img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:10px}
         footer{background:#003366;color:#fff;padding:40px 0;text-align:center}
-        footer a{color:#fff;text-decoration:none}
         @media(max-width:700px){.banner h2{font-size:1.8rem}}
     </style>
 </head>
 <body>
 <header>
     <div class="wrap">
-        <img src="https://raw.githubusercontent.com/xiejieyu/haimier.top/main/LOGO.jpg" alt="海米尔" class="logo">
-        <span>海米尔（吉林）文化传播有限公司</span>
+        <h1>海米尔（吉林）文化传播有限公司</h1>
+        <p>以年少之心 敬未来无限可能</p>
     </div>
 </header>
 
@@ -34,28 +40,32 @@
     <h2>以年少之心 敬未来无限可能</h2>
 </div>
 
-<main>
-    <section>
-        <div class="wrap">
-            <h3>关于我们</h3>
-            <p>海米尔（吉林）文化传播有限公司简称海米尔文化，是一家MCN与版权代理的结合公司，成立于2025年8月21日，公司创始人：吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
-        </div>
-    </section>
-
-    <section>
-        <div class="wrap">
-            <h3>联系我们</h3>
-            <p>电话：16617152404<br>
-            邮箱：<a href="mailto:lvjianze@haimier.top">lvjianze@haimier.top</a> &nbsp;<a href="mailto:haimier@qq.com">haimier@qq.com</a><br>
-            地址：吉林省四平市伊通满族自治县靠山镇九龙村二组</p>
-        </div>
-    </section>
-</main>
-
-<footer>
+<section>
     <div class="wrap">
-        © 2025 海米尔（吉林）文化传播有限公司 版权所有
+        <h3>关于我们</h3>
+        <p>海米尔（吉林）文化传播有限公司简称海米尔文化，是一家MCN与版权代理的结合公司，成立于2025年8月21日，公司创始人：吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
     </div>
-</footer>
-</body>
-</html>
+</section>
+
+<section>
+    <div class="wrap">
+        <h3>作品示例</h3>
+        <div class="works">
+            <a href="https://www.bilibili.com/video/BV1Tx4y1f7Uw/" target="_blank"><img src="https://raw.githubusercontent.com/xiejieyu/haimier.top/main/新封面.jpg" alt="2024AmongUs拜年祭"></a>
+            <a href="https://www.bilibili.com/video/BV1gPFpezEZP/" target="_blank"><img src="https://raw.githubusercontent.com/xiejieyu/haimier.top/main/封面.jpg" alt="2025AmongUs拜年纪"></a>
+            <a href="https://www.bilibili.com/video/BV1M2mYYqE2F/" target="_blank"><img src="https://raw.githubusercontent.com/xiejieyu/haimier.top/main/坏人与好人（7）-封面.jpg" alt="坏人与好人(7)"></a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="wrap qr">
+        <h3>微信公众号</h3>
+        <p>扫码关注</p>
+        <img src="https://raw.githubusercontent.com/xiejieyu/haimier.top/main/公众号二维码.jpg" alt="微信二维码">
+    </div>
+</section>
+
+<section>
+    <div class="wrap">
+        
