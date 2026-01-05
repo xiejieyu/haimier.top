@@ -17,6 +17,9 @@
     .back{text-align:center;margin-top:40px}
     .back a{display:inline-block;background:#FBC500;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none}
     .back a:hover{opacity:.9}
+    .works a{width:160px;font-size:0.875rem}   /* 卡片整体缩小 */
+.works img{width:100%;height:90px;object-fit:cover} /* 图片固定小尺寸 */
+.works .desc{margin:6px 0 0;text-align:center;color:#555} /* 描述文字 */
     p {
   font-size: 1.5rem;
 }
@@ -26,7 +29,7 @@
 <div class="wrap">
   <!-- 头图 + 简介 -->
   <div class="hero">
-    <img src="../jieyu.jpg" alt="杰鱼">
+    <img src="../jie.jpg" alt="杰鱼">
     <h1>杰鱼记忆有点差</h1>
     <p>海米尔文化创始人、最高领导人、艺人，一手引领公司发展，掌控运营与技能全局</p>
     <p>擅长创意策划、视频制作、版权运营；致力于用年轻视角创造无限内容价值</p>
@@ -35,9 +38,10 @@
   <!-- 代表作 -->
   <h2>代表作</h2>
   <div class="works">
-    <a href="https://www.bilibili.com/video/BV1M2mYYqE2F/" target="_blank">
-      <img src="../坏人与好人（7）-封面.jpg" alt="坏人与好人（7）">
-    </a>
+  <a href="https://www.bilibili.com/video/BV1M2mYYqE2F/" target="_blank">
+    <img src="../坏人与好人（7）-封面.jpg" alt="坏人与好人（7）">
+    <p class="desc">坏人与好人（7）</p>
+  </a>
   </div>
 
   <!-- 返回主站 -->
