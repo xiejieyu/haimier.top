@@ -44,6 +44,89 @@
         .card{flex:1 1 220px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:20px;text-align:center}
         .card img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:10px;aspect-ratio:1/1}
         
+        /* 文章墙样式 */
+        .article-wall {
+            margin-top: 20px;
+        }
+        
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .article-item {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .article-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,.15);
+        }
+        
+        .article-item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .article-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #FBC500;
+            margin-bottom: 8px;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .article-date {
+            color: #999;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .page-btn {
+            background: #FBC500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+        
+        .page-btn:hover:not(:disabled) {
+            opacity: 0.9;
+        }
+        
+        .page-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-info {
+            font-size: 1rem;
+            color: #666;
+        }
+        
         /* 联系信息 */
         .contact-info {margin-top:20px}
         
@@ -58,6 +141,11 @@
             .banner h2{font-size:1.8rem}
             .team, .works {flex-direction:column}
             .card, .works a {flex:1 1 auto}
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
         }
         
         /* 去掉杰鱼卡片下划线 */
@@ -97,26 +185,19 @@
 
 <section>
     <div class="wrap">
-    <h3>文化墙</h3>
-    <p>
-        <a href="https://mp.weixin.qq.com/s/OVGXN4bx5_MvDuJhdsjk3A?scene=1&click_id=2" target="_blank" rel="noopener" style="color:#FBC500;text-decoration:none;">
-            海米尔文化祝贺大家2026新年快乐
-        </a>
-        <span style="color:#999;font-size:0.9em;margin-left:15px;">发布日期：2026年1月1日</span>
-    </p>
-    <p>
-        <a href="https://mp.weixin.qq.com/s/u8K0ABrptwLs5CFiIzU_hA" target="_blank" rel="noopener" style="color:#FBC500;text-decoration:none;">
-            海米尔文化官方网站正式投入使用
-        </a>
-        <span style="color:#999;font-size:0.9em;margin-left:15px;">发布日期：2026年1月1日</span>
-    </p>
-    <p>
-        <a href="https://mp.weixin.qq.com/s/fO0EfimpkZvOAY0cUu_Mkg" target="_blank" rel="noopener" style="color:#FBC500;text-decoration:none;">
-            海米尔文化官方吉祥物公布
-        </a>
-        <span style="color:#999;font-size:0.9em;margin-left:15px;">发布日期：2026年1月3日</span>
-    </p>
-</div>
+        <h3>文章墙</h3>
+        <div class="article-wall">
+            <div class="article-list" id="articleList">
+                <!-- 文章列表会通过JavaScript动态加载 -->
+            </div>
+            
+            <div class="pagination">
+                <button class="page-btn" id="prevBtn" disabled>上一页</button>
+                <span class="page-info" id="pageInfo">第 <span id="currentPage">1</span> 页 / 共 <span id="totalPages">1</span> 页</span>
+                <button class="page-btn" id="nextBtn">下一页</button>
+            </div>
+        </div>
+    </div>
 </section>
 
     
@@ -254,5 +335,112 @@
         © 2026 海米尔（吉林）文化传播有限公司 版权所有
     </div>
 </footer>
+
+<script>
+// 文章数据
+const articles = [
+    {
+        title: "海米尔文化祝贺大家2026新年快乐",
+        link: "https://mp.weixin.qq.com/s/OVGXN4bx5_MvDuJhdsjk3A?scene=1&click_id=2",
+        date: "2026年1月1日",
+        author: "海米尔文化"
+    },
+    {
+        title: "海米尔文化官方网站正式投入使用",
+        link: "https://mp.weixin.qq.com/s/u8K0ABrptwLs5CFiIzU_hA",
+        date: "2026年1月1日",
+        author: "海米尔文化"
+    },
+    {
+        title: "海米尔文化官方吉祥物公布",
+        link: "https://mp.weixin.qq.com/s/fO0EfimpkZvOAY0cUu_Mkg",
+        date: "2026年1月3日",
+        author: "海米尔文化"
+    },
+    // 可以继续添加更多文章
+    {
+        title: "海米尔文化发展规划白皮书",
+        link: "#",
+        date: "2026年1月5日",
+        author: "海米尔文化"
+    },
+    {
+        title: "我们的核心价值观",
+        link: "#",
+        date: "2026年1月4日",
+        author: "海米尔文化"
+    },
+    {
+        title: "业务合作指南",
+        link: "#",
+        date: "2026年1月2日",
+        author: "海米尔文化"
+    }
+];
+
+// 分页设置
+const articlesPerPage = 3;
+let currentPage = 1;
+
+// DOM元素
+const articleList = document.getElementById('articleList');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const currentPageSpan = document.getElementById('currentPage');
+const totalPagesSpan = document.getElementById('totalPages');
+
+// 计算总页数
+const totalPages = Math.ceil(articles.length / articlesPerPage);
+totalPagesSpan.textContent = totalPages;
+
+// 渲染文章列表
+function renderArticles() {
+    articleList.innerHTML = '';
+    
+    const startIndex = (currentPage - 1) * articlesPerPage;
+    const endIndex = startIndex + articlesPerPage;
+    const pageArticles = articles.slice(startIndex, endIndex);
+    
+    pageArticles.forEach(article => {
+        const articleItem = document.createElement('div');
+        articleItem.className = 'article-item';
+        
+        articleItem.innerHTML = `
+            <a href="${article.link}" target="_blank" rel="noopener">
+                <div class="article-title">${article.title}</div>
+                <div class="article-meta">
+                    <span class="article-date">发布日期：${article.date}</span>
+                    <span class="article-author">发布者：${article.author}</span>
+                </div>
+            </a>
+        `;
+        
+        articleList.appendChild(articleItem);
+    });
+    
+    // 更新分页按钮状态
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+    currentPageSpan.textContent = currentPage;
+}
+
+// 分页按钮事件
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        renderArticles();
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderArticles();
+    }
+});
+
+// 初始化
+renderArticles();
+</script>
 </body>
 </html>
