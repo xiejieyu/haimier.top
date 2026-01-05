@@ -1,18 +1,46 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<a href="/jieyu/">杰鱼介绍</a>
 <head>
   <meta charset="UTF-8">
   <title>杰鱼 - 海米尔文化官方网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333;text-align:center;padding:60px}
-    h1{color:#FBC500}
-    a{color:#FBC500;text-decoration:none}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333;margin:0;padding:0;line-height:1.8}
+    .wrap{width:90%;max-width:1100px;margin:auto;padding:60px 0}
+    h1,h2{color:#FBC500}
+    .hero{text-align:center;margin-bottom:40px}
+    .hero img{width:200px;height:200px;border-radius:50%;object-fit:cover;margin-bottom:20px}
+    .works{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+    .works a{flex:1 1 250px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .works img{width:100%;display:block;transition:.3s}
+    .works a:hover img{transform:scale(1.05)}
+    .back{text-align:center;margin-top:40px}
+    .back a{display:inline-block;background:#FBC500;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none}
+    .back a:hover{opacity:.9}
   </style>
 </head>
 <body>
-  <h1>杰鱼记忆有点差</h1>
-  <p>这里放杰鱼的个人介绍、作品、联系方式等。</p>
-  <p><a href="../">← 返回主站</a></p>
+<div class="wrap">
+  <!-- 头图 + 简介 -->
+  <div class="hero">
+    <img src="../jieyu.jpg" alt="杰鱼">
+    <h1>杰鱼</h1>
+    <p>海米尔文化创始人、最高领导人、艺人，一手引领公司发展，掌控运营与技能全局</p>
+    <p>擅长创意策划、视频制作、版权运营；致力于用年轻视角创造无限内容价值</p>
+  </div>
+
+  <!-- 代表作 -->
+  <h2>代表作</h2>
+  <div class="works">
+    <a href="https://www.bilibili.com/video/BV1M2mYYqE2F/" target="_blank">
+      <img src="../hao.jpg" alt="坏人与好人（7）">
+    </a>
+  </div>
+
+  <!-- 返回主站 -->
+  <div class="back">
+    <a href="../">← 返回主站</a>
+  </div>
+</div>
 </body>
 </html>
