@@ -31,9 +31,58 @@
         
         /* 作品展示区域 - 懒加载 + 占位防跳动 */
         .works{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
-        .works a{flex:1 1 250px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+        .works a{flex:1 1 250px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15);text-decoration:none;}
         .works img{width:100%;display:block;transition:.3s;aspect-ratio:16/9;object-fit:cover}
         .works a:hover img{transform:scale(1.05)}
+        
+        /* 作品描述样式 */
+        .works .desc {
+            color: #FBC500;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px;
+            text-align: center;
+            background: #fff;
+            margin: 0;
+        }
+        
+        /* 作品分页样式 */
+        .works-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        
+        .works-page-btn {
+            background: #FBC500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+        
+        .works-page-btn:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .works-page-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .works-page-info {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
         
         /* 二维码区域 */
         .qr{text-align:center}
@@ -233,23 +282,23 @@
 </section>
     
 <section>
-   <div class="works">
-   <h3>作品示例</h3>
-<div class="spacer"></div>
-<div class="works">
-   <a href="https://www.bilibili.com/video/BV1Tx4y1f7Uw?spm_id_from=333.788.player.switch&vd_source=48e557edd3bf164f1acf9453d12b659c " target="_blank">
-       <img src="新封面.jpg" alt="2024AmongUs拜年祭" loading="lazy">
-       <p class="desc" style="color: #FBC500; text-decoration: none; font-weight: 500; padding: 8px; text-align: center; background: #fff; margin: 0;">2024amongus拜年祭</p>
-   </a>
-   <a href="https://www.bilibili.com/video/BV1gPFpezEZP?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c " target="_blank">
-       <img src="封面.jpg" alt="2025AmongUs拜年纪" loading="lazy">
-       <p class="desc" style="color: #FBC500; text-decoration: none; font-weight: 500; padding: 8px; text-align: center; background: #fff; margin: 0;">2025amongus拜年纪</p>
-   </a>
-   <a href="https://www.bilibili.com/video/BV1M2mYYqE2F?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c " target="_blank">
-       <img src="坏人与好人（7）-封面.jpg" alt="坏人与好人(7)" loading="lazy">
-       <p class="desc" style="color: #FBC500; text-decoration: none; font-weight: 500; padding: 8px; text-align: center; background: #fff; margin: 0;">坏人与好人（7）</p>
-   </a>
-</div>
+    <div class="wrap">
+        <h3>作品示例</h3>
+        <div class="spacer"></div>
+        
+        <!-- 作品分页容器 -->
+        <div class="works-pagination-container">
+            <div class="works" id="worksContainer">
+                <!-- 作品会通过JavaScript动态加载 -->
+            </div>
+            
+            <!-- 分页控制 -->
+            <div class="works-pagination" id="worksPagination" style="display: none;">
+                <button class="works-page-btn" id="worksPrevBtn" disabled>上一页</button>
+                <span class="works-page-info" id="worksPageInfo">第 <span id="worksCurrentPage">1</span> 页 / 共 <span id="worksTotalPages">1</span> 页</span>
+                <button class="works-page-btn" id="worksNextBtn">下一页</button>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -433,8 +482,104 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
+// ===== 作品分页功能 =====
+// 作品数据
+const worksData = [
+    {
+        title: "2024amongus拜年祭",
+        link: "https://www.bilibili.com/video/BV1Tx4y1f7Uw?spm_id_from=333.788.player.switch&vd_source=48e557edd3bf164f1acf9453d12b659c",
+        image: "新封面.jpg",
+        alt: "2024AmongUs拜年祭"
+    },
+    {
+        title: "2025amongus拜年纪",
+        link: "https://www.bilibili.com/video/BV1gPFpezEZP?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c",
+        image: "封面.jpg",
+        alt: "2025AmongUs拜年纪"
+    },
+    {
+        title: "坏人与好人（7）",
+        link: "https://www.bilibili.com/video/BV1M2mYYqE2F?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c",
+        image: "坏人与好人（7）-封面.jpg",
+        alt: "坏人与好人(7)"
+    },
+    // 可以继续添加更多作品，系统会自动分页
+    // 例如：
+    // {
+    //     title: "新作品示例",
+    //     link: "#",
+    //     image: "示例图片.jpg",
+    //     alt: "新作品"
+    // }
+];
+
+// 作品分页设置
+const worksPerPage = 3;
+let currentWorksPage = 1;
+
+// DOM元素
+const worksContainer = document.getElementById('worksContainer');
+const worksPagination = document.getElementById('worksPagination');
+const worksPrevBtn = document.getElementById('worksPrevBtn');
+const worksNextBtn = document.getElementById('worksNextBtn');
+const worksCurrentPageSpan = document.getElementById('worksCurrentPage');
+const worksTotalPagesSpan = document.getElementById('worksTotalPages');
+
+// 计算作品总页数
+const totalWorksPages = Math.ceil(worksData.length / worksPerPage);
+
+// 显示或隐藏作品分页
+if (totalWorksPages > 1) {
+    worksPagination.style.display = 'flex';
+}
+
+// 渲染作品列表
+function renderWorks() {
+    worksContainer.innerHTML = '';
+    
+    const startIndex = (currentWorksPage - 1) * worksPerPage;
+    const endIndex = startIndex + worksPerPage;
+    const pageWorks = worksData.slice(startIndex, endIndex);
+    
+    pageWorks.forEach(work => {
+        const workItem = document.createElement('a');
+        workItem.href = work.link;
+        workItem.target = "_blank";
+        workItem.rel = "noopener";
+        
+        workItem.innerHTML = `
+            <img src="${work.image}" alt="${work.alt}" loading="lazy">
+            <p class="desc">${work.title}</p>
+        `;
+        
+        worksContainer.appendChild(workItem);
+    });
+    
+    // 更新分页按钮状态
+    worksPrevBtn.disabled = currentWorksPage === 1;
+    worksNextBtn.disabled = currentWorksPage === totalWorksPages;
+    worksCurrentPageSpan.textContent = currentWorksPage;
+    worksTotalPagesSpan.textContent = totalWorksPages;
+}
+
+// 作品分页按钮事件
+worksPrevBtn.addEventListener('click', () => {
+    if (currentWorksPage > 1) {
+        currentWorksPage--;
+        renderWorks();
+    }
+});
+
+worksNextBtn.addEventListener('click', () => {
+    if (currentWorksPage < totalWorksPages) {
+        currentWorksPage++;
+        renderWorks();
+    }
+});
+
 // 初始化
 renderArticles();
+renderWorks();
 </script>
 </body>
 </html>
