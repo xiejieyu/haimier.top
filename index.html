@@ -30,8 +30,8 @@
         p{line-height:1.8;margin-bottom:15px;display:block;width:100%}
         
         /* 作品展示区域 - 懒加载 + 占位防跳动 */
-        .works{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
-        .works a{flex:1 1 250px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15);text-decoration:none;}
+        .works{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;justify-content:center}
+        .works a{flex:0 0 calc(33.333% - 14px);position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15);text-decoration:none;}
         .works img{width:100%;display:block;transition:.3s;aspect-ratio:16/9;object-fit:cover}
         .works a:hover img{transform:scale(1.05)}
         
@@ -40,10 +40,11 @@
             color: #FBC500;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
             background: #fff;
             margin: 0;
+            font-size: 1rem;
         }
         
         /* 作品分页样式 */
@@ -88,10 +89,17 @@
         .qr{text-align:center}
         .qr img{width:200px;margin-top:10px;aspect-ratio:1/1;object-fit:cover}
         
-        /* 管理团队区域 */
-        .team{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
-        .card{flex:0 0 calc(33.333% - 14px);background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:20px;text-align:center;margin-bottom:20px}
-        .card img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:10px;aspect-ratio:1/1}
+        /* 管理团队区域 - 统一每行3个 */
+        .team{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;justify-content:flex-start}
+        .team a{flex:0 0 calc(33.333% - 14px);text-decoration:none;color:inherit;cursor:pointer;display:block}
+        .card{background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:20px;text-align:center;height:320px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+        .card img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:15px;aspect-ratio:1/1}
+        .card h4{margin:10px 0;font-size:1.2rem;color:#333}
+        .card p{line-height:1.6;margin:0;color:#555;font-size:0.95rem}
+        
+        /* 吉祥物区域 */
+        .mascot{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
+        .mascot .card{flex:0 0 calc(50% - 10px)}
         
         /* 文章墙样式 */
         .article-wall {
@@ -186,15 +194,20 @@
         .spacer {height:20px;display:block}
         
         /* 响应式设计 */
-        @media(max-width:700px){
+        @media(max-width: 1100px){
+            .team a, .works a, .mascot .card {flex:0 0 calc(50% - 10px)}
+        }
+        
+        @media(max-width: 700px){
             .banner h2{font-size:1.8rem}
-            .team, .works {flex-direction:column}
-            .card, .works a {flex:1 1 auto}
+            .team, .works, .mascot {flex-direction:column}
+            .team a, .works a, .mascot .card, .card {flex:1 1 auto;width:100%}
             .article-meta {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 5px;
             }
+            .card{height:auto;min-height:280px}
         }
         
         /* 去掉杰鱼卡片下划线 */
@@ -259,7 +272,7 @@
     </div>
 </section>
 
-   <section>
+<section>
     <div class="wrap">
         <h3>公司吉祥物</h3>
         <div class="mascot">
@@ -321,11 +334,11 @@
     </div>
 </section>
 
-   <section>
+<section>
     <div class="wrap">
         <h3>管理团队(点击可跳转界面)</h3>
         <div class="team">
-            <a href="/jieyu/" target="_blank" rel="noopener" style="flex: 0 0 calc(33.333% - 14px); text-decoration:none;color:inherit;cursor:pointer;display:block;">
+            <a href="/jieyu/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="jie.jpg" alt="杰鱼记忆有点差" loading="lazy">
                     <h4>杰鱼记忆有点差</h4>
@@ -334,7 +347,7 @@
                 </div>
             </a>
             
-            <a href="/shumiao/" target="_blank" rel="noopener" style="flex: 0 0 calc(33.333% - 14px); text-decoration:none;color:inherit;cursor:pointer;display:block;">
+            <a href="/shumiao/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="树苗头像.jpg" alt="树苗" loading="lazy">
                     <h4>树苗</h4>
@@ -343,7 +356,7 @@
                 </div>
             </a>
             
-            <a href="/mangu/" target="_blank" rel="noopener" style="flex: 0 0 calc(33.333% - 14px); text-decoration:none;color:inherit;cursor:pointer;display:block;">
+            <a href="/mangu/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="蛮顾头像.jpg" alt="蛮顾" loading="lazy">
                     <h4>蛮顾</h4>
@@ -352,7 +365,7 @@
                 </div>
             </a>
             
-            <a href="/tianmimi/" target="_blank" rel="noopener" style="flex: 0 0 calc(33.333% - 14px); text-decoration:none;color:inherit;cursor:pointer;display:block;">
+            <a href="/tianmimi/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="甜蜜蜜头像.jpg" alt="甜蜜蜜" loading="lazy">
                     <h4>甜蜜蜜</h4>
@@ -361,7 +374,7 @@
                 </div>
             </a>
             
-            <a href="/ws/" target="_blank" rel="noopener" style="flex: 0 0 calc(33.333% - 14px); text-decoration:none;color:inherit;cursor:pointer;display:block;">
+            <a href="/ws/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="ws.jpg" alt="ws" loading="lazy">
                     <h4>ws</h4>
@@ -373,7 +386,7 @@
 
         <h3 style="margin-top:40px">部长</h3>
         <div class="team">
-            <a href="/ranhao/" target="_blank" rel="noopener" style="flex: 0 0 calc(33.333% - 14px); text-decoration:none;color:inherit;cursor:pointer;display:block;">
+            <a href="/ranhao/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="燃浩头像.jpg" alt="燃浩" loading="lazy">
                     <h4>燃浩</h4>
@@ -382,7 +395,7 @@
                 </div>
             </a>
             
-            <a href="/luoqingshuang/" target="_blank" rel="noopener" style="flex: 0 0 calc(33.333% - 14px); text-decoration:none;color:inherit;cursor:pointer;display:block;">
+            <a href="/luoqingshuang/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="luoqingshuang.png" alt="洛轻霜" loading="lazy">
                     <h4>洛轻霜</h4>
@@ -516,14 +529,6 @@ const worksData = [
         image: "坏人与好人（7）-封面.jpg",
         alt: "坏人与好人(7)"
     },
-    // 可以继续添加更多作品，系统会自动分页
-    // 例如：
-    // {
-    //     title: "新作品示例",
-    //     link: "#",
-    //     image: "示例图片.jpg",
-    //     alt: "新作品"
-    // }
 ];
 
 // 作品分页设置
