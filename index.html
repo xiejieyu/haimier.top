@@ -20,6 +20,67 @@
         .logo-txt img{height:64px}
         h1{font-size:2.2rem;margin-bottom:10px}
         
+        /* 彩蛋按钮样式 */
+        .egg-button {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+            color: #000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            animation: float 3s ease-in-out infinite;
+            transition: all 0.3s;
+            display: none;
+        }
+        
+        .egg-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .egg-button::before {
+            content: "🎉 ";
+        }
+        
+        .egg-button::after {
+            content: " 🎉";
+        }
+        
+        /* 彩蛋提示样式 */
+        .egg-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FBC500, #FFE66D);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 8px;
+            z-index: 9998;
+            box-shadow: 0 5px 15px rgba(251, 197, 0, 0.3);
+            display: none;
+            animation: slideDown 0.5s ease;
+            font-weight: bold;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translate(-50%, -100px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+        
         /* Banner区域 - 预加载首图 */
         .banner{background:#FBC500 url(https://cdn.jsdelivr.net/gh/xiejieyu/haimier.top/main/slogan.png) center/cover no-repeat;height:420px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}
         .banner img{max-width:640px;width:90%}
@@ -208,6 +269,21 @@
                 gap: 5px;
             }
             .card{height:auto;min-height:280px}
+            
+            /* 移动端彩蛋按钮调整 */
+            .egg-button {
+                top: 80px;
+                right: 10px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .egg-notification {
+                top: 10px;
+                width: 90%;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
         }
         
         /* 去掉杰鱼卡片下划线 */
@@ -220,51 +296,17 @@
             outline: none;
             border: none;
         }
-        
-        /* 刷新跳转提示样式 */
-        .redirect-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            color: white;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 999999;
-            font-family: inherit;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .redirect-content {
-            max-width: 500px;
-            background: rgba(251, 197, 0, 0.1);
-            padding: 40px 30px;
-            border-radius: 15px;
-            border: 2px solid #FBC500;
-        }
-        
-        .redirect-loader {
-            width: 60px;
-            height: 60px;
-            border: 5px solid #333;
-            border-top: 5px solid #FBC500;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 25px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
+<!-- 彩蛋按钮 -->
+<button class="egg-button" id="eggButton" onclick="goToFriendsPage()">进入彩蛋网页</button>
+
+<!-- 彩蛋提示 -->
+<div class="egg-notification" id="eggNotification">
+    恭喜！彩蛋已解锁 🎊
+</div>
+
 <header>
     <div class="wrap">
         <div class="logo-txt">
@@ -466,111 +508,89 @@
     </div>
 </footer>
 
-<!-- 刷新跳转提示 -->
-<div class="redirect-overlay" id="redirectOverlay">
-    <div class="redirect-content">
-        <div style="font-size: 3rem; margin-bottom: 20px;">✨</div>
-        <h2 style="color: #FBC500; margin-bottom: 15px; font-size: 1.8rem;">发现精彩伙伴</h2>
-        <p style="margin-bottom: 10px;">感谢您对海米尔文化的持续关注</p>
-        <p style="margin-bottom: 25px; color: #aaa;">我们为您准备了精选的友情链接</p>
-        
-        <div class="redirect-loader"></div>
-        
-        <div style="
-            display: inline-block;
-            padding: 12px 30px;
-            background: #FBC500;
-            color: #000;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 20px;
-            cursor: pointer;
-        " onclick="window.location.href='https://haimier.top/friends'">
-            立即前往友情链接页面 →
-        </div>
-        
-        <p style="color: #666; margin-top: 25px; font-size: 0.9rem;">
-            自动跳转倒计时: <span id="haimierCountdown">5</span>秒
-        </p>
-        
-        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-            <p style="color: #FBC500; margin: 0; font-size: 0.9rem;">
-                以年少之心敬未来无限可能
-            </p>
-        </div>
-    </div>
-</div>
-
 <script>
-// ===== 刷新三次自动跳转功能 =====
-// 注意：这段代码必须放在最前面，在其他代码之前执行
+// ===== 刷新计数和彩蛋功能 =====
 (function() {
-    // 使用更可靠的key名称，避免冲突
-    const STORAGE_KEY = 'haimier_redirect_counter';
-    const REDIRECT_FLAG = 'haimier_redirected_flag';
-    
-    // 检查是否已经跳转过
-    if (localStorage.getItem(REDIRECT_FLAG) === 'true') {
-        console.log('已经跳转过了，跳过跳转逻辑');
-        return;
-    }
+    // 使用更可靠的key名称
+    const REFRESH_COUNT_KEY = 'haimier_refresh_count_v2';
+    const EGG_UNLOCKED_KEY = 'haimier_egg_unlocked_v2';
     
     // 获取刷新次数并增加
     let refreshCount = 0;
     try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+        const stored = localStorage.getItem(REFRESH_COUNT_KEY);
         refreshCount = stored ? parseInt(stored) : 0;
         console.log('当前刷新次数:', refreshCount);
         
         // 增加计数
         refreshCount++;
-        localStorage.setItem(STORAGE_KEY, refreshCount.toString());
+        localStorage.setItem(REFRESH_COUNT_KEY, refreshCount.toString());
         console.log('更新后的刷新次数:', refreshCount);
-        
-        // 测试输出
-        console.log('刷新计数已保存，当前值:', localStorage.getItem(STORAGE_KEY));
         
     } catch (error) {
         console.error('读取localStorage时出错:', error);
     }
     
-    // 达到3次后跳转
-    if (refreshCount >= 3) {
-        console.log('达到3次刷新，准备跳转');
+    // 检查是否已经解锁彩蛋
+    const eggUnlocked = localStorage.getItem(EGG_UNLOCKED_KEY) === 'true';
+    
+    // 达到3次刷新且尚未解锁彩蛋
+    if (refreshCount >= 3 && !eggUnlocked) {
+        console.log('达到3次刷新，解锁彩蛋按钮');
         
-        // 设置已跳转标记
-        localStorage.setItem(REDIRECT_FLAG, 'true');
+        // 设置彩蛋解锁标记
+        localStorage.setItem(EGG_UNLOCKED_KEY, 'true');
         
-        // 延迟2秒显示跳转提示
+        // 延迟1秒后显示彩蛋按钮和提示
         setTimeout(() => {
-            const redirectOverlay = document.getElementById('redirectOverlay');
-            const countdownEl = document.getElementById('haimierCountdown');
+            const eggButton = document.getElementById('eggButton');
+            const eggNotification = document.getElementById('eggNotification');
             
-            if (!redirectOverlay) {
-                console.error('跳转提示元素未找到');
-                window.location.href = 'https://haimier.top/friends';
-                return;
+            if (eggButton && eggNotification) {
+                // 显示彩蛋按钮
+                eggButton.style.display = 'block';
+                
+                // 显示提示
+                eggNotification.style.display = 'block';
+                
+                // 5秒后隐藏提示
+                setTimeout(() => {
+                    eggNotification.style.display = 'none';
+                }, 5000);
+                
+                // 添加按钮点击动画
+                eggButton.style.animation = 'float 2s ease-in-out infinite, pulse 1s 3';
+                
+                // 添加CSS动画
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes pulse {
+                        0% { transform: scale(1); }
+                        50% { transform: scale(1.1); }
+                        100% { transform: scale(1); }
+                    }
+                `;
+                document.head.appendChild(style);
             }
-            
-            // 显示跳转提示
-            redirectOverlay.style.display = 'flex';
-            
-            // 5秒倒计时
-            let seconds = 5;
-            const countdownInterval = setInterval(() => {
-                seconds--;
-                if (countdownEl) {
-                    countdownEl.textContent = seconds;
-                }
-                if (seconds <= 0) {
-                    clearInterval(countdownInterval);
-                    console.log('倒计时结束，开始跳转');
-                    window.location.href = 'https://haimier.top/friends';
-                }
-            }, 1000);
-        }, 2000);
+        }, 1000);
+    }
+    
+    // 如果彩蛋已经解锁，直接显示按钮
+    if (eggUnlocked) {
+        console.log('彩蛋已解锁，显示按钮');
+        const eggButton = document.getElementById('eggButton');
+        if (eggButton) {
+            setTimeout(() => {
+                eggButton.style.display = 'block';
+            }, 500);
+        }
     }
 })();
+
+// 跳转到彩蛋页面
+function goToFriendsPage() {
+    window.location.href = 'https://haimier.top/friends';
+}
 
 // 文章数据
 const articles = [
@@ -742,8 +762,7 @@ worksNextBtn.addEventListener('click', () => {
     }
 });
 
-// 添加调试按钮（开发时可以查看当前计数）
-// 这段代码可以移除，只是用于调试
+// 添加调试功能（开发时可查看当前计数）
 document.addEventListener('DOMContentLoaded', function() {
     // 创建一个调试按钮（仅在开发时使用）
     if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
@@ -752,7 +771,7 @@ document.addEventListener('DOMContentLoaded', function() {
         debugBtn.style.cssText = `
             position: fixed;
             bottom: 10px;
-            right: 10px;
+            left: 10px;
             padding: 10px;
             background: #333;
             color: white;
@@ -763,18 +782,28 @@ document.addEventListener('DOMContentLoaded', function() {
             font-size: 12px;
         `;
         debugBtn.onclick = function() {
-            const count = localStorage.getItem('haimier_redirect_counter') || '0';
-            const redirected = localStorage.getItem('haimier_redirected_flag') || 'false';
-            alert(`当前计数: ${count}\n已跳转: ${redirected}`);
+            const count = localStorage.getItem('haimier_refresh_count_v2') || '0';
+            const unlocked = localStorage.getItem('haimier_egg_unlocked_v2') || 'false';
+            alert(`当前计数: ${count}\n彩蛋解锁: ${unlocked}`);
             
             if (confirm('是否重置计数？')) {
-                localStorage.removeItem('haimier_redirect_counter');
-                localStorage.removeItem('haimier_redirected_flag');
-                alert('计数已重置，请刷新页面');
+                localStorage.removeItem('haimier_refresh_count_v2');
+                localStorage.removeItem('haimier_egg_unlocked_v2');
+                alert('计数已重置，请刷新页面3次');
+            }
+            
+            if (confirm('是否立即解锁彩蛋？')) {
+                localStorage.setItem('haimier_egg_unlocked_v2', 'true');
+                document.getElementById('eggButton').style.display = 'block';
+                alert('彩蛋已解锁');
             }
         };
         document.body.appendChild(debugBtn);
     }
+    
+    // 显示当前刷新次数（仅用于测试）
+    console.log('当前刷新次数:', localStorage.getItem('haimier_refresh_count_v2') || '0');
+    console.log('彩蛋解锁状态:', localStorage.getItem('haimier_egg_unlocked_v2') || 'false');
 });
 
 // 初始化
