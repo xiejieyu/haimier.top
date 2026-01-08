@@ -1,6 +1,6 @@
 <!-- 在您现有网站的适当位置添加 -->
 <style>
-/* 全屏视频样式 */
+/* 全屏视频容器样式 */
 #fullscreenVideoContainer {
     position: fixed;
     top: 0;
@@ -15,12 +15,12 @@
 #fullscreenVideo {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 #fullscreenVideoControls {
     position: absolute;
-    bottom: 20px;
+    bottom: 30px;
     left: 0;
     width: 100%;
     display: flex;
@@ -38,18 +38,40 @@
     cursor: pointer;
     font-size: 14px;
     transition: all 0.3s;
+    font-family: inherit;
 }
 
 .video-control-btn:hover {
     background: rgba(251, 197, 0, 0.2);
 }
+
+.video-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+
+.video-brand {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FBC500;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 999999;
+}
 </style>
 
-<!-- 全屏视频容器 -->
+<!-- 全屏视频容器（放在body开始处） -->
 <div id="fullscreenVideoContainer">
+    <div class="video-brand">海米尔文化</div>
     <video id="fullscreenVideo" autoplay muted playsinline>
-        <source src="company-intro.mp4" type="video/mp4">
-        <source src="company-intro.webm" type="video/webm">
+        <source src="viedo.mov" type="video/quicktime">
+        <source src="viedo.mp4" type="video/mp4">
     </video>
     <div id="fullscreenVideoControls">
         <button class="video-control-btn" onclick="toggleVideoMute()" id="videoMuteBtn">开启声音</button>
@@ -60,31 +82,73 @@
 
 <script>
 // 添加到现有JavaScript中
+let isVideoPlaying = false;
+
 function showFullscreenVideo() {
     const videoContainer = document.getElementById('fullscreenVideoContainer');
     const video = document.getElementById('fullscreenVideo');
     
     // 显示视频容器
     videoContainer.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // 添加加载状态
+    videoContainer.innerHTML += `
+        <div class="video-loading" id="videoLoading">
+            <div style="width: 50px; height: 50px; border: 5px solid #333; border-top: 5px solid #FBC500; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px;"></div>
+            <p>加载海米尔文化网站彩蛋视频...</p>
+        </div>
+    `;
     
     // 加载视频
     video.load();
     
     video.onloadeddata = function() {
+        // 移除加载提示
+        const loadingElement = document.getElementById('videoLoading');
+        if (loadingElement) loadingElement.remove();
+        
         // 开始播放
         video.play().then(() => {
             console.log('全屏视频开始播放');
+            isVideoPlaying = true;
             // 进入全屏
             enterFullscreen(document.documentElement);
         }).catch(error => {
             console.log('视频播放失败:', error);
-            video.controls = true;
+            // 显示播放按钮
+            videoContainer.innerHTML += `
+                <div class="video-loading">
+                    <p style="color: #FBC500; margin-bottom: 20px;">点击开始播放</p>
+                    <button class="video-control-btn" onclick="startVideoPlayback()" style="background: #FBC500; color: #000;">开始播放</button>
+                </div>
+            `;
         });
     };
     
     video.onended = function() {
         hideFullscreenVideo();
     };
+    
+    video.onerror = function() {
+        console.log('视频加载错误');
+        const loadingElement = document.getElementById('videoLoading');
+        if (loadingElement) {
+            loadingElement.innerHTML = `
+                <p style="color: #ff5555;">视频加载失败</p>
+                <button class="video-control-btn" onclick="hideFullscreenVideo()">跳过视频</button>
+            `;
+        }
+    };
+}
+
+function startVideoPlayback() {
+    const video = document.getElementById('fullscreenVideo');
+    video.play().then(() => {
+        const loadingElement = document.getElementById('videoLoading');
+        if (loadingElement) loadingElement.remove();
+        enterFullscreen(document.documentElement);
+    });
 }
 
 function hideFullscreenVideo() {
@@ -93,7 +157,9 @@ function hideFullscreenVideo() {
     
     video.pause();
     videoContainer.style.display = 'none';
+    document.body.style.overflow = 'auto';
     exitFullscreen();
+    isVideoPlaying = false;
 }
 
 function toggleVideoMute() {
@@ -123,7 +189,9 @@ function skipFullscreenVideo() {
 
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
-        element.requestFullscreen();
+        element.requestFullscreen().catch(err => {
+            console.log('全屏请求失败:', err);
+        });
     } else if (element.mozRequestFullScreen) {
         element.mozRequestFullScreen();
     } else if (element.webkitRequestFullscreen) {
@@ -147,14 +215,14 @@ function exitFullscreen() {
 
 // 页面加载完成后自动显示全屏视频
 document.addEventListener('DOMContentLoaded', function() {
-    // 延迟1秒显示视频，确保页面其他内容加载完成
-    setTimeout(showFullscreenVideo, 1000);
+    // 延迟0.5秒显示视频，确保页面基础内容加载完成
+    setTimeout(showFullscreenVideo, 500);
 });
 
 // 监听全屏变化
 document.addEventListener('fullscreenchange', function() {
     const isFullscreen = document.fullscreenElement;
-    if (!isFullscreen) {
+    if (!isFullscreen && isVideoPlaying) {
         hideFullscreenVideo();
     }
 });
