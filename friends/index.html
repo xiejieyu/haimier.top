@@ -83,7 +83,7 @@
             width: 100%;
             text-align: center;
             transform-origin: 50% 100%;
-            animation: scrollUp 40s linear infinite;
+            animation: scrollUp 50s linear infinite;
         }
         
         /* 控制面板 - 简化版 */
@@ -186,7 +186,7 @@
                 transform: rotateX(20deg) translateZ(0);
             }
             100% {
-                top: -500%;
+                top: -300%;
                 transform: rotateX(25deg) translateZ(-250px);
             }
         }
@@ -202,49 +202,133 @@
             }
         }
         
-        /* 人员名单样式 */
+        /* 文本样式 */
         .credit-title {
-            font-size: 52px;
+            font-size: 42px;
+            color: #FBC500;
+            margin: 30px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(251, 197, 0, 0.8);
+        }
+        
+        .company-name {
+            font-size: 36px;
             color: #FBC500;
             margin: 40px 0;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            text-shadow: 0 0 25px rgba(251, 197, 0, 0.9);
+            font-weight: bold;
         }
         
-        .credit-section {
-            margin: 60px 0;
-        }
-        
-        .credit-section h2 {
-            font-size: 38px;
-            color: #FBC500;
-            margin-bottom: 35px;
-            border-bottom: 2px solid rgba(251, 197, 0, 0.6);
-            padding-bottom: 15px;
-            display: inline-block;
-            text-shadow: 0 0 15px rgba(251, 197, 0, 0.5);
-        }
-        
-        .credit-person {
-            font-size: 28px;
-            margin: 20px 0;
-            padding: 10px;
-            transition: all 0.3s;
-            letter-spacing: 1px;
-        }
-        
-        .credit-person:hover {
-            color: #FBC500;
-            transform: scale(1.05);
-            text-shadow: 0 0 15px rgba(251, 197, 0, 0.7);
-        }
-        
-        .credit-role {
+        .copyright {
             font-size: 22px;
             color: rgba(255, 255, 255, 0.8);
-            margin-left: 20px;
-            font-weight: normal;
+            margin: 30px 0;
+        }
+        
+        .timeline {
+            font-size: 26px;
+            color: #FBC500;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+        
+        .year-item {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 15px 0;
+        }
+        
+        .reflection {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        
+        .quote {
+            font-size: 28px;
+            color: #FBC500;
+            margin: 30px 0;
+            font-style: italic;
+            padding: 15px;
+            border-left: 4px solid #FBC500;
+            text-align: left;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .friends-title {
+            font-size: 32px;
+            color: #FBC500;
+            margin: 40px 0 20px 0;
+            border-bottom: 2px solid rgba(251, 197, 0, 0.6);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .friends-list {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+        
+        .friend-name {
+            display: inline-block;
+            margin: 0 8px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .friend-name:hover {
+            background-color: rgba(251, 197, 0, 0.2);
+            color: #FBC500;
+            transform: translateY(-3px);
+        }
+        
+        .note {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 25px 0;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        .email {
+            font-size: 22px;
+            color: #FBC500;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+        
+        .final-name {
+            font-size: 58px;
+            color: #FBC500;
+            margin: 60px 0 100px 0;
+            text-shadow: 0 0 30px rgba(251, 197, 0, 0.9);
+            font-weight: bold;
+            letter-spacing: 5px;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 20px rgba(251, 197, 0, 0.7);
+                transform: scale(1);
+            }
+            100% {
+                text-shadow: 0 0 40px rgba(251, 197, 0, 1);
+                transform: scale(1.05);
+            }
+        }
+        
+        .section-divider {
+            height: 2px;
+            width: 80%;
+            background: linear-gradient(to right, transparent, #FBC500, transparent);
+            margin: 40px auto;
         }
         
         .stars {
@@ -287,20 +371,40 @@
                 bottom: 20px;
             }
             
-            .credit-title {
-                font-size: 36px;
-            }
-            
-            .credit-section h2 {
+            .company-name {
                 font-size: 28px;
             }
             
-            .credit-person {
+            .credit-title {
+                font-size: 32px;
+            }
+            
+            .timeline {
                 font-size: 22px;
             }
             
-            .credit-role {
+            .year-item {
+                font-size: 20px;
+            }
+            
+            .reflection {
+                font-size: 20px;
+            }
+            
+            .quote {
+                font-size: 22px;
+            }
+            
+            .friends-title {
+                font-size: 26px;
+            }
+            
+            .friends-list {
                 font-size: 18px;
+            }
+            
+            .final-name {
+                font-size: 42px;
             }
             
             .hint {
@@ -318,7 +422,7 @@
     <div class="header">
         <div class="logo-container">
             <!-- 这里放置LOGO图片 -->
-            <img src="https://images.unsplash.com/photo-1567446537710-0e9b8d4d8c4d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80" alt="海米尔文化LOGO" class="logo" id="logoImage">
+            <img src="../方形LOGO.jpg" alt="海米尔文化LOGO" class="logo" id="logoImage">
             <h1 class="title">海米尔文化彩蛋页面</h1>
         </div>
     </div>
@@ -349,64 +453,6 @@
     </div>
 
     <script>
-        // 人员名单数据
-        const creditsData = [
-            { title: "海米尔文化", section: "出品方" },
-            { title: "制作团队", section: "导演组", people: [
-                { name: "张明", role: "总导演" },
-                { name: "李芳", role: "副导演" },
-                { name: "王强", role: "助理导演" },
-                { name: "刘洋", role: "场记" }
-            ]},
-            { title: "制作团队", section: "编剧组", people: [
-                { name: "刘伟", role: "首席编剧" },
-                { name: "赵敏", role: "剧本顾问" },
-                { name: "孙丽", role: "剧本编辑" },
-                { name: "周涛", role: "对白设计" }
-            ]},
-            { title: "制作团队", section: "摄影组", people: [
-                { name: "吴昊", role: "摄影指导" },
-                { name: "郑洁", role: "主摄影师" },
-                { name: "钱峰", role: "摄影助理" },
-                { name: "冯雪", role: "灯光师" }
-            ]},
-            { title: "制作团队", section: "美术组", people: [
-                { name: "陈东", role: "美术指导" },
-                { name: "杨阳", role: "场景设计师" },
-                { name: "朱琳", role: "道具师" },
-                { name: "秦海", role: "服装设计" }
-            ]},
-            { title: "制作团队", section: "音乐组", people: [
-                { name: "林峰", role: "音乐总监" },
-                { name: "苏梅", role: "作曲" },
-                { name: "黄伟", role: "音效设计" },
-                { name: "白露", role: "录音师" }
-            ]},
-            { title: "制作团队", section: "后期制作", people: [
-                { name: "陆羽", role: "剪辑指导" },
-                { name: "韩冰", role: "视觉特效" },
-                { name: "楚云", role: "调色师" },
-                { name: "夏雨", role: "字幕设计" }
-            ]},
-            { title: "特别鸣谢", section: "合作伙伴", people: [
-                { name: "星光传媒有限公司", role: "联合出品" },
-                { name: "创意视觉工作室", role: "后期制作" },
-                { name: "城市影院集团", role: "放映支持" },
-                { name: "艺术基金会", role: "资金支持" }
-            ]},
-            { title: "特别感谢", section: "特别出演", people: [
-                { name: "周华", role: "" },
-                { name: "李娜", role: "" },
-                { name: "王磊", role: "" },
-                { name: "张薇", role: "" }
-            ]},
-            { title: "感谢观看", section: "", people: [
-                { name: "海米尔文化全体成员", role: "" },
-                { name: "献给所有支持我们的观众", role: "" },
-                { name: "谨以此片献给每一位追梦人", role: "" }
-            ]}
-        ];
-        
         // DOM元素
         const creditsContent = document.getElementById('creditsContent');
         const pauseBtn = document.getElementById('pauseBtn');
@@ -416,12 +462,12 @@
         
         // 控制状态
         let isPaused = false;
-        let animationSpeed = 40; // 默认速度值
+        let animationSpeed = 50; // 默认速度值
         
         // 初始化页面
         function initPage() {
-            // 生成人员名单
-            renderCredits();
+            // 生成内容
+            renderContent();
             
             // 创建星空背景
             createStars();
@@ -442,40 +488,123 @@
             updateSpeedDisplay();
         }
         
-        // 渲染人员名单
-        function renderCredits() {
+        // 渲染内容
+        function renderContent() {
             let html = '';
             
-            // 添加主标题
-            html += `<div class="credit-title">${creditsData[0].title}</div>`;
+            // 公司名称和版权信息
+            html += `<div class="company-name">海米尔(吉林)文化传播有限公司</div>`;
+            html += `<div class="copyright">©2025-2026 版权所有</div>`;
             
-            // 添加各个部分
-            for (let i = 1; i < creditsData.length; i++) {
-                const section = creditsData[i];
-                
-                html += `<div class="credit-section">`;
-                if (section.section) {
-                    html += `<h2>${section.section}</h2>`;
-                }
-                
-                if (section.people) {
-                    section.people.forEach(person => {
-                        html += `<div class="credit-person">${person.name}`;
-                        if (person.role) {
-                            html += `<span class="credit-role">${person.name === "海米尔文化全体成员" ? "" : " - "}${person.role}</span>`;
-                        }
-                        html += `</div>`;
-                    });
-                }
-                
+            html += `<div class="section-divider"></div>`;
+            
+            // 发展历程
+            html += `<div class="timeline">发展历程</div>`;
+            html += `<div class="year-item">2023年，HMICteam宣布成立</div>`;
+            html += `<div class="year-item">2024年，HMICteam宣布转型为海米尔自媒体工作室</div>`;
+            html += `<div class="year-item">2025年，海米尔自媒体工作室宣布正式成立为海米尔文化</div>`;
+            
+            html += `<div class="section-divider"></div>`;
+            
+            // 反思与感悟
+            html += `<div class="reflection">三年很短，但又很长</div>`;
+            html += `<div class="reflection">每次日以继夜思考的创新</div>`;
+            html += `<div class="reflection">每次苦思冥想创作的想法</div>`;
+            html += `<div class="reflection">每次夜不能寐焦虑的未来</div>`;
+            html += `<div class="reflection">...</div>`;
+            html += `<div class="reflection">在此刻竟觉得是如此幽默</div>`;
+            
+            html += `<div class="quote">海米尔文化的理念是<br>"以年少之心敬未来无限可能"</div>`;
+            
+            html += `<div class="reflection">但同时，我们更推崇的是</div>`;
+            html += `<div class="quote">"友情创造无限未来"</div>`;
+            
+            html += `<div class="reflection">有朋友在才是奔赴未来的最好动力</div>`;
+            html += `<div class="reflection">做这个彩蛋网页也是为了展现出关于友谊的东西</div>`;
+            html += `<div class="reflection">很开心自22年到现在我的朋友们一直都陪伴着我</div>`;
+            html += `<div class="reflection">有开心、有憎恨、有悲观</div>`;
+            html += `<div class="reflection">但那一切都是我们作为朋友一同进步的见证</div>`;
+            html += `<div class="reflection">我是杰鱼..</div>`;
+            html += `<div class="reflection">我也是吕健泽</div>`;
+            html += `<div class="reflection">希望大家都有属于自己那坚固的友谊</div>`;
+            
+            html += `<div class="section-divider"></div>`;
+            
+            // 朋友名单
+            html += `<div class="friends-title">---下为朋友们的名单（排名不分前后）---</div>`;
+            html += `<div class="friends-list">`;
+            
+            // 朋友名单分组显示
+            const friendsGroups = [
+                ["恒星Hz", "甜蜜蜜", "艾格", "melon", "蛮顾", "燃浩"],
+                ["珍珍", "树苗", "zack", "洛轻霜", "brokenhalo", "ws"],
+                ["小满", "潇潇", "煜桉", "一白", "殷氏", "阿狼"],
+                ["零墨寻", "茉莉白", "居雨", "雨湖", "韵湫", "青sir"],
+                ["楠桑", "叁叁", "火战", "艾尔曼", "雪染", "真紫色"],
+                ["哲白", "梅川", "烂尾", "小晨", "麻雀", "礼貌猫"],
+                ["黑松露", "橙子", "植绘", "紫轩", "sk", "白鱼"],
+                ["可可", "猫猫", "毒液", "ray", "五六", "屑杰"],
+                ["名蒸蛋", "阿楠", "celeste", "名三字", "蓝墨涵", "蜘蛛"],
+                ["entity", "404", "晓周", "萨利图", "shuihei", "昸玄"],
+                ["太阳", "落归", "雪花", "小优", "年白", "矿工"],
+                ["残云", "鸽子管家", "杰慕斯", "尾巴", "416", "神秘梦境"],
+                ["花盆", "方源", "噗嗤", "SC", "UK", "仙草"],
+                ["月", "江無冥", "林", "乔鸳", "歆", "蟑螂"],
+                ["小黄117", "高血压", "弦白", "屑土豆", "soundscool", "楠木"],
+                ["沐冷", "鸽子", "大汉", "空白", "十五孙策", "火龙"],
+                ["嘉尔", "虚高", "GB", "戴花", "planother", "build"],
+                ["X.Y.H", "IDK", "荡萃", "云", "红叶草", "盒子"],
+                ["字母小子", "陆子", "墨", "饺子", "海棠"]
+            ];
+            
+            friendsGroups.forEach(group => {
+                html += `<div>`;
+                group.forEach(friend => {
+                    html += `<span class="friend-name">${friend}</span>`;
+                });
                 html += `</div>`;
-            }
+            });
             
-            // 添加结束语
-            html += `<div class="credit-title" style="margin-top: 100px;">THE END</div>`;
-            html += `<div class="credit-section" style="margin-top: 120px; margin-bottom: 150px;">
-                        <div class="credit-person">© 2023 海米尔文化传媒有限公司 版权所有</div>
-                    </div>`;
+            html += `</div>`;
+            
+            html += `<div class="note">----可能有一些遗漏，甚至有些人会得罪，但不管怎么说你们都是我的好友----</div>`;
+            html += `<div class="note">---希望我不会因为这个名单被骂..---</div>`;
+            
+            html += `<div class="section-divider"></div>`;
+            
+            // 曾经的好友
+            html += `<div class="friends-title">---接下来是一些曾经的好友---</div>`;
+            html += `<div class="friends-list">`;
+            const pastFriends = ["南昕", "双子安德", "鸽子（和上面那个不一样。）", "钻石", "绿阿楼", "兰", "露露（被封杀版）", "果汁"];
+            html += `<div>`;
+            pastFriends.forEach(friend => {
+                html += `<span class="friend-name">${friend}</span>`;
+            });
+            html += `</div>`;
+            html += `</div>`;
+            
+            html += `<div class="section-divider"></div>`;
+            
+            // 结语
+            html += `<div class="reflection">我能想到曾经的朋友不多了，好多都忘记了</div>`;
+            html += `<div class="reflection">不管再怎么矛盾再怎么撕逼</div>`;
+            html += `<div class="reflection">曾为朋友对我来讲便有情谊</div>`;
+            html += `<div class="reflection">曾在快手平台结识的其他好友也忘了许多</div>`;
+            html += `<div class="reflection">如果记得和我有过关系的可以发邮箱到</div>`;
+            
+            html += `<div class="email">lvjianze@haimier.top</div>`;
+            
+            html += `<div class="reflection">上述名单中无论关系重还是关系不重</div>`;
+            html += `<div class="reflection">我全写在里面了，2026是一个新未来</div>`;
+            html += `<div class="reflection">期望在新一年中我可以去结实更多朋友</div>`;
+            html += `<div class="reflection">曾经有渊源的也能够逐渐解开心结</div>`;
+            html += `<div class="reflection">一同迈向未来才是更好的答复</div>`;
+            
+            html += `<div class="section-divider"></div>`;
+            
+            // 最后的签名
+            html += `<div class="reflection">我是...</div>`;
+            html += `<div class="final-name">吕健泽</div>`;
             
             creditsContent.innerHTML = html;
             
