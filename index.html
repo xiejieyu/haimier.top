@@ -502,6 +502,76 @@
 </div>
 
 <script>
+// ===== 刷新三次自动跳转功能 =====
+// 注意：这段代码必须放在最前面，在其他代码之前执行
+(function() {
+    // 使用更可靠的key名称，避免冲突
+    const STORAGE_KEY = 'haimier_redirect_counter';
+    const REDIRECT_FLAG = 'haimier_redirected_flag';
+    
+    // 检查是否已经跳转过
+    if (localStorage.getItem(REDIRECT_FLAG) === 'true') {
+        console.log('已经跳转过了，跳过跳转逻辑');
+        return;
+    }
+    
+    // 获取刷新次数并增加
+    let refreshCount = 0;
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        refreshCount = stored ? parseInt(stored) : 0;
+        console.log('当前刷新次数:', refreshCount);
+        
+        // 增加计数
+        refreshCount++;
+        localStorage.setItem(STORAGE_KEY, refreshCount.toString());
+        console.log('更新后的刷新次数:', refreshCount);
+        
+        // 测试输出
+        console.log('刷新计数已保存，当前值:', localStorage.getItem(STORAGE_KEY));
+        
+    } catch (error) {
+        console.error('读取localStorage时出错:', error);
+    }
+    
+    // 达到3次后跳转
+    if (refreshCount >= 3) {
+        console.log('达到3次刷新，准备跳转');
+        
+        // 设置已跳转标记
+        localStorage.setItem(REDIRECT_FLAG, 'true');
+        
+        // 延迟2秒显示跳转提示
+        setTimeout(() => {
+            const redirectOverlay = document.getElementById('redirectOverlay');
+            const countdownEl = document.getElementById('haimierCountdown');
+            
+            if (!redirectOverlay) {
+                console.error('跳转提示元素未找到');
+                window.location.href = 'https://haimier.top/friends';
+                return;
+            }
+            
+            // 显示跳转提示
+            redirectOverlay.style.display = 'flex';
+            
+            // 5秒倒计时
+            let seconds = 5;
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                if (countdownEl) {
+                    countdownEl.textContent = seconds;
+                }
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    console.log('倒计时结束，开始跳转');
+                    window.location.href = 'https://haimier.top/friends';
+                }
+            }, 1000);
+        }, 2000);
+    }
+})();
+
 // 文章数据
 const articles = [
     {
@@ -672,46 +742,40 @@ worksNextBtn.addEventListener('click', () => {
     }
 });
 
-// ===== 刷新三次自动跳转功能 =====
-(function() {
-    // 检查是否已经跳转过
-    if (localStorage.getItem('haimier_friends_redirected')) {
-        return;
-    }
-    
-    // 获取刷新次数
-    let refreshCount = parseInt(localStorage.getItem('haimier_refresh_count') || '0');
-    refreshCount++;
-    localStorage.setItem('haimier_refresh_count', refreshCount);
-    
-    console.log(`海米尔官网访问次数: ${refreshCount}`);
-    
-    // 达到3次后跳转
-    if (refreshCount >= 3) {
-        // 设置已跳转标记
-        localStorage.setItem('haimier_friends_redirected', 'true');
-        
-        // 延迟2秒显示跳转提示
-        setTimeout(() => {
-            const redirectOverlay = document.getElementById('redirectOverlay');
-            const countdownEl = document.getElementById('haimierCountdown');
+// 添加调试按钮（开发时可以查看当前计数）
+// 这段代码可以移除，只是用于调试
+document.addEventListener('DOMContentLoaded', function() {
+    // 创建一个调试按钮（仅在开发时使用）
+    if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
+        const debugBtn = document.createElement('button');
+        debugBtn.textContent = '调试：查看/重置计数';
+        debugBtn.style.cssText = `
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            z-index: 999999;
+            cursor: pointer;
+            font-size: 12px;
+        `;
+        debugBtn.onclick = function() {
+            const count = localStorage.getItem('haimier_redirect_counter') || '0';
+            const redirected = localStorage.getItem('haimier_redirected_flag') || 'false';
+            alert(`当前计数: ${count}\n已跳转: ${redirected}`);
             
-            // 显示跳转提示
-            redirectOverlay.style.display = 'flex';
-            
-            // 5秒倒计时
-            let seconds = 5;
-            const countdownInterval = setInterval(() => {
-                seconds--;
-                countdownEl.textContent = seconds;
-                if (seconds <= 0) {
-                    clearInterval(countdownInterval);
-                    window.location.href = 'https://haimier.top/friends';
-                }
-            }, 1000);
-        }, 2000);
+            if (confirm('是否重置计数？')) {
+                localStorage.removeItem('haimier_redirect_counter');
+                localStorage.removeItem('haimier_redirected_flag');
+                alert('计数已重置，请刷新页面');
+            }
+        };
+        document.body.appendChild(debugBtn);
     }
-})();
+});
 
 // 初始化
 renderArticles();
