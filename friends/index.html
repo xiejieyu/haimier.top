@@ -1,1 +1,161 @@
+<!-- 在您现有网站的适当位置添加 -->
+<style>
+/* 全屏视频样式 */
+#fullscreenVideoContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 99999;
+    display: none;
+}
 
+#fullscreenVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#fullscreenVideoControls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 999999;
+}
+
+.video-control-btn {
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 1px solid #FBC500;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.video-control-btn:hover {
+    background: rgba(251, 197, 0, 0.2);
+}
+</style>
+
+<!-- 全屏视频容器 -->
+<div id="fullscreenVideoContainer">
+    <video id="fullscreenVideo" autoplay muted playsinline>
+        <source src="company-intro.mp4" type="video/mp4">
+        <source src="company-intro.webm" type="video/webm">
+    </video>
+    <div id="fullscreenVideoControls">
+        <button class="video-control-btn" onclick="toggleVideoMute()" id="videoMuteBtn">开启声音</button>
+        <button class="video-control-btn" onclick="toggleVideoPlay()" id="videoPlayBtn">暂停</button>
+        <button class="video-control-btn" onclick="skipFullscreenVideo()">跳过</button>
+    </div>
+</div>
+
+<script>
+// 添加到现有JavaScript中
+function showFullscreenVideo() {
+    const videoContainer = document.getElementById('fullscreenVideoContainer');
+    const video = document.getElementById('fullscreenVideo');
+    
+    // 显示视频容器
+    videoContainer.style.display = 'block';
+    
+    // 加载视频
+    video.load();
+    
+    video.onloadeddata = function() {
+        // 开始播放
+        video.play().then(() => {
+            console.log('全屏视频开始播放');
+            // 进入全屏
+            enterFullscreen(document.documentElement);
+        }).catch(error => {
+            console.log('视频播放失败:', error);
+            video.controls = true;
+        });
+    };
+    
+    video.onended = function() {
+        hideFullscreenVideo();
+    };
+}
+
+function hideFullscreenVideo() {
+    const videoContainer = document.getElementById('fullscreenVideoContainer');
+    const video = document.getElementById('fullscreenVideo');
+    
+    video.pause();
+    videoContainer.style.display = 'none';
+    exitFullscreen();
+}
+
+function toggleVideoMute() {
+    const video = document.getElementById('fullscreenVideo');
+    const muteBtn = document.getElementById('videoMuteBtn');
+    
+    video.muted = !video.muted;
+    muteBtn.textContent = video.muted ? '开启声音' : '关闭声音';
+}
+
+function toggleVideoPlay() {
+    const video = document.getElementById('fullscreenVideo');
+    const playBtn = document.getElementById('videoPlayBtn');
+    
+    if (video.paused) {
+        video.play();
+        playBtn.textContent = '暂停';
+    } else {
+        video.pause();
+        playBtn.textContent = '播放';
+    }
+}
+
+function skipFullscreenVideo() {
+    hideFullscreenVideo();
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+}
+
+// 页面加载完成后自动显示全屏视频
+document.addEventListener('DOMContentLoaded', function() {
+    // 延迟1秒显示视频，确保页面其他内容加载完成
+    setTimeout(showFullscreenVideo, 1000);
+});
+
+// 监听全屏变化
+document.addEventListener('fullscreenchange', function() {
+    const isFullscreen = document.fullscreenElement;
+    if (!isFullscreen) {
+        hideFullscreenVideo();
+    }
+});
+</script>
