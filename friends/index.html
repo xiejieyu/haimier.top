@@ -63,27 +63,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            perspective: 1200px;
-            padding-top: 100px;
+            justify-content: flex-start;
+            perspective: 1000px;
+            overflow: hidden;
+            position: relative;
         }
         
         /* 滚动的人员名单 */
         .credits-roll {
             width: 85%;
             max-width: 950px;
-            height: 75vh;
+            height: 100vh;
             position: relative;
             transform-style: preserve-3d;
-            animation: rotateIn 2s ease-out;
+            margin-top: 100px;
+            overflow: hidden;
         }
         
         .credits-content {
             position: absolute;
             width: 100%;
             text-align: center;
+            top: 100vh;
             transform-origin: 50% 100%;
-            animation: scrollUp 50s linear infinite;
+            transform: rotateX(25deg);
+            animation: scrollUp 60s linear infinite;
         }
         
         /* 控制面板 - 简化版 */
@@ -179,26 +183,15 @@
             z-index: 50;
         }
         
-        /* 动画效果 */
+        /* 修复的动画效果 - 关键修改 */
         @keyframes scrollUp {
             0% {
-                top: 100%;
-                transform: rotateX(20deg) translateZ(0);
+                top: 100vh;
+                transform: rotateX(25deg) translateZ(0);
             }
             100% {
-                top: -300%;
+                top: -600vh; /* 增加滚动距离，确保完整播放 */
                 transform: rotateX(25deg) translateZ(-250px);
-            }
-        }
-        
-        @keyframes rotateIn {
-            0% {
-                opacity: 0;
-                transform: rotateX(30deg) translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: rotateX(0) translateY(0);
             }
         }
         
@@ -306,7 +299,7 @@
         .final-name {
             font-size: 58px;
             color: #FBC500;
-            margin: 60px 0 100px 0;
+            margin: 60px 0 150px 0; /* 增加底部边距，确保完全显示 */
             text-shadow: 0 0 30px rgba(251, 197, 0, 0.9);
             font-weight: bold;
             letter-spacing: 5px;
@@ -405,11 +398,21 @@
             
             .final-name {
                 font-size: 42px;
+                margin-bottom: 200px;
             }
             
             .hint {
                 bottom: 160px;
                 font-size: 12px;
+            }
+            
+            .credits-roll {
+                width: 95%;
+                margin-top: 80px;
+            }
+            
+            .credits-content {
+                transform: rotateX(20deg);
             }
         }
     </style>
@@ -444,7 +447,7 @@
         <div class="control-group">
             <div class="control-label">滚动速度:</div>
             <div class="speed-control">
-                <input type="range" class="speed-slider" id="speedControl" min="20" max="80" value="40">
+                <input type="range" class="speed-slider" id="speedControl" min="30" max="120" value="60">
                 <div class="speed-value" id="speedValue">正常</div>
             </div>
         </div>
@@ -462,7 +465,7 @@
         
         // 控制状态
         let isPaused = false;
-        let animationSpeed = 50; // 默认速度值
+        let animationSpeed = 60; // 默认速度值（越大越慢）
         
         // 初始化页面
         function initPage() {
@@ -486,6 +489,9 @@
             
             // 初始速度显示
             updateSpeedDisplay();
+            
+            // 初始动画设置
+            resetAnimation();
         }
         
         // 渲染内容
@@ -606,10 +612,10 @@
             html += `<div class="reflection">我是...</div>`;
             html += `<div class="final-name">吕健泽</div>`;
             
-            creditsContent.innerHTML = html;
+            // 添加足够的空白确保内容完全滚动
+            html += `<div style="height: 100vh;"></div>`;
             
-            // 设置初始动画
-            creditsContent.style.animation = `scrollUp ${animationSpeed}s linear infinite`;
+            creditsContent.innerHTML = html;
         }
         
         // 创建星空背景
@@ -651,6 +657,22 @@
             document.head.appendChild(style);
         }
         
+        // 重置动画
+        function resetAnimation() {
+            // 移除现有动画
+            creditsContent.style.animation = 'none';
+            
+            // 强制重绘
+            void creditsContent.offsetWidth;
+            
+            // 重新应用动画
+            creditsContent.style.animation = `scrollUp ${animationSpeed}s linear infinite`;
+            creditsContent.style.animationPlayState = 'running';
+            
+            // 确保从屏幕底部开始
+            creditsContent.style.top = '100vh';
+        }
+        
         // 切换暂停状态
         function togglePause() {
             isPaused = !isPaused;
@@ -665,19 +687,28 @@
             }
         }
         
-        // 更新滚动速度
+        // 更新滚动速度 - 修复逻辑
         function updateSpeed() {
-            animationSpeed = 80 - parseInt(speedControl.value) + 20; // 反转值，使滑块向右时速度更快
+            // 获取滑块值（30-120）
+            const sliderValue = parseInt(speedControl.value);
+            
+            // 滑块向左（值小） = 速度快（动画时间短）
+            // 滑块向右（值大） = 速度慢（动画时间长）
+            animationSpeed = sliderValue;
+            
+            // 更新动画持续时间
             creditsContent.style.animationDuration = `${animationSpeed}s`;
+            
+            // 更新速度显示
             updateSpeedDisplay();
         }
         
-        // 更新速度显示
+        // 更新速度显示 - 修复逻辑
         function updateSpeedDisplay() {
             const sliderValue = parseInt(speedControl.value);
-            if (sliderValue <= 30) {
+            if (sliderValue <= 50) {
                 speedValue.textContent = '快速';
-            } else if (sliderValue <= 50) {
+            } else if (sliderValue <= 80) {
                 speedValue.textContent = '正常';
             } else {
                 speedValue.textContent = '慢速';
