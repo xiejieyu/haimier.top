@@ -20,65 +20,131 @@
         .logo-txt img{height:64px}
         h1{font-size:2.2rem;margin-bottom:10px}
         
-        /* 彩蛋按钮样式 */
-        .egg-button {
+        /* 滚动字幕容器 */
+        .marquee-container {
             position: fixed;
-            top: 100px;
-            right: 20px;
-            background: linear-gradient(135deg, #FF6B6B, #FFE66D);
-            color: #000;
-            padding: 12px 24px;
-            border: none;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        /* 公司LOGO */
+        .marquee-logo {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(251, 197, 0, 0.2);
+            animation: logoPulse 1.5s infinite alternate;
+            border: 3px solid #FBC500;
+        }
+        
+        @keyframes logoPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 15px 35px rgba(251, 197, 0, 0.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.08);
+                box-shadow: 0 25px 45px rgba(251, 197, 0, 0.4);
+                opacity: 1;
+            }
+        }
+        
+        /* 滚动字幕区域 */
+        .marquee-wrapper {
+            width: 80%;
+            max-width: 800px;
+            height: 60px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 30px;
+            border: 2px solid rgba(251, 197, 0, 0.3);
+        }
+        
+        .marquee-content {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FBC500;
+            line-height: 60px;
+            animation: marqueeScroll 15s linear infinite;
+            text-shadow: 0 0 10px rgba(251, 197, 0, 0.5);
+        }
+        
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* 加载文字 */
+        .loading-text {
+            color: #fff;
+            margin-top: 30px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+        
+        .loading-text span {
+            color: #FBC500;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        /* 跳过按钮 */
+        .skip-marquee {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            padding: 12px 30px;
+            background: rgba(251, 197, 0, 0.9);
+            color: #000;
+            border: none;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            z-index: 9999;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-            animation: float 3s ease-in-out infinite;
             transition: all 0.3s;
-            display: none;
+            z-index: 999999;
         }
         
-        .egg-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        .skip-marquee:hover {
+            background: #FBC500;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(251, 197, 0, 0.3);
         }
         
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .egg-button::before {
-            content: "🎉 ";
-        }
-        
-        .egg-button::after {
-            content: " 🎉";
-        }
-        
-        /* 彩蛋提示样式 */
-        .egg-notification {
-            position: fixed;
-            top: 20px;
+        /* 品牌口号 */
+        .brand-slogan {
+            position: absolute;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #FBC500, #FFE66D);
-            color: #000;
-            padding: 15px 30px;
-            border-radius: 8px;
-            z-index: 9998;
-            box-shadow: 0 5px 15px rgba(251, 197, 0, 0.3);
-            display: none;
-            animation: slideDown 0.5s ease;
-            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-align: center;
         }
         
-        @keyframes slideDown {
-            from { transform: translate(-50%, -100px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
+        .brand-slogan span {
+            color: #FBC500;
+            font-weight: 600;
         }
         
         /* Banner区域 - 预加载首图 */
@@ -270,19 +336,36 @@
             }
             .card{height:auto;min-height:280px}
             
-            /* 移动端彩蛋按钮调整 */
-            .egg-button {
-                top: 80px;
-                right: 10px;
-                padding: 10px 20px;
-                font-size: 0.9rem;
+            /* 滚动字幕响应式 */
+            .marquee-logo {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 30px;
             }
             
-            .egg-notification {
-                top: 10px;
+            .marquee-wrapper {
                 width: 90%;
-                padding: 12px 20px;
-                font-size: 0.9rem;
+                height: 50px;
+            }
+            
+            .marquee-content {
+                font-size: 1.3rem;
+                line-height: 50px;
+            }
+            
+            .brand-slogan {
+                font-size: 1rem;
+                bottom: 30px;
+            }
+            
+            .skip-marquee {
+                bottom: 30px;
+                right: 20px;
+                padding: 10px 20px;
+            }
+            
+            .loading-text {
+                font-size: 1rem;
             }
         }
         
@@ -299,12 +382,25 @@
     </style>
 </head>
 <body>
-<!-- 彩蛋按钮 -->
-<button class="egg-button" id="eggButton" onclick="goToFriendsPage()">进入彩蛋网页</button>
-
-<!-- 彩蛋提示 -->
-<div class="egg-notification" id="eggNotification">
-    恭喜！彩蛋已解锁 🎊
+<!-- 滚动字幕容器（放在body最前面） -->
+<div class="marquee-container" id="marqueeContainer">
+    <img src="LOGO.jpg" alt="海米尔文化" class="marquee-logo">
+    
+    <div class="marquee-wrapper">
+        <div class="marquee-content" id="marqueeText">
+            欢迎来到海米尔文化官方网站！我们致力于用年轻视角创造无限内容价值！以年少之心敬未来无限可能！MCN与版权代理的结合公司，成立于2025年8月21日！感谢您的关注与支持！
+        </div>
+    </div>
+    
+    <div class="loading-text">
+        正在加载海米尔文化官方网站，请稍候... <span id="countdown">3</span>秒
+    </div>
+    
+    <div class="brand-slogan">
+        以<span>年少之心</span>敬<span>未来无限可能</span>
+    </div>
+    
+    <button class="skip-marquee" onclick="skipMarquee()">跳过介绍</button>
 </div>
 
 <header>
@@ -496,7 +592,7 @@
         <h3>联系我们</h3>
         <div class="contact-info">
             <p>电话：16617152404<br>
-            邮箱：<a href="mailto:us@haimier.top">us@haimier.top</a> &nbsp;<a href="mailto:haimier@qq.com">haimier@qq.com</a><br>
+            邮箱：<a href="mailto:lvjianze@haimier.top">lvjianze@haimier.top</a> &nbsp;<a href="mailto:haimier@qq.com">haimier@qq.com</a><br>
             地址：吉林省四平市伊通满族自治县靠山镇九龙村二组</p>
         </div>
     </div>
@@ -509,87 +605,59 @@
 </footer>
 
 <script>
-// ===== 刷新计数和彩蛋功能 =====
+// ===== 滚动字幕系统（3秒版本）=====
 (function() {
-    // 使用更可靠的key名称
-    const REFRESH_COUNT_KEY = 'haimier_refresh_count_v2';
-    const EGG_UNLOCKED_KEY = 'haimier_egg_unlocked_v2';
+    const marqueeContainer = document.getElementById('marqueeContainer');
+    const countdownElement = document.getElementById('countdown');
     
-    // 获取刷新次数并增加
-    let refreshCount = 0;
-    try {
-        const stored = localStorage.getItem(REFRESH_COUNT_KEY);
-        refreshCount = stored ? parseInt(stored) : 0;
-        console.log('当前刷新次数:', refreshCount);
-        
-        // 增加计数
-        refreshCount++;
-        localStorage.setItem(REFRESH_COUNT_KEY, refreshCount.toString());
-        console.log('更新后的刷新次数:', refreshCount);
-        
-    } catch (error) {
-        console.error('读取localStorage时出错:', error);
-    }
+    // 显示滚动字幕
+    marqueeContainer.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
     
-    // 检查是否已经解锁彩蛋
-    const eggUnlocked = localStorage.getItem(EGG_UNLOCKED_KEY) === 'true';
-    
-    // 达到3次刷新且尚未解锁彩蛋
-    if (refreshCount >= 3 && !eggUnlocked) {
-        console.log('达到3次刷新，解锁彩蛋按钮');
+    // 3秒倒计时
+    let seconds = 3;
+    const countdownInterval = setInterval(() => {
+        seconds--;
+        countdownElement.textContent = seconds;
         
-        // 设置彩蛋解锁标记
-        localStorage.setItem(EGG_UNLOCKED_KEY, 'true');
-        
-        // 延迟1秒后显示彩蛋按钮和提示
-        setTimeout(() => {
-            const eggButton = document.getElementById('eggButton');
-            const eggNotification = document.getElementById('eggNotification');
-            
-            if (eggButton && eggNotification) {
-                // 显示彩蛋按钮
-                eggButton.style.display = 'block';
-                
-                // 显示提示
-                eggNotification.style.display = 'block';
-                
-                // 5秒后隐藏提示
-                setTimeout(() => {
-                    eggNotification.style.display = 'none';
-                }, 5000);
-                
-                // 添加按钮点击动画
-                eggButton.style.animation = 'float 2s ease-in-out infinite, pulse 1s 3';
-                
-                // 添加CSS动画
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes pulse {
-                        0% { transform: scale(1); }
-                        50% { transform: scale(1.1); }
-                        100% { transform: scale(1); }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        }, 1000);
-    }
-    
-    // 如果彩蛋已经解锁，直接显示按钮
-    if (eggUnlocked) {
-        console.log('彩蛋已解锁，显示按钮');
-        const eggButton = document.getElementById('eggButton');
-        if (eggButton) {
-            setTimeout(() => {
-                eggButton.style.display = 'block';
-            }, 500);
+        if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            hideMarquee();
         }
-    }
+    }, 1000);
+    
+    // 创建多条字幕内容
+    const marqueeTexts = [
+        "欢迎来到海米尔文化官方网站！我们致力于用年轻视角创造无限内容价值！",
+        "以年少之心敬未来无限可能！MCN与版权代理的结合公司，成立于2025年8月21日！",
+        "海米尔文化，创造无限可能！感谢您的关注与支持！",
+        "专业MCN与版权代理服务，为您的内容创作保驾护航！",
+        "年轻视角，无限创意，海米尔文化与您共创未来！"
+    ];
+    
+    // 随机选择一条字幕
+    const randomText = marqueeTexts[Math.floor(Math.random() * marqueeTexts.length)];
+    document.getElementById('marqueeText').textContent = randomText + " " + randomText; // 重复一次让滚动更连续
+    
+    console.log('滚动字幕已启动，3秒后自动关闭');
 })();
 
-// 跳转到彩蛋页面
-function goToFriendsPage() {
-    window.location.href = 'https://haimier.top/friends';
+// 跳过滚动字幕
+function skipMarquee() {
+    hideMarquee();
+}
+
+// 隐藏滚动字幕
+function hideMarquee() {
+    const marqueeContainer = document.getElementById('marqueeContainer');
+    marqueeContainer.style.opacity = '0';
+    marqueeContainer.style.transition = 'opacity 0.5s ease';
+    
+    setTimeout(() => {
+        marqueeContainer.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        console.log('滚动字幕已关闭');
+    }, 500);
 }
 
 // 文章数据
@@ -760,50 +828,6 @@ worksNextBtn.addEventListener('click', () => {
         currentWorksPage++;
         renderWorks();
     }
-});
-
-// 添加调试功能（开发时可查看当前计数）
-document.addEventListener('DOMContentLoaded', function() {
-    // 创建一个调试按钮（仅在开发时使用）
-    if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
-        const debugBtn = document.createElement('button');
-        debugBtn.textContent = '调试：查看/重置计数';
-        debugBtn.style.cssText = `
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            padding: 10px;
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            z-index: 999999;
-            cursor: pointer;
-            font-size: 12px;
-        `;
-        debugBtn.onclick = function() {
-            const count = localStorage.getItem('haimier_refresh_count_v2') || '0';
-            const unlocked = localStorage.getItem('haimier_egg_unlocked_v2') || 'false';
-            alert(`当前计数: ${count}\n彩蛋解锁: ${unlocked}`);
-            
-            if (confirm('是否重置计数？')) {
-                localStorage.removeItem('haimier_refresh_count_v2');
-                localStorage.removeItem('haimier_egg_unlocked_v2');
-                alert('计数已重置，请刷新页面3次');
-            }
-            
-            if (confirm('是否立即解锁彩蛋？')) {
-                localStorage.setItem('haimier_egg_unlocked_v2', 'true');
-                document.getElementById('eggButton').style.display = 'block';
-                alert('彩蛋已解锁');
-            }
-        };
-        document.body.appendChild(debugBtn);
-    }
-    
-    // 显示当前刷新次数（仅用于测试）
-    console.log('当前刷新次数:', localStorage.getItem('haimier_refresh_count_v2') || '0');
-    console.log('彩蛋解锁状态:', localStorage.getItem('haimier_egg_unlocked_v2') || 'false');
 });
 
 // 初始化
