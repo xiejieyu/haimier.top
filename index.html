@@ -220,6 +220,48 @@
             outline: none;
             border: none;
         }
+        
+        /* 刷新跳转提示样式 */
+        .redirect-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            font-family: inherit;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .redirect-content {
+            max-width: 500px;
+            background: rgba(251, 197, 0, 0.1);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 2px solid #FBC500;
+        }
+        
+        .redirect-loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #333;
+            border-top: 5px solid #FBC500;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 25px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -424,6 +466,41 @@
     </div>
 </footer>
 
+<!-- 刷新跳转提示 -->
+<div class="redirect-overlay" id="redirectOverlay">
+    <div class="redirect-content">
+        <div style="font-size: 3rem; margin-bottom: 20px;">✨</div>
+        <h2 style="color: #FBC500; margin-bottom: 15px; font-size: 1.8rem;">发现精彩伙伴</h2>
+        <p style="margin-bottom: 10px;">感谢您对海米尔文化的持续关注</p>
+        <p style="margin-bottom: 25px; color: #aaa;">我们为您准备了精选的友情链接</p>
+        
+        <div class="redirect-loader"></div>
+        
+        <div style="
+            display: inline-block;
+            padding: 12px 30px;
+            background: #FBC500;
+            color: #000;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+        " onclick="window.location.href='https://haimier.top/friends'">
+            立即前往友情链接页面 →
+        </div>
+        
+        <p style="color: #666; margin-top: 25px; font-size: 0.9rem;">
+            自动跳转倒计时: <span id="haimierCountdown">5</span>秒
+        </p>
+        
+        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <p style="color: #FBC500; margin: 0; font-size: 0.9rem;">
+                以年少之心敬未来无限可能
+            </p>
+        </div>
+    </div>
+</div>
+
 <script>
 // 文章数据
 const articles = [
@@ -594,6 +671,47 @@ worksNextBtn.addEventListener('click', () => {
         renderWorks();
     }
 });
+
+// ===== 刷新三次自动跳转功能 =====
+(function() {
+    // 检查是否已经跳转过
+    if (localStorage.getItem('haimier_friends_redirected')) {
+        return;
+    }
+    
+    // 获取刷新次数
+    let refreshCount = parseInt(localStorage.getItem('haimier_refresh_count') || '0');
+    refreshCount++;
+    localStorage.setItem('haimier_refresh_count', refreshCount);
+    
+    console.log(`海米尔官网访问次数: ${refreshCount}`);
+    
+    // 达到3次后跳转
+    if (refreshCount >= 3) {
+        // 设置已跳转标记
+        localStorage.setItem('haimier_friends_redirected', 'true');
+        
+        // 延迟2秒显示跳转提示
+        setTimeout(() => {
+            const redirectOverlay = document.getElementById('redirectOverlay');
+            const countdownEl = document.getElementById('haimierCountdown');
+            
+            // 显示跳转提示
+            redirectOverlay.style.display = 'flex';
+            
+            // 5秒倒计时
+            let seconds = 5;
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdownEl.textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = 'https://haimier.top/friends';
+                }
+            }, 1000);
+        }, 2000);
+    }
+})();
 
 // 初始化
 renderArticles();
