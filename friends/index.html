@@ -47,6 +47,7 @@
             object-fit: cover;
             border: 2px solid #FBC500;
             box-shadow: 0 0 15px rgba(251, 197, 0, 0.5);
+            background-color: #333;
         }
         
         .title {
@@ -190,9 +191,14 @@
                 transform: rotateX(25deg) translateZ(0);
             }
             100% {
-                top: -600vh; /* 增加滚动距离，确保完整播放 */
+                top: -600vh;
                 transform: rotateX(25deg) translateZ(-250px);
             }
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
         
         /* 文本样式 */
@@ -299,7 +305,7 @@
         .final-name {
             font-size: 58px;
             color: #FBC500;
-            margin: 60px 0 150px 0; /* 增加底部边距，确保完全显示 */
+            margin: 60px 0 150px 0;
             text-shadow: 0 0 30px rgba(251, 197, 0, 0.9);
             font-weight: bold;
             letter-spacing: 5px;
@@ -465,7 +471,7 @@
         
         // 控制状态
         let isPaused = false;
-        let animationSpeed = 60; // 默认速度值（越大越慢）
+        let animationSpeed = 60;
         
         // 初始化页面
         function initPage() {
@@ -481,7 +487,6 @@
             
             // 点击屏幕暂停/继续
             document.body.addEventListener('click', function(e) {
-                // 如果点击的不是控制面板
                 if (!e.target.closest('.controls')) {
                     togglePause();
                 }
@@ -540,7 +545,7 @@
             html += `<div class="friends-title">---下为朋友们的名单（排名不分前后）---</div>`;
             html += `<div class="friends-list">`;
             
-            // 朋友名单分组显示
+            // 朋友名单分组显示 - 修复了中文逗号错误
             const friendsGroups = [
                 ["恒星Hz", "甜蜜蜜", "艾格", "melon", "蛮顾", "燃浩"],
                 ["珍珍", "树苗", "zack", "洛轻霜", "brokenhalo", "ws"],
@@ -554,8 +559,8 @@
                 ["entity", "404", "晓周", "萨利图", "shuihei", "昸玄"],
                 ["太阳", "落归", "雪花", "小优", "年白", "矿工"],
                 ["残云", "鸽子管家", "杰慕斯", "尾巴", "416", "神秘梦境"],
-                ["花盆", "方源", "噗嗤", "SC", "UK", "仙草"，"GC"],
-                ["月", "江無冥", "林", "乔鸳", "歆", "蟑螂"，"BQBZS"],
+                ["花盆", "方源", "噗嗤", "SC", "UK", "仙草", "GC"],
+                ["月", "江無冥", "林", "乔鸳", "歆", "蟑螂", "BQBZS"],
                 ["小黄117", "高血压", "弦白", "屑土豆", "soundscool", "楠木"],
                 ["沐冷", "鸽子", "大汉", "空白", "十五孙策", "火龙"],
                 ["嘉尔", "虚高", "GB", "戴花", "planother", "build"],
@@ -645,16 +650,6 @@
                     star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite alternate`;
                 }
             }
-            
-            // 添加闪烁动画
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes twinkle {
-                    0% { opacity: 0.3; }
-                    100% { opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
         }
         
         // 重置动画
@@ -687,7 +682,7 @@
             }
         }
         
-        // 更新滚动速度 - 修复逻辑
+        // 更新滚动速度
         function updateSpeed() {
             // 获取滑块值（30-120）
             const sliderValue = parseInt(speedControl.value);
@@ -703,7 +698,7 @@
             updateSpeedDisplay();
         }
         
-        // 更新速度显示 - 修复逻辑
+        // 更新速度显示
         function updateSpeedDisplay() {
             const sliderValue = parseInt(speedControl.value);
             if (sliderValue <= 50) {
