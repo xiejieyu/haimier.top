@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <link rel="icon" href="../favicon.ico">
+  <!-- 修改这里：使用绝对路径引用zhe.ico图标 -->
+  <link rel="icon" type="image/x-icon" href="zhe.ico">
+  <link rel="shortcut icon" href="zhe.ico">
+  
   <meta charset="UTF-8">
   <title>哲白</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +35,19 @@
     .hero{text-align:center;margin-top:30px;margin-bottom:40px}
     .hero img{width:200px;height:200px;object-fit:cover;margin-bottom:20px}
 
+    /* ===== 代表作区域 - 新增底部间距 ===== */
+    .works-section {
+      margin-bottom: 60px; /* 作品区域与底部的间隙 */
+    }
+    
+    /* ===== 代表作标题 ===== */
+    .works-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
     /* ===== 代表作 + 垂直描述（变量控制） ===== */
     .works{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
     .works a{width:var(--work-width);font-size:var(--work-font);display:flex;flex-direction:column;border-radius:8px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.15);text-decoration:none;color:inherit}
@@ -39,8 +55,13 @@
     .works a:hover img{transform:scale(1.05)}
     .works .desc{margin:0;padding:6px 8px;text-align:center;font-size:.75rem;color:#555;background:#fff}
 
+    /* ===== 空白的间隙区域 ===== */
+    .gap {
+      height: 50px; /* 控制间隙高度 */
+    }
+
     /* ===== 底部 ===== */
-    footer{background:#89CFF0;color:#fff;padding:40px 0;text-align:center}
+    footer{background:#89CFF0;color:#fff;padding:40px 0;text-align:center;margin-top: 20px;}
   </style>
 </head>
 <body>
@@ -62,27 +83,30 @@
   <p>一手引领团队发展，掌控运营与技能全局</p>
   <p>擅长创意策划、视频制作；致力于为广大观众带来优质的视频</p>
   <p style="font-size: 32px; color: #89CFF0; font-style: italic; text-decoration: underline;">
-  “未来有无限可能，请大胆的走下去”
+  "未来有无限可能，请大胆的走下去"
 </p>
 </div>
 
-<!-- 代表作（变量控制） -->
-<h2 style="text-align:center;">代表作</h2>
-<div class="works">
-  <a href="https://b23.tv/1h0RMm9" target="_blank" rel="noopener">
-    <img src="哲封.jpg" alt="《尖  叫  模  拟  器》">
-    <p class="desc">《尖  叫  模  拟  器》</p>
-  </a>
+<!-- 代表作区域（已添加底部间距） -->
+<div class="works-section">
+  <h2 class="works-title">代表作</h2>
+  <div class="works">
+    <a href="https://b23.tv/1h0RMm9" target="_blank" rel="noopener">
+      <img src="哲封.jpg" alt="《尖  叫  模  拟  器》">
+      <p class="desc">《尖  叫  模  拟  器》</p>
+    </a>
+  </div>
 </div>
 
-  <div class="back">
-</div>
+<!-- 可选：添加一个额外的间隙 -->
+<div class="gap"></div>
 
 <!-- 底部 -->
 <footer>
   <div class="wrap">
-    © 2026 哲白是只狼 版权所有
-    海米尔（吉林）文化传播有限公司 技术支持代理制作 haimier.top域名授权  网站最终解释权归海米尔（吉林）文化传播有限公司所有
+    © 2026 哲白是只狼 版权所有<br>
+    海米尔（吉林）文化传播有限公司 技术支持代理制作 haimier.top域名授权<br>
+    网站最终解释权归海米尔（吉林）文化传播有限公司所有
   </div>
 </footer>
 </body>
