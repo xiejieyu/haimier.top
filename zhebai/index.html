@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <!-- 修改这里：使用绝对路径引用zhe.ico图标 -->
+  <!-- 完整图标配置方案 -->
   <link rel="icon" type="image/x-icon" href="zhe.ico">
   <link rel="shortcut icon" href="zhe.ico">
+  <link rel="icon" type="image/png" href="zhe.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="zhe.png">
+  
+  <!-- 强制浏览器重新验证图标缓存 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   
   <meta charset="UTF-8">
   <title>哲白</title>
@@ -109,5 +116,27 @@
     网站最终解释权归海米尔（吉林）文化传播有限公司所有
   </div>
 </footer>
+
+<script>
+  // 强制图标重新加载的脚本
+  document.addEventListener('DOMContentLoaded', function() {
+    // 方法1: 创建新的link元素强制加载图标
+    setTimeout(function() {
+      var newLink = document.createElement('link');
+      newLink.rel = 'icon';
+      newLink.href = 'zhe.ico?v=' + new Date().getTime();
+      document.head.appendChild(newLink);
+    }, 100);
+    
+    // 方法2: 修改现有link元素的href（添加时间戳防止缓存）
+    var links = document.querySelectorAll('link[rel*="icon"]');
+    links.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (href) {
+        link.href = href.split('?')[0] + '?v=' + new Date().getTime();
+      }
+    });
+  });
+</script>
 </body>
 </html>
