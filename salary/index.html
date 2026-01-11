@@ -29,6 +29,9 @@
             background-color: var(--light-bg);
             color: var(--dark-text);
             padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
@@ -38,6 +41,7 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             overflow: hidden;
+            flex: 1;
         }
         
         /* 头部 */
@@ -227,7 +231,7 @@
             font-size: 14px;
         }
         
-        /* 计算器样式 */
+        /* 计算器样式 - 修复版 */
         .calculator {
             background-color: #f8f9fa;
             border-radius: 10px;
@@ -249,7 +253,7 @@
         
         .calc-buttons {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
         }
         
@@ -262,6 +266,9 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .calc-btn:hover {
@@ -284,12 +291,17 @@
             background-color: var(--success-color);
             color: white;
             border-color: #218838;
+            grid-column: span 2;
         }
         
         .calc-btn.percent {
             background-color: var(--warning-color);
             color: var(--dark-text);
             border-color: #e0a800;
+        }
+        
+        .calc-btn.zero {
+            grid-column: span 2;
         }
         
         /* 状态标签 */
@@ -453,6 +465,18 @@
             text-align: right;
         }
         
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray-text);
+            font-size: 14px;
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+        }
+        
         /* 响应式 */
         @media (max-width: 768px) {
             .form-row {
@@ -529,8 +553,8 @@
                         <option value="">选择部门</option>
                         <option value="管理层">管理层</option>
                         <option value="资料管理处">资料管理处</option>
-                      <option value="审核部">审核部</option>
-                      <option value="策划宣传部">策划宣传部</option>
+                        <option value="审核部">审核部</option>
+                        <option value="策划宣传部">策划宣传部</option>
                         <option value="版权部">版权部</option>
                         <option value="美工部">美工部</option>
                         <option value="艺人部">艺人部</option>
@@ -604,25 +628,25 @@
                     <button class="calc-btn" data-action="backspace">⌫</button>
                     <button class="calc-btn percent" data-action="%">%</button>
                     <button class="calc-btn operator" data-action="/">÷</button>
-                    <button class="calc-btn operator" data-action="*">×</button>
                     
                     <button class="calc-btn" data-action="7">7</button>
                     <button class="calc-btn" data-action="8">8</button>
                     <button class="calc-btn" data-action="9">9</button>
-                    <button class="calc-btn operator" data-action="-">-</button>
+                    <button class="calc-btn operator" data-action="*">×</button>
                     
                     <button class="calc-btn" data-action="4">4</button>
                     <button class="calc-btn" data-action="5">5</button>
                     <button class="calc-btn" data-action="6">6</button>
-                    <button class="calc-btn operator" data-action="+">+</button>
+                    <button class="calc-btn operator" data-action="-">-</button>
                     
                     <button class="calc-btn" data-action="1">1</button>
                     <button class="calc-btn" data-action="2">2</button>
                     <button class="calc-btn" data-action="3">3</button>
-                    <button class="calc-btn equals" data-action="=" rowspan="2">=</button>
+                    <button class="calc-btn operator" data-action="+">+</button>
                     
-                    <button class="calc-btn" data-action="0" colspan="2">0</button>
+                    <button class="calc-btn zero" data-action="0">0</button>
                     <button class="calc-btn" data-action=".">.</button>
+                    <button class="calc-btn equals" data-action="=">=</button>
                 </div>
             </div>
             
@@ -677,6 +701,11 @@
                 <p>编辑或操作记录后，这里会显示历史记录</p>
             </div>
         </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            © 2025-2026 海米尔（吉林）文化传播有限公司 版权所有
+        </div>
     </div>
 
     <!-- 编辑记录模态框 -->
@@ -698,10 +727,14 @@
                             <label for="edit-department">部门</label>
                             <select id="edit-department" required>
                                 <option value="">选择部门</option>
-                                <option value="技术部">技术部</option>
-                                <option value="设计部">设计部</option>
-                                <option value="销售部">销售部</option>
-                                <option value="行政部">行政部</option>
+                                <option value="管理层">管理层</option>
+                                <option value="资料管理处">资料管理处</option>
+                                <option value="审核部">审核部</option>
+                                <option value="策划宣传部">策划宣传部</option>
+                                <option value="版权部">版权部</option>
+                                <option value="美工部">美工部</option>
+                                <option value="艺人部">艺人部</option>
+                                <option value="心理部">心理部</option>
                                 <option value="其他">其他</option>
                             </select>
                         </div>
@@ -1381,7 +1414,7 @@
             document.getElementById('no-history-message').style.display = 'none';
         }
         
-        // 初始化计算器
+        // 初始化计算器 - 修复版
         function initCalculator() {
             const calcDisplayElement = document.getElementById('calc-display');
             const calcButtons = document.querySelectorAll('.calc-btn');
