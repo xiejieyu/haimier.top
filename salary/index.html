@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简洁工资管理系统</title>
+    <style>
+        :root {
+            --primary-color: #FBC500;
+            --primary-dark: #E0B000;
+            --light-bg: #f8f9fa;
+            --dark-text: #333;
+            --gray-text: #666;
+            --border-color: #ddd;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        /* 头部 */
+        .header {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .header-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray-text);
+        }
+        
+        /* 标签页 */
+        .tabs {
+            display: flex;
+            background-color: #f1f1f1;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .tab.active {
+            background-color: white;
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--dark-text);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* 表单样式 */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray-text);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: var(--dark-text);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-info {
+            background-color: var(--info-color);
+            color: white;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--gray-text);
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+        
+        /* 计算器样式 */
+        .calculator {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+        
+        .calc-display {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 28px;
+            text-align: right;
+            margin-bottom: 20px;
+            min-height: 80px;
+            word-break: break-all;
+        }
+        
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        
+        .calc-btn {
+            padding: 18px 10px;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .calc-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .calc-btn.operator {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+            border-color: var(--primary-dark);
+        }
+        
+        .calc-btn.clear {
+            background-color: var(--danger-color);
+            color: white;
+            border-color: #c82333;
+        }
+        
+        .calc-btn.equals {
+            background-color: var(--success-color);
+            color: white;
+            border-color: #218838;
+        }
+        
+        .calc-btn.percent {
+            background-color: var(--warning-color);
+            color: var(--dark-text);
+            border-color: #e0a800;
+        }
+        
+        /* 状态标签 */
+        .status-paid {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .status-unpaid {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--gray-text);
+        }
+        
+        .empty-state i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-text);
+        }
+        
+        /* 历史记录样式 */
+        .history-container {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        .history-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .history-time {
+            color: var(--gray-text);
+            font-size: 14px;
+        }
+        
+        .history-action {
+            font-weight: 600;
+            color: var(--info-color);
+        }
+        
+        .history-details {
+            font-size: 14px;
+            color: var(--gray-text);
+        }
+        
+        .history-change {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        /* 最近记录 */
+        .recent-calculations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .recent-item {
+            flex: 1;
+            min-width: 200px;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .recent-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+        }
+        
+        .recent-calculation {
+            font-size: 14px;
+            color: var(--gray-text);
+            margin-bottom: 5px;
+            word-break: break-all;
+        }
+        
+        .recent-result {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: right;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .header-stats {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            
+            .stat-box {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .calc-buttons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .recent-item {
+                min-width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1><i class="fas fa-money-bill-wave"></i> 简洁工资管理系统</h1>
+            <div class="header-stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="total-unpaid">¥0</div>
+                    <div class="stat-label">未结工资</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="total-paid">¥0</div>
+                    <div class="stat-label">已结工资</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="total-employees">0人</div>
+                    <div class="stat-label">总人员</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 标签页 -->
+        <div class="tabs">
+            <div class="tab active" data-tab="record-tab">记账</div>
+            <div class="tab" data-tab="calculator-tab">快速算账</div>
+            <div class="tab" data-tab="history-tab">编辑记录</div>
+        </div>
+        
+        <!-- 记账标签页 -->
+        <div class="tab-content active" id="record-tab">
+            <h2 style="margin-bottom: 25px;">记录工资信息</h2>
+            
+            <!-- 添加记录表单 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="person-name">人员</label>
+                    <input type="text" id="person-name" placeholder="输入姓名">
+                </div>
+                <div class="form-group">
+                    <label for="department">部门</label>
+                    <select id="department">
+                        <option value="">选择部门</option>
+                        <option value="管理层">管理层</option>
+                        <option value="资料管理处">资料管理处</option>
+                      <option value="审核部">审核部</option>
+                      <option value="策划宣传部">策划宣传部</option>
+                        <option value="版权部">版权部</option>
+                        <option value="美工部">美工部</option>
+                        <option value="艺人部">艺人部</option>
+                        <option value="心理部">心理部</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="work-content">工作内容</label>
+                    <input type="text" id="work-content" placeholder="输入工作内容">
+                </div>
+                <div class="form-group">
+                    <label for="salary">工资</label>
+                    <input type="number" id="salary" placeholder="输入金额" min="0" step="0.01">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="paid-amount">已结金额</label>
+                    <input type="number" id="paid-amount" placeholder="已支付金额" min="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="unpaid-amount">未结金额</label>
+                    <input type="number" id="unpaid-amount" placeholder="未支付金额" min="0" step="0.01">
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="add-record-btn">
+                <i class="fas fa-plus"></i> 添加记录
+            </button>
+            
+            <!-- 记录表格 -->
+            <div class="table-container">
+                <table id="records-table">
+                    <thead>
+                        <tr>
+                            <th>人员</th>
+                            <th>部门</th>
+                            <th>工作内容</th>
+                            <th>工资</th>
+                            <th>已结</th>
+                            <th>未结</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="records-body">
+                        <!-- 记录将通过JavaScript动态添加 -->
+                    </tbody>
+                </table>
+                <div class="empty-state" id="no-records-message">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>暂无工资记录</h3>
+                    <p>点击上方"添加记录"按钮开始记录</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 快速算账标签页 -->
+        <div class="tab-content" id="calculator-tab">
+            <h2 style="margin-bottom: 25px;">快速工资计算器</h2>
+            
+            <div class="calculator">
+                <div class="calc-display" id="calc-display">0</div>
+                <div class="calc-buttons">
+                    <button class="calc-btn clear" data-action="clear">C</button>
+                    <button class="calc-btn" data-action="backspace">⌫</button>
+                    <button class="calc-btn percent" data-action="%">%</button>
+                    <button class="calc-btn operator" data-action="/">÷</button>
+                    <button class="calc-btn operator" data-action="*">×</button>
+                    
+                    <button class="calc-btn" data-action="7">7</button>
+                    <button class="calc-btn" data-action="8">8</button>
+                    <button class="calc-btn" data-action="9">9</button>
+                    <button class="calc-btn operator" data-action="-">-</button>
+                    
+                    <button class="calc-btn" data-action="4">4</button>
+                    <button class="calc-btn" data-action="5">5</button>
+                    <button class="calc-btn" data-action="6">6</button>
+                    <button class="calc-btn operator" data-action="+">+</button>
+                    
+                    <button class="calc-btn" data-action="1">1</button>
+                    <button class="calc-btn" data-action="2">2</button>
+                    <button class="calc-btn" data-action="3">3</button>
+                    <button class="calc-btn equals" data-action="=" rowspan="2">=</button>
+                    
+                    <button class="calc-btn" data-action="0" colspan="2">0</button>
+                    <button class="calc-btn" data-action=".">.</button>
+                </div>
+            </div>
+            
+            <!-- 最近记录 -->
+            <div style="margin-top: 30px;">
+                <h3 style="margin-bottom: 15px;">最近记录 <span style="font-size: 14px; color: var(--gray-text); font-weight: normal;">（点击可快速计算）</span></h3>
+                <div id="recent-calculations">
+                    <!-- 最近计算记录将通过JavaScript动态添加 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 编辑记录标签页 -->
+        <div class="tab-content" id="history-tab">
+            <h2 style="margin-bottom: 25px;">编辑记录历史</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="history-filter-person">按人员筛选</label>
+                        <input type="text" id="history-filter-person" placeholder="输入人员姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="history-filter-type">按操作类型筛选</label>
+                        <select id="history-filter-type">
+                            <option value="">全部操作</option>
+                            <option value="新增">新增记录</option>
+                            <option value="编辑">编辑记录</option>
+                            <option value="结清">结清工资</option>
+                            <option value="删除">删除记录</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="filter-history-btn">
+                    <i class="fas fa-filter"></i> 筛选
+                </button>
+                <button class="btn btn-secondary" id="clear-filter-btn" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> 清除筛选
+                </button>
+                <button class="btn btn-danger" id="clear-all-history-btn" style="margin-left: 10px;">
+                    <i class="fas fa-trash"></i> 清空历史
+                </button>
+            </div>
+            
+            <div id="history-list">
+                <!-- 历史记录将通过JavaScript动态添加 -->
+            </div>
+            
+            <div class="empty-state" id="no-history-message">
+                <i class="fas fa-history"></i>
+                <h3>暂无编辑记录</h3>
+                <p>编辑或操作记录后，这里会显示历史记录</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑记录模态框 -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>编辑记录</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-person">人员</label>
+                            <input type="text" id="edit-person" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-department">部门</label>
+                            <select id="edit-department" required>
+                                <option value="">选择部门</option>
+                                <option value="技术部">技术部</option>
+                                <option value="设计部">设计部</option>
+                                <option value="销售部">销售部</option>
+                                <option value="行政部">行政部</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-work-content">工作内容</label>
+                            <input type="text" id="edit-work-content" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-salary">工资</label>
+                            <input type="number" id="edit-salary" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-paid-amount">已结金额</label>
+                            <input type="number" id="edit-paid-amount" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-unpaid-amount">未结金额</label>
+                            <input type="number" id="edit-unpaid-amount" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button type="submit" class="btn btn-success" style="flex: 1;">
+                            <i class="fas fa-save"></i> 保存更改
+                        </button>
+                        <button type="button" class="btn btn-danger close-modal" style="flex: 1;">
+                            <i class="fas fa-times"></i> 取消
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 查看历史模态框 -->
+    <div class="modal" id="history-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>记录历史详情</h2>
+                <button class="close-history-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="history-details">
+                    <!-- 历史详情将通过JavaScript动态添加 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 工资记录存储
+        let salaryRecords = JSON.parse(localStorage.getItem('salaryRecords')) || [];
+        
+        // 编辑历史记录存储
+        let editHistory = JSON.parse(localStorage.getItem('editHistory')) || [];
+        
+        // 最近计算记录存储
+        let recentCalculations = JSON.parse(localStorage.getItem('recentCalculations')) || [];
+        
+        // 计算器状态
+        let calcDisplay = '0';
+        let calcFirstOperand = null;
+        let calcOperator = null;
+        let calcWaitingForSecondOperand = false;
+        
+        // 初始化函数
+        function init() {
+            // 初始化标签页
+            initTabs();
+            
+            // 初始化记录表格
+            renderRecordsTable();
+            updateStats();
+            
+            // 初始化计算器
+            initCalculator();
+            
+            // 初始化最近计算记录
+            renderRecentCalculations();
+            
+            // 初始化历史记录
+            renderEditHistory();
+            
+            // 清空示例数据
+            clearSampleData();
+        }
+        
+        // 清空示例数据
+        function clearSampleData() {
+            // 检查是否是第一次使用
+            const isFirstUse = !localStorage.getItem('salaryRecords') && 
+                              !localStorage.getItem('editHistory') &&
+                              !localStorage.getItem('recentCalculations');
+            
+            if (isFirstUse) {
+                // 首次使用，清空所有数据
+                salaryRecords = [];
+                editHistory = [];
+                recentCalculations = [];
+                
+                saveRecords();
+                saveHistory();
+                saveRecentCalculations();
+                
+                // 更新UI
+                renderRecordsTable();
+                updateStats();
+                renderEditHistory();
+                renderRecentCalculations();
+                
+                // 显示欢迎消息
+                showNotification('欢迎使用工资管理系统！请开始添加您的第一条记录。', 'info');
+            }
+        }
+        
+        // 初始化标签页
+        function initTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 移除所有标签的active类
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(tc => tc.classList.remove('active'));
+                    
+                    // 为当前标签添加active类
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        }
+        
+        // 保存记录到本地存储
+        function saveRecords() {
+            localStorage.setItem('salaryRecords', JSON.stringify(salaryRecords));
+        }
+        
+        // 保存编辑历史到本地存储
+        function saveHistory() {
+            localStorage.setItem('editHistory', JSON.stringify(editHistory));
+        }
+        
+        // 保存最近计算记录到本地存储
+        function saveRecentCalculations() {
+            localStorage.setItem('recentCalculations', JSON.stringify(recentCalculations));
+        }
+        
+        // 添加历史记录
+        function addHistoryRecord(recordId, action, person, workContent, salary, paidAmount, unpaidAmount, changes = null) {
+            const historyRecord = {
+                id: Date.now(),
+                recordId: recordId,
+                action: action,
+                person: person,
+                workContent: workContent,
+                salary: salary,
+                paidAmount: paidAmount,
+                unpaidAmount: unpaidAmount,
+                timestamp: new Date().toISOString(),
+                changes: changes
+            };
+            
+            editHistory.unshift(historyRecord); // 添加到开头，最新的在前面
+            
+            // 限制最多保存100条历史记录
+            if (editHistory.length > 100) {
+                editHistory.pop();
+            }
+            
+            saveHistory();
+        }
+        
+        // 渲染记录表格
+        function renderRecordsTable() {
+            const recordsBody = document.getElementById('records-body');
+            const noRecordsMessage = document.getElementById('no-records-message');
+            
+            if (salaryRecords.length === 0) {
+                recordsBody.innerHTML = '';
+                noRecordsMessage.style.display = 'block';
+                return;
+            }
+            
+            noRecordsMessage.style.display = 'none';
+            
+            // 按添加时间排序（最新的在前）
+            const sortedRecords = [...salaryRecords].sort((a, b) => b.id - a.id);
+            
+            let tableHTML = '';
+            
+            sortedRecords.forEach(record => {
+                const totalSalary = record.salary;
+                const paidAmount = record.paidAmount || 0;
+                const unpaidAmount = record.unpaidAmount || totalSalary;
+                const isPaid = unpaidAmount <= 0;
+                
+                tableHTML += `
+                    <tr data-id="${record.id}">
+                        <td>${record.person}</td>
+                        <td>${record.department}</td>
+                        <td>${record.workContent}</td>
+                        <td>¥${totalSalary.toLocaleString()}</td>
+                        <td>¥${paidAmount.toLocaleString()}</td>
+                        <td>¥${unpaidAmount.toLocaleString()}</td>
+                        <td>
+                            <span class="${isPaid ? 'status-paid' : 'status-unpaid'}">
+                                ${isPaid ? '已结清' : '未结清'}
+                            </span>
+                        </td>
+                        <td class="actions">
+                            <button class="btn btn-info btn-sm history-btn" data-id="${record.id}">
+                                <i class="fas fa-history"></i> 历史
+                            </button>
+                            <button class="btn btn-warning btn-sm edit-btn" data-id="${record.id}">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            ${!isPaid ? `
+                                <button class="btn btn-success btn-sm pay-btn" data-id="${record.id}">
+                                    <i class="fas fa-check"></i> 结清
+                                </button>
+                            ` : ''}
+                            <button class="btn btn-danger btn-sm delete-btn" data-id="${record.id}">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            recordsBody.innerHTML = tableHTML;
+            
+            // 添加事件监听器到操作按钮
+            document.querySelectorAll('.history-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    showRecordHistory(id);
+                });
+            });
+            
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    openEditModal(id);
+                });
+            });
+            
+            document.querySelectorAll('.pay-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    paySalary(id);
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    deleteRecord(id);
+                });
+            });
+        }
+        
+        // 显示记录历史
+        function showRecordHistory(recordId) {
+            const record = salaryRecords.find(r => r.id === recordId);
+            if (!record) return;
+            
+            const recordHistory = editHistory.filter(h => h.recordId === recordId);
+            
+            let historyHTML = `
+                <h3 style="margin-bottom: 15px;">${record.person} - ${record.workContent} 的历史记录</h3>
+                <div class="history-container">
+            `;
+            
+            if (recordHistory.length === 0) {
+                historyHTML += '<p style="text-align: center; padding: 20px; color: var(--gray-text);">暂无历史记录</p>';
+            } else {
+                recordHistory.forEach(history => {
+                    const time = new Date(history.timestamp).toLocaleString('zh-CN');
+                    
+                    historyHTML += `
+                        <div class="history-item">
+                            <div class="history-header">
+                                <span class="history-action">${history.action}</span>
+                                <span class="history-time">${time}</span>
+                            </div>
+                            <div class="history-details">
+                                <div>人员: ${history.person}</div>
+                                <div>工作内容: ${history.workContent}</div>
+                                <div>工资: ¥${history.salary.toLocaleString()}</div>
+                                <div>已结: ¥${history.paidAmount.toLocaleString()}</div>
+                                <div>未结: ¥${history.unpaidAmount.toLocaleString()}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            historyHTML += '</div>';
+            
+            document.getElementById('history-details').innerHTML = historyHTML;
+            document.getElementById('history-modal').style.display = 'flex';
+            
+            // 添加关闭事件
+            document.querySelector('.close-history-modal').addEventListener('click', closeHistoryModal);
+            
+            // 点击模态框外部关闭
+            document.getElementById('history-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeHistoryModal();
+                }
+            });
+        }
+        
+        // 关闭历史模态框
+        function closeHistoryModal() {
+            document.getElementById('history-modal').style.display = 'none';
+        }
+        
+        // 添加新记录
+        document.getElementById('add-record-btn').addEventListener('click', function() {
+            const person = document.getElementById('person-name').value.trim();
+            const department = document.getElementById('department').value;
+            const workContent = document.getElementById('work-content').value.trim();
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const paidAmount = parseFloat(document.getElementById('paid-amount').value) || 0;
+            const unpaidAmount = parseFloat(document.getElementById('unpaid-amount').value) || salary;
+            
+            if (!person || !workContent || salary <= 0) {
+                alert('请填写完整信息，且工资必须大于0');
+                return;
+            }
+            
+            // 生成新ID
+            const newId = salaryRecords.length > 0 ? Math.max(...salaryRecords.map(r => r.id)) + 1 : 1;
+            
+            // 创建新记录对象
+            const newRecord = {
+                id: newId,
+                person,
+                department,
+                workContent,
+                salary,
+                paidAmount,
+                unpaidAmount,
+                date: new Date().toISOString().split('T')[0],
+                createdAt: new Date().toISOString()
+            };
+            
+            // 添加到记录数组
+            salaryRecords.push(newRecord);
+            saveRecords();
+            
+            // 添加历史记录
+            addHistoryRecord(newId, "新增", person, workContent, salary, paidAmount, unpaidAmount);
+            
+            // 更新UI
+            renderRecordsTable();
+            updateStats();
+            renderEditHistory();
+            
+            // 重置表单
+            document.getElementById('person-name').value = '';
+            document.getElementById('department').value = '';
+            document.getElementById('work-content').value = '';
+            document.getElementById('salary').value = '';
+            document.getElementById('paid-amount').value = '';
+            document.getElementById('unpaid-amount').value = '';
+            
+            // 显示成功消息
+            showNotification(`已添加记录: ${person} - ${workContent}`, 'success');
+        });
+        
+        // 打开编辑模态框
+        function openEditModal(id) {
+            const record = salaryRecords.find(r => r.id === id);
+            
+            if (!record) return;
+            
+            // 保存原始数据用于比较
+            const originalRecord = { ...record };
+            
+            // 填充表单数据
+            document.getElementById('edit-id').value = record.id;
+            document.getElementById('edit-person').value = record.person;
+            document.getElementById('edit-department').value = record.department;
+            document.getElementById('edit-work-content').value = record.workContent;
+            document.getElementById('edit-salary').value = record.salary;
+            document.getElementById('edit-paid-amount').value = record.paidAmount;
+            document.getElementById('edit-unpaid-amount').value = record.unpaidAmount;
+            
+            // 显示模态框
+            document.getElementById('edit-modal').style.display = 'flex';
+            
+            // 添加关闭事件
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', closeEditModal);
+            });
+            
+            // 点击模态框外部关闭
+            document.getElementById('edit-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeEditModal();
+                }
+            });
+            
+            // 表单提交事件
+            document.getElementById('edit-form').onsubmit = function(e) {
+                e.preventDefault();
+                
+                const id = parseInt(document.getElementById('edit-id').value);
+                const person = document.getElementById('edit-person').value.trim();
+                const department = document.getElementById('edit-department').value;
+                const workContent = document.getElementById('edit-work-content').value.trim();
+                const salary = parseFloat(document.getElementById('edit-salary').value) || 0;
+                const paidAmount = parseFloat(document.getElementById('edit-paid-amount').value) || 0;
+                const unpaidAmount = parseFloat(document.getElementById('edit-unpaid-amount').value) || salary;
+                
+                if (!person || !workContent || salary <= 0) {
+                    alert('请填写完整信息，且工资必须大于0');
+                    return;
+                }
+                
+                // 找到记录索引
+                const index = salaryRecords.findIndex(r => r.id === id);
+                
+                if (index !== -1) {
+                    // 检测哪些字段发生了变化
+                    const changes = [];
+                    if (originalRecord.person !== person) changes.push(`人员: ${originalRecord.person} → ${person}`);
+                    if (originalRecord.department !== department) changes.push(`部门: ${originalRecord.department} → ${department}`);
+                    if (originalRecord.workContent !== workContent) changes.push(`工作内容: ${originalRecord.workContent} → ${workContent}`);
+                    if (originalRecord.salary !== salary) changes.push(`工资: ¥${originalRecord.salary} → ¥${salary}`);
+                    if (originalRecord.paidAmount !== paidAmount) changes.push(`已结金额: ¥${originalRecord.paidAmount} → ¥${paidAmount}`);
+                    if (originalRecord.unpaidAmount !== unpaidAmount) changes.push(`未结金额: ¥${originalRecord.unpaidAmount} → ¥${unpaidAmount}`);
+                    
+                    // 更新记录信息
+                    salaryRecords[index] = {
+                        ...originalRecord,
+                        person,
+                        department,
+                        workContent,
+                        salary,
+                        paidAmount,
+                        unpaidAmount
+                    };
+                    
+                    saveRecords();
+                    
+                    // 添加历史记录（如果有变化）
+                    if (changes.length > 0) {
+                        addHistoryRecord(id, "编辑", person, workContent, salary, paidAmount, unpaidAmount, changes);
+                    }
+                    
+                    // 更新UI
+                    renderRecordsTable();
+                    updateStats();
+                    renderEditHistory();
+                    
+                    // 关闭模态框
+                    closeEditModal();
+                    
+                    // 显示成功消息
+                    showNotification(`已更新记录: ${person}`, 'success');
+                }
+            };
+        }
+        
+        // 关闭编辑模态框
+        function closeEditModal() {
+            document.getElementById('edit-modal').style.display = 'none';
+            // 重置表单提交事件
+            document.getElementById('edit-form').onsubmit = null;
+        }
+        
+        // 结清工资
+        function paySalary(id) {
+            const record = salaryRecords.find(r => r.id === id);
+            
+            if (!record) return;
+            
+            // 保存原始数据
+            const originalRecord = { ...record };
+            
+            // 标记为已结清
+            record.paidAmount = record.salary;
+            record.unpaidAmount = 0;
+            
+            saveRecords();
+            
+            // 添加历史记录
+            addHistoryRecord(id, "结清", record.person, record.workContent, record.salary, record.paidAmount, record.unpaidAmount, [
+                `已结金额: ¥${originalRecord.paidAmount} → ¥${record.paidAmount}`,
+                `未结金额: ¥${originalRecord.unpaidAmount} → ¥${record.unpaidAmount}`
+            ]);
+            
+            renderRecordsTable();
+            updateStats();
+            renderEditHistory();
+            
+            showNotification(`已结清 ${record.person} 的工资`, 'success');
+        }
+        
+        // 删除记录
+        function deleteRecord(id) {
+            if (!confirm('确定要删除此记录吗？此操作不可撤销。')) {
+                return;
+            }
+            
+            const record = salaryRecords.find(r => r.id === id);
+            
+            // 添加历史记录
+            addHistoryRecord(id, "删除", record.person, record.workContent, record.salary, record.paidAmount, record.unpaidAmount);
+            
+            // 从数组中移除记录
+            salaryRecords = salaryRecords.filter(r => r.id !== id);
+            saveRecords();
+            renderRecordsTable();
+            updateStats();
+            renderEditHistory();
+            
+            showNotification(`已删除记录: ${record.person}`, 'danger');
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            // 计算总未结工资
+            const totalUnpaid = salaryRecords.reduce((sum, r) => sum + (r.unpaidAmount || 0), 0);
+            
+            // 计算总已结工资
+            const totalPaid = salaryRecords.reduce((sum, r) => sum + (r.paidAmount || 0), 0);
+            
+            // 计算总人员（去重）
+            const uniquePersons = [...new Set(salaryRecords.map(r => r.person))];
+            
+            // 更新UI
+            document.getElementById('total-unpaid').textContent = `¥${totalUnpaid.toLocaleString()}`;
+            document.getElementById('total-paid').textContent = `¥${totalPaid.toLocaleString()}`;
+            document.getElementById('total-employees').textContent = `${uniquePersons.length}人`;
+        }
+        
+        // 渲染编辑历史
+        function renderEditHistory() {
+            const historyList = document.getElementById('history-list');
+            const noHistoryMessage = document.getElementById('no-history-message');
+            
+            if (editHistory.length === 0) {
+                historyList.innerHTML = '';
+                noHistoryMessage.style.display = 'block';
+                return;
+            }
+            
+            noHistoryMessage.style.display = 'none';
+            
+            let historyHTML = '<div class="history-container">';
+            
+            editHistory.forEach(history => {
+                const time = new Date(history.timestamp).toLocaleString('zh-CN');
+                const actionClass = history.action === '新增' ? 'success' : 
+                                 history.action === '编辑' ? 'warning' : 
+                                 history.action === '结清' ? 'info' : 'danger';
+                
+                historyHTML += `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <span class="history-action" style="color: var(--${actionClass}-color);">${history.action}</span>
+                            <span class="history-time">${time}</span>
+                        </div>
+                        <div class="history-details">
+                            <div>记录ID: ${history.recordId}</div>
+                            <div>人员: ${history.person}</div>
+                            <div>工作内容: ${history.workContent}</div>
+                            <div>工资: ¥${history.salary.toLocaleString()}</div>
+                            <div>已结: ¥${history.paidAmount.toLocaleString()}</div>
+                            <div>未结: ¥${history.unpaidAmount.toLocaleString()}</div>
+                        </div>
+                        ${history.changes && history.changes.length > 0 ? `
+                            <div class="history-change">
+                                <strong>变更内容:</strong><br>
+                                ${history.changes.map(change => `• ${change}`).join('<br>')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            
+            historyHTML += '</div>';
+            historyList.innerHTML = historyHTML;
+            
+            // 筛选功能
+            document.getElementById('filter-history-btn').addEventListener('click', function() {
+                filterHistory();
+            });
+            
+            document.getElementById('clear-filter-btn').addEventListener('click', function() {
+                document.getElementById('history-filter-person').value = '';
+                document.getElementById('history-filter-type').value = '';
+                renderEditHistory();
+            });
+            
+            // 清空历史功能
+            document.getElementById('clear-all-history-btn').addEventListener('click', function() {
+                if (confirm('确定要清空所有历史记录吗？此操作不可撤销。')) {
+                    editHistory = [];
+                    saveHistory();
+                    renderEditHistory();
+                    showNotification('已清空所有历史记录', 'danger');
+                }
+            });
+        }
+        
+        // 筛选历史记录
+        function filterHistory() {
+            const personFilter = document.getElementById('history-filter-person').value.trim().toLowerCase();
+            const typeFilter = document.getElementById('history-filter-type').value;
+            
+            let filteredHistory = editHistory;
+            
+            if (personFilter) {
+                filteredHistory = filteredHistory.filter(h => 
+                    h.person.toLowerCase().includes(personFilter)
+                );
+            }
+            
+            if (typeFilter) {
+                filteredHistory = filteredHistory.filter(h => h.action === typeFilter);
+            }
+            
+            if (filteredHistory.length === 0) {
+                document.getElementById('history-list').innerHTML = '<p style="text-align: center; padding: 20px; color: var(--gray-text);">未找到匹配的历史记录</p>';
+                document.getElementById('no-history-message').style.display = 'none';
+                return;
+            }
+            
+            let historyHTML = '<div class="history-container">';
+            
+            filteredHistory.forEach(history => {
+                const time = new Date(history.timestamp).toLocaleString('zh-CN');
+                const actionClass = history.action === '新增' ? 'success' : 
+                                 history.action === '编辑' ? 'warning' : 
+                                 history.action === '结清' ? 'info' : 'danger';
+                
+                historyHTML += `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <span class="history-action" style="color: var(--${actionClass}-color);">${history.action}</span>
+                            <span class="history-time">${time}</span>
+                        </div>
+                        <div class="history-details">
+                            <div>记录ID: ${history.recordId}</div>
+                            <div>人员: ${history.person}</div>
+                            <div>工作内容: ${history.workContent}</div>
+                            <div>工资: ¥${history.salary.toLocaleString()}</div>
+                            <div>已结: ¥${history.paidAmount.toLocaleString()}</div>
+                            <div>未结: ¥${history.unpaidAmount.toLocaleString()}</div>
+                        </div>
+                        ${history.changes && history.changes.length > 0 ? `
+                            <div class="history-change">
+                                <strong>变更内容:</strong><br>
+                                ${history.changes.map(change => `• ${change}`).join('<br>')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            
+            historyHTML += '</div>';
+            document.getElementById('history-list').innerHTML = historyHTML;
+            document.getElementById('no-history-message').style.display = 'none';
+        }
+        
+        // 初始化计算器
+        function initCalculator() {
+            const calcDisplayElement = document.getElementById('calc-display');
+            const calcButtons = document.querySelectorAll('.calc-btn');
+            
+            // 更新计算器显示
+            function updateCalcDisplay() {
+                calcDisplayElement.textContent = calcDisplay;
+            }
+            
+            // 处理数字输入
+            function inputDigit(digit) {
+                if (calcWaitingForSecondOperand) {
+                    calcDisplay = digit;
+                    calcWaitingForSecondOperand = false;
+                } else {
+                    calcDisplay = calcDisplay === '0' ? digit : calcDisplay + digit;
+                }
+                
+                updateCalcDisplay();
+            }
+            
+            // 处理小数点
+            function inputDecimal() {
+                if (calcWaitingForSecondOperand) {
+                    calcDisplay = '0.';
+                    calcWaitingForSecondOperand = false;
+                    updateCalcDisplay();
+                    return;
+                }
+                
+                if (!calcDisplay.includes('.')) {
+                    calcDisplay += '.';
+                    updateCalcDisplay();
+                }
+            }
+            
+            // 处理百分比
+            function inputPercent() {
+                const currentValue = parseFloat(calcDisplay);
+                if (!isNaN(currentValue)) {
+                    calcDisplay = (currentValue / 100).toString();
+                    updateCalcDisplay();
+                }
+            }
+            
+            // 处理操作符
+            function handleOperator(nextOperator) {
+                const inputValue = parseFloat(calcDisplay);
+                
+                if (calcFirstOperand === null) {
+                    calcFirstOperand = inputValue;
+                } else if (calcOperator) {
+                    const result = performCalculation(calcFirstOperand, inputValue, calcOperator);
+                    
+                    calcDisplay = `${parseFloat(result.toFixed(7))}`;
+                    calcFirstOperand = result;
+                    
+                    // 保存到最近计算记录
+                    addRecentCalculation(`${calcFirstOperand} ${getOperatorSymbol(calcOperator)} ${inputValue} = ${result}`);
+                }
+                
+                calcWaitingForSecondOperand = true;
+                calcOperator = nextOperator;
+                
+                updateCalcDisplay();
+            }
+            
+            // 执行计算
+            function performCalculation(firstOperand, secondOperand, operator) {
+                switch (operator) {
+                    case '+': return firstOperand + secondOperand;
+                    case '-': return firstOperand - secondOperand;
+                    case '*': return firstOperand * secondOperand;
+                    case '/': return firstOperand / secondOperand;
+                    default: return secondOperand;
+                }
+            }
+            
+            // 获取操作符符号
+            function getOperatorSymbol(operator) {
+                switch (operator) {
+                    case '+': return '+';
+                    case '-': return '-';
+                    case '*': return '×';
+                    case '/': return '÷';
+                    default: return operator;
+                }
+            }
+            
+            // 重置计算器
+            function resetCalculator() {
+                calcDisplay = '0';
+                calcFirstOperand = null;
+                calcOperator = null;
+                calcWaitingForSecondOperand = false;
+                updateCalcDisplay();
+            }
+            
+            // 退格
+            function backspace() {
+                if (calcDisplay.length > 1) {
+                    calcDisplay = calcDisplay.slice(0, -1);
+                } else {
+                    calcDisplay = '0';
+                }
+                updateCalcDisplay();
+            }
+            
+            // 为计算器按钮添加事件监听器
+            calcButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    
+                    if (action >= '0' && action <= '9') {
+                        inputDigit(action);
+                    } else if (action === '.') {
+                        inputDecimal();
+                    } else if (action === '%') {
+                        inputPercent();
+                    } else if (action === '=') {
+                        if (calcFirstOperand !== null && calcOperator && !calcWaitingForSecondOperand) {
+                            const inputValue = parseFloat(calcDisplay);
+                            const result = performCalculation(calcFirstOperand, inputValue, calcOperator);
+                            
+                            calcDisplay = `${parseFloat(result.toFixed(7))}`;
+                            calcFirstOperand = null;
+                            calcOperator = null;
+                            calcWaitingForSecondOperand = false;
+                            
+                            updateCalcDisplay();
+                        }
+                    } else if (action === 'clear') {
+                        resetCalculator();
+                    } else if (action === 'backspace') {
+                        backspace();
+                    } else {
+                        handleOperator(action);
+                    }
+                });
+            });
+            
+            updateCalcDisplay();
+        }
+        
+        // 添加最近计算记录
+        function addRecentCalculation(calculation) {
+            // 限制最多保存10条记录
+            if (recentCalculations.length >= 10) {
+                recentCalculations.shift();
+            }
+            
+            recentCalculations.push({
+                id: Date.now(),
+                calculation,
+                result: parseFloat(calcDisplay)
+            });
+            
+            saveRecentCalculations();
+            renderRecentCalculations();
+        }
+        
+        // 渲染最近计算记录
+        function renderRecentCalculations() {
+            const recentCalculationsContainer = document.getElementById('recent-calculations');
+            
+            if (recentCalculations.length === 0) {
+                recentCalculationsContainer.innerHTML = '<p style="color: var(--gray-text); text-align: center;">暂无计算记录</p>';
+                return;
+            }
+            
+            // 按时间排序（最新的在前）
+            const sortedCalculations = [...recentCalculations].sort((a, b) => b.id - a.id);
+            
+            let html = '<div class="recent-calculations">';
+            
+            sortedCalculations.forEach(calc => {
+                html += `
+                    <div class="recent-item" data-result="${calc.result}">
+                        <div class="recent-calculation">${calc.calculation}</div>
+                        <div class="recent-result">${calc.result.toLocaleString()}</div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            recentCalculationsContainer.innerHTML = html;
+            
+            // 为最近计算记录添加点击事件
+            document.querySelectorAll('.recent-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const result = parseFloat(this.getAttribute('data-result'));
+                    
+                    if (!isNaN(result)) {
+                        // 设置计算器显示
+                        calcDisplay = result.toString();
+                        document.getElementById('calc-display').textContent = calcDisplay;
+                        
+                        showNotification(`已载入计算结果: ${result.toLocaleString()}`, 'success');
+                    }
+                });
+            });
+        }
+        
+        // 显示通知消息
+        function showNotification(message, type = 'info') {
+            // 创建通知元素
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                background-color: ${type === 'success' ? '#28a745' : type === 'danger' ? '#dc3545' : type === 'warning' ? '#ffc107' : '#17a2b8'};
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-weight: 500;
+                transition: transform 0.3s, opacity 0.3s;
+                transform: translateY(100%);
+                opacity: 0;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // 显示通知
+            setTimeout(() => {
+                notification.style.transform = 'translateY(0)';
+                notification.style.opacity = '1';
+            }, 10);
+            
+            // 3秒后隐藏并移除通知
+            setTimeout(() => {
+                notification.style.transform = 'translateY(100%)';
+                notification.style.opacity = '0';
+                
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
