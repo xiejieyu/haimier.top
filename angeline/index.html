@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="icon" href="../favicon.ico">
+  <meta charset="UTF-8">
+  <title>angeline - 海米尔文化官方网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 预加载首屏唯一大图 -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/xiejieyu/haimier.top/main/甜蜜蜜头像.jpg" as="image">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333;line-height:1.8}
+
+    /* ===== 可调变量 ===== */
+    :root{
+      --work-width:320px;   /* 卡片总宽 */
+      --work-img-h:180px;    /* 图片高度 */
+      --work-font:.875rem;  /* 整体字号 */
+    }
+
+    /* ===== 头部 ===== */
+    header{background:#CCCCCC;color:#fff;padding:25px 0}
+    .wrap{width:90%;max-width:1100px;margin:auto}
+    header .wrap{display:flex;align-items:center;justify-content:space-between}
+    .logo-txt{display:flex;align-items:center;gap:12px}
+    .logo-txt img{height:64px}
+    h1{font-size:2.2rem;margin-bottom:10px}
+
+    /* ===== 1:1 正方形头图 + 留距 ===== */
+    .hero{text-align:center;margin-top:30px;margin-bottom:40px}
+    .hero img{width:200px;height:200px;object-fit:cover;margin-bottom:20px}
+
+    /* ===== 代表作 + 垂直描述（变量控制） ===== */
+    .works{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+    .works a{width:var(--work-width);font-size:var(--work-font);display:flex;flex-direction:column;border-radius:8px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.15);text-decoration:none;color:inherit}
+    .works img{width:100%;height:var(--work-img-h);object-fit:cover;display:block;transition:.3s}
+    .works a:hover img{transform:scale(1.05)}
+    .works .desc{margin:0;padding:6px 8px;text-align:center;font-size:.75rem;color:#555;background:#fff}
+
+    /* ===== 返回按钮 + 间距 ===== */
+    .back{text-align:center;margin-top:40px;margin-bottom:20px}
+    .back a{display:inline-block;background:#CCCCCC;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none}
+    .back a:hover{opacity:.9}
+
+    /* ===== 底部 ===== */
+    footer{background:#CCCCCC;color:#fff;padding:40px 0;text-align:center}
+  </style>
+</head>
+<body>
+<!-- 头部 -->
+<header>
+  <div class="wrap">
+    <div class="logo-txt">
+      <img src="../LOGO.jpg" alt="海米尔">
+      <div>
+        <h1>海米尔文化 人员资料介绍</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 1:1 正方形头图 + 留距 -->
+<div class="hero">
+  <img src="../甜蜜蜜头像.jpg" alt="甜蜜蜜">
+  <h2>angeline</h2>
+  <h3 style="font-size: 24px; color: #E2D1D2;">
+  海米尔文化艺人
+</h3>
+  <p>制作新颖视频，创作美好内容</p>
+  <p>擅长创意策划、视频制作；致力于整死老板(?</p>
+  <p style="font-size: 32px; color: #CCCCCC; font-style: italic; text-decoration: underline;">
+  “以及木糊打吧哟（俄国音）”
+</p>
+</div>
+
+
+<!-- 代表作（变量控制） -->
+<h2 style="text-align:center;">代表作</h2>
+<div class="works">
+  <a href="https://haimier.top/" target="_blank" rel="noopener">
+    <p class="desc">暂无</p>
+  </a>
+</div>
+
+<!-- 返回按钮 + 间距 -->
+<div class="back">
+  <a href="../">← 返回主站</a>
+</div>
+
+<!-- 底部 -->
+<footer>
+  <div class="wrap">
+    © 2025-2026 海米尔（吉林）文化传播有限公司 版权所有
+    <a class="text-[#FFFFFF]" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="" style="
+  margin-left: 20px; 
+  color: #FBC500 !important; 
+  text-decoration: none !important; 
+  display: inline-block; 
+  transition: transform 0.3s ease;
+" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+吉ICP备2026000319号
+</a>
+  </div>
+</footer>
+</body>
+</html>
