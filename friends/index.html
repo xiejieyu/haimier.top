@@ -20,7 +20,7 @@
             background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 70%);
         }
         
-        /* 顶部标题区域 */
+        /* 修复的头图区域 */
         .header {
             position: fixed;
             top: 0;
@@ -56,6 +56,12 @@
             color: #FBC500;
             text-shadow: 0 0 10px rgba(251, 197, 0, 0.7);
             letter-spacing: 2px;
+        }
+        
+        /* 移除或修正原有的.wrap和.方形logo-txt样式 */
+        .wrap {
+            /* 如果不需要.wrap容器，可以移除这个样式 */
+            display: none;
         }
         
         /* 主内容区域 */
@@ -439,10 +445,10 @@
     <!-- 星空背景 -->
     <div class="stars" id="stars"></div>
     
-    <!-- 顶部标题区域 -->
-    <div class="wrap">
-        <div class="方形logo-txt">
-            <img src="../方形LOGO.jpg" alt="海米尔">
+    <!-- 修复的头图区域 -->
+    <div class="header">
+        <div class="logo-container">
+            <img class="logo" src="../方形LOGO.jpg" alt="海米尔" id="logoImage">
             <h1 class="title">海米尔文化彩蛋页面</h1>
         </div>
     </div>
@@ -479,6 +485,7 @@
         const speedControl = document.getElementById('speedControl');
         const speedValue = document.getElementById('speedValue');
         const starsContainer = document.getElementById('stars');
+        const logoImage = document.getElementById('logoImage');
         
         // 控制状态
         let isPaused = false;
@@ -728,15 +735,12 @@
         document.addEventListener('DOMContentLoaded', initPage);
         
         // 允许用户更改LOGO
-        document.getElementById('logoImage').addEventListener('click', function() {
+        logoImage.addEventListener('click', function() {
             const newLogoUrl = prompt('请输入新LOGO的图片URL:');
             if (newLogoUrl) {
                 const img = new Image();
                 img.onload = function() {
-                    this.innerHTML = '';
-                    this.style.backgroundImage = `url('${newLogoUrl}')`;
-                    this.style.backgroundSize = 'cover';
-                    this.style.backgroundPosition = 'center';
+                    logoImage.src = newLogoUrl;
                 };
                 img.onerror = function() {
                     alert('图片加载失败，请检查URL是否正确');
