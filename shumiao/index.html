@@ -11,41 +11,380 @@
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333;line-height:1.8}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
+      background:#f7f9fc;
+      color:#333;
+      line-height:1.8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
     /* ===== 可调变量 ===== */
     :root{
       --work-width:320px;   /* 卡片总宽 */
       --work-img-h:180px;    /* 图片高度 */
       --work-font:.875rem;  /* 整体字号 */
+      --primary-color: #3E7F2F; /* 主要颜色变量 */
     }
 
     /* ===== 头部 ===== */
-    header{background:#3E7F2F;color:#fff;padding:25px 0}
-    .wrap{width:90%;max-width:1100px;margin:auto}
-    header .wrap{display:flex;align-items:center;justify-content:space-between}
-    .logo-txt{display:flex;align-items:center;gap:12px}
-    .logo-txt img{height:64px}
-    h1{font-size:2.2rem;margin-bottom:10px}
+    header{
+      background:var(--primary-color);
+      color:#fff;
+      padding:25px 0;
+      flex-shrink: 0;
+    }
+    .wrap{
+      width:90%;
+      max-width:1100px;
+      margin:auto;
+    }
+    header .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .logo-txt{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo-txt img{
+      height:64px;
+    }
+    h1{
+      font-size:2.2rem;
+      margin-bottom:10px;
+    }
+
+    /* ===== 主内容区域 - 允许自动扩展 ===== */
+    main {
+      flex: 1;
+      width: 100%;
+    }
 
     /* ===== 1:1 正方形头图 + 留距 ===== */
-    .hero{text-align:center;margin-top:30px;margin-bottom:40px}
-    .hero img{width:200px;height:200px;object-fit:cover;margin-bottom:20px}
+    .hero{
+      text-align:center;
+      margin-top:30px;
+      margin-bottom:40px;
+    }
+    .hero img{
+      width:200px;
+      height:200px;
+      object-fit:cover;
+      margin-bottom:20px;
+      border-radius: 50%;
+      border: 4px solid var(--primary-color);
+      box-shadow: 0 4px 15px rgba(62, 127, 47, 0.3);
+    }
+    
+    .hero h2 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+    
+    /* ===== 职位标签样式 - 统一风格 ===== */
+    .position-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-color) 0%, #2E6C23 100%);
+      color: white;
+      padding: 8px 25px;
+      border-radius: 25px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 15px 0 25px 0;
+      box-shadow: 0 4px 12px rgba(62, 127, 47, 0.3);
+      letter-spacing: 1px;
+    }
+    
+    .hero p {
+      margin-bottom: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+      font-size: 1.1rem;
+      color: #555;
+    }
 
     /* ===== 代表作 + 垂直描述（变量控制） ===== */
-    .works{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-    .works a{width:var(--work-width);font-size:var(--work-font);display:flex;flex-direction:column;border-radius:8px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.15);text-decoration:none;color:inherit}
-    .works img{width:100%;height:var(--work-img-h);object-fit:cover;display:block;transition:.3s}
-    .works a:hover img{transform:scale(1.05)}
-    .works .desc{margin:0;padding:6px 8px;text-align:center;font-size:.75rem;color:#555;background:#fff}
+    .works{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:20px;
+      margin-bottom: 40px;
+    }
+    .works a{
+      width:var(--work-width);
+      font-size:var(--work-font);
+      display:flex;
+      flex-direction:column;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 20px rgba(0,0,0,.12);
+      text-decoration:none;
+      color:inherit;
+      transition: all 0.3s ease;
+      background: white;
+    }
+    .works a:hover{
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.2);
+    }
+    .works img{
+      width:100%;
+      height:var(--work-img-h);
+      object-fit:cover;
+      display:block;
+      transition:.3s;
+    }
+    .works a:hover img{
+      transform:scale(1.05);
+    }
+    .works .desc{
+      margin:0;
+      padding:20px 15px;
+      text-align:center;
+      font-size:1rem;
+      color:#555;
+      background:#fff;
+      border-top: 1px solid rgba(62, 127, 47, 0.2);
+      font-weight: 500;
+    }
+
+    /* ===== 代表作标题 ===== */
+    .works-title {
+      text-align: center;
+      font-size: 2rem;
+      margin: 40px 0 30px 0;
+      color: var(--primary-color);
+      font-weight: 600;
+      position: relative;
+    }
+    
+    .works-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--primary-color);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ===== 暂无代表作占位 ===== */
+    .no-works-placeholder {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      height: var(--work-img-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-size: 1.3rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(62, 127, 47, 0.2);
+    }
 
     /* ===== 返回按钮 + 间距 ===== */
-    .back{text-align:center;margin-top:40px;margin-bottom:20px}
-    .back a{display:inline-block;background:#3E7F2F;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none}
-    .back a:hover{opacity:.9}
+    .back{
+      text-align:center;
+      margin-top:50px;
+      margin-bottom:60px;
+    }
+    .back a{
+      display:inline-block;
+      background:var(--primary-color);
+      color:#fff;
+      padding:14px 35px;
+      border-radius:30px;
+      text-decoration:none;
+      font-weight:bold;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(62, 127, 47, 0.3);
+      border: 2px solid transparent;
+    }
+    .back a:hover{
+      background:white;
+      color: var(--primary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(62, 127, 47, 0.4);
+      border: 2px solid var(--primary-color);
+    }
 
-    /* ===== 底部 ===== */
-    footer{background:#3E7F2F;color:#fff;padding:40px 0;text-align:center}
+    /* ===== 名言样式 ===== */
+    .quote {
+      font-size: 1.6rem;
+      color: var(--primary-color);
+      font-style: italic;
+      margin: 40px auto;
+      padding: 25px;
+      border-left: 5px solid var(--primary-color);
+      background-color: rgba(62, 127, 47, 0.08);
+      max-width: 700px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(62, 127, 47, 0.1);
+      line-height: 1.6;
+    }
+
+    /* ===== 底部 - 固定底部 ===== */
+    footer{
+      background:var(--primary-color);
+      color:#fff;
+      padding:40px 0;
+      text-align:center;
+      flex-shrink: 0;
+      margin-top: auto;
+      width: 100%;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+    
+    .copyright {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+    
+    .beian-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 15px;
+    }
+    
+    .beian-link {
+      color: #FBC500 !important;
+      text-decoration: none !important;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      background-color: rgba(0, 0, 0, 0.25);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 500;
+      border: 1px solid rgba(251, 197, 0, 0.2);
+    }
+    
+    .beian-link:hover {
+      transform: scale(1.08);
+      background-color: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 5px 15px rgba(251, 197, 0, 0.15);
+    }
+    
+    .beian-link img {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    /* ===== 响应式设计 ===== */
+    @media (max-width: 768px) {
+      .hero img {
+        width: 160px;
+        height: 160px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+      
+      .position-tag {
+        font-size: 1.1rem;
+        padding: 7px 20px;
+      }
+      
+      .works a {
+        width: 90%;
+        max-width: 350px;
+      }
+      
+      .beian-links {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .back a {
+        padding: 12px 30px;
+      }
+      
+      .quote {
+        font-size: 1.4rem;
+        padding: 20px;
+        margin: 30px 15px;
+      }
+      
+      .works-title {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .logo-txt img {
+        height: 50px;
+      }
+      
+      h1 {
+        font-size: 1.6rem;
+      }
+      
+      .hero img {
+        width: 140px;
+        height: 140px;
+      }
+      
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+      
+      .position-tag {
+        font-size: 1rem;
+        padding: 6px 18px;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+        padding: 0 15px;
+      }
+      
+      .back a {
+        padding: 10px 25px;
+        font-size: 1rem;
+      }
+      
+      .quote {
+        font-size: 1.2rem;
+        padding: 15px;
+      }
+      
+      .copyright {
+        font-size: 0.95rem;
+        padding: 0 15px;
+      }
+      
+      .no-works-placeholder {
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -61,69 +400,55 @@
   </div>
 </header>
 
-<!-- 1:1 正方形头图 + 留距 -->
-<div class="hero">
-  <img src="../树苗头像.jpg" alt="树苗">
-  <h2>星辉梦晓（树苗）</h2>
-  <h3 style="font-size: 24px; color: #3E7F2F;">
-  海米尔文化第二领导人、监事、音效师
-</h3>
-  <p>协助最高领导人一同发展公司，致力于创造出新未来</p>
-  <p>擅长创意策划、领导决策；致力于迸发出无效可能</p>
-  <p style="font-size: 32px; color: #3E7F2F; font-style: italic; text-decoration: underline;">
-  “勇气即为赞歌，热爱即可前进”
-</p>
-</div>
+<main>
+  <!-- 1:1 正方形头图 + 留距 -->
+  <div class="hero">
+    <img src="../树苗头像.jpg" alt="树苗">
+    <h2>星辉梦晓（树苗）</h2>
+    <div class="position-tag">海米尔文化第二领导人、监事、音效师</div>
+    <p>协助最高领导人一同发展公司，致力于创造出新未来</p>
+    <p>擅长创意策划、领导决策；致力于迸发出无限可能</p>
+    
+    <div class="quote">
+      "勇气即为赞歌，热爱即可前进"
+    </div>
+  </div>
 
-<!-- 代表作（变量控制） -->
-<h2 style="text-align:center;">代表作</h2>
-<div class="works">
-  <a href="https://haimier.top/" target="_blank" rel="noopener">
-    <p class="desc">暂无</p>
-  </a>
-</div>
+  <!-- 代表作 -->
+  <h2 class="works-title">代表作</h2>
+  <div class="works">
+    <a href="https://haimier.top/" target="_blank" rel="noopener">
+      <div class="no-works-placeholder">
+        暂无代表作
+      </div>
+      <p class="desc">点击查看海米尔文化官网</p>
+    </a>
+  </div>
 
-<!-- 返回按钮 + 间距 -->
-<div class="back">
-  <a href="../">← 返回主站</a>
-</div>
+  <!-- 返回按钮 + 间距 -->
+  <div class="back">
+    <a href="../">← 返回主站</a>
+  </div>
+</main>
 
 <!-- 底部 -->
 <footer>
-  <div class="wrap">
-    © 2025-2026 海米尔（吉林）文化传播有限公司 版权所有
-      <a class="text-[#FFFFFF]" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="" style="
-  margin-left: 20px; 
-  color: #FBC500 !important; 
-  text-decoration: none !important; 
-  display: inline-flex; 
-  align-items: center;
-  transition: transform 0.3s ease;
-" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-  <img src="../ICP.png" alt="ICP图标" style="
-    width: 16px; 
-    height: 16px; 
-    margin-right: 6px;
-    vertical-align: middle;
-  ">
-  吉ICP备2026000319号
-</a>    
-       <a class="text-[#FFFFFF]" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" data-v-72957a96="" style="
-  margin-left: 20px; 
-  color: #FBC500 !important; 
-  text-decoration: none !important; 
-  display: inline-flex; 
-  align-items: center;
-  transition: transform 0.3s ease;
-" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-  <img src="../备案图标.png" alt="备案图标" style="
-    width: 16px; 
-    height: 16px; 
-    margin-right: 6px;
-    vertical-align: middle;
-  ">
-  吉公网安备22032302000081号
-</a>
+  <div class="wrap footer-content">
+    <div class="copyright">
+      © 2025-2026 海米尔（吉林）文化传播有限公司 版权所有
+    </div>
+    
+    <div class="beian-links">
+      <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="">
+        <img src="../ICP.png" alt="ICP图标">
+        吉ICP备2026000319号
+      </a>
+      
+      <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" data-v-72957a96="">
+        <img src="../备案图标.png" alt="备案图标">
+        吉公网安备22032302000081号
+      </a>
+    </div>
   </div>
 </footer>
 </body>
