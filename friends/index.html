@@ -316,6 +316,48 @@
             animation: pulse 2s infinite alternate;
         }
         
+        /* 备案链接样式 - 新增 */
+        .beian-links {
+            margin: 30px 0 100px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            font-size: 16px;
+        }
+        
+        .beian-link {
+            color: #FBC500 !important;
+            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(251, 197, 0, 0.3);
+        }
+        
+        .beian-link:hover {
+            transform: scale(1.05);
+            border-color: #FBC500;
+            box-shadow: 0 0 15px rgba(251, 197, 0, 0.3);
+        }
+        
+        .beian-link img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .copyright-info {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 25px 0 15px 0;
+            font-weight: bold;
+        }
+        
         @keyframes pulse {
             0% {
                 text-shadow: 0 0 20px rgba(251, 197, 0, 0.7);
@@ -348,20 +390,6 @@
             position: absolute;
             background-color: white;
             border-radius: 50%;
-        }
-        
-        /* 备案号样式 */
-        .beian-link {
-            margin: 20px 0 100px 0;
-            display: inline-block;
-            color: #FBC500 !important;
-            text-decoration: none !important;
-            transition: transform 0.3s ease;
-            font-size: 16px;
-        }
-        
-        .beian-link:hover {
-            transform: scale(1.05);
         }
         
         /* 响应式设计 */
@@ -437,6 +465,20 @@
             
             .credits-content {
                 transform: rotateX(20deg);
+            }
+            
+            /* 响应式备案链接 */
+            .beian-links {
+                margin: 20px 0 120px 0;
+            }
+            
+            .beian-link {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .copyright-info {
+                font-size: 18px;
             }
         }
     </style>
@@ -523,7 +565,7 @@
             
             // 公司名称和版权信息
             html += `<div class="company-name">海米尔(吉林)文化传播有限公司</div>`;
-            html += `<div class="copyright">© 2025-2026 海米尔（吉林）文化传播有限公司 版权所有</div>`;
+            html += `<div class="copyright">彩蛋页面 - 友情创造无限未来</div>`;
             
             html += `<div class="section-divider"></div>`;
             
@@ -631,47 +673,27 @@
             
             html += `<div class="section-divider"></div>`;
             
+            // 版权和备案信息
+            html += `<div class="copyright-info">© 2025-2026 海米尔（吉林）文化传播有限公司 版权所有</div>`;
+            
+            html += `<div class="beian-links">`;
+            html += `<a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="">
+                <img src="../ICP.png" alt="ICP图标">
+                吉ICP备2026000319号
+            </a>`;
+            
+            html += `<a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" data-v-72957a96="">
+                <img src="../备案图标.png" alt="备案图标">
+                吉公网安备22032302000081号
+            </a>`;
+            html += `</div>`;
+            
+            html += `<div class="section-divider"></div>`;
+            
             // 最后的签名
             html += `<div class="reflection">我是...</div>`;
             html += `<div class="final-name">杰鱼记忆有点差</div>`;
             
-            // 备案号
-            html += `<div class="wrap">
-    © 2025-2026 海米尔（吉林）文化传播有限公司 版权所有
-      <a class="text-[#FFFFFF]" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="" style="
-  margin-left: 20px; 
-  color: #FBC500 !important; 
-  text-decoration: none !important; 
-  display: inline-flex; 
-  align-items: center;
-  transition: transform 0.3s ease;
-" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-  <img src="../ICP.png" alt="ICP图标" style="
-    width: 16px; 
-    height: 16px; 
-    margin-right: 6px;
-    vertical-align: middle;
-  ">
-  吉ICP备2026000319号
-</a>    
-       <a class="text-[#FFFFFF]" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" data-v-72957a96="" style="
-  margin-left: 20px; 
-  color: #FBC500 !important; 
-  text-decoration: none !important; 
-  display: inline-flex; 
-  align-items: center;
-  transition: transform 0.3s ease;
-" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-  <img src="../备案图标.png" alt="备案图标" style="
-    width: 16px; 
-    height: 16px; 
-    margin-right: 6px;
-    vertical-align: middle;
-  ">
-  吉公网安备22032302000081号
-</a>
-  </div>`;
-           
             // 添加足够的空白确保内容完全滚动
             html += `<div style="height: 100vh;"></div>`;
             
