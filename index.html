@@ -339,24 +339,60 @@
         /* 联系信息 */
         .contact-info {margin-top:20px}
         
-        /* 底部样式 + 按钮间距 - 修改颜色为 #E5BA1F */
-        footer{background:#E5BA1F;color:#fff;padding:40px 0;text-align:center;margin-top:20px}
-        
+        /* 底部样式 - 修改颜色为 #E5BA1F，使用统一圆角样式 */
+        footer{
+            background: #E5BA1F;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
         /* 版权信息样式 */
         .copyright-info {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            color: #fff;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
             font-weight: 500;
         }
-        
-        /* 底部链接容器 */
-        .footer-links {
+
+        /* 备案链接容器 */
+        .beian-links {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .beian-link {
+            color: #FBC500 !important;
+            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.25);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            border: 1px solid rgba(251, 197, 0, 0.2);
+        }
+
+        .beian-link:hover {
+            transform: scale(1.08);
+            background-color: rgba(0, 0, 0, 0.35);
+            box-shadow: 0 5px 15px rgba(251, 197, 0, 0.15);
+        }
+
+        .beian-link img {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            vertical-align: middle;
         }
         
         /* 间距元素 */
@@ -417,9 +453,9 @@
             }
             
             /* 底部响应式 */
-            .footer-links {
+            .beian-links {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
             }
         }
         
@@ -719,37 +755,15 @@
         ©2025-2026 版权所有 海米尔（吉林）文化传播有限公司
     </div>
     
-    <!-- 备案信息链接 -->
-    <div class="footer-links">
-        <a class="text-[#FFFFFF]" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="" style="
-            color: #FFFFFF !important; 
-            text-decoration: none !important; 
-            display: inline-flex; 
-            align-items: center;
-            transition: transform 0.3s ease;
-        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="ICP.png" alt="ICP图标" style="
-                width: 16px; 
-                height: 16px; 
-                margin-right: 6px;
-                vertical-align: middle;
-            ">
+    <!-- 备案信息链接 - 改为统一的圆角样式 -->
+    <div class="beian-links">
+        <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="">
+            <img src="ICP.png" alt="ICP图标" style="width: 18px; height: 18px; margin-right: 10px;">
             吉ICP备2026000319号
         </a>    
         
-        <a class="text-[#FFFFFF]" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" data-v-72957a96="" style="
-            color: #FFFFFF !important; 
-            text-decoration: none !important; 
-            display: inline-flex; 
-            align-items: center;
-            transition: transform 0.3s ease;
-        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="备案图标.png" alt="备案图标" style="
-                width: 16px; 
-                height: 16px; 
-                margin-right: 6px;
-                vertical-align: middle;
-            ">
+        <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" data-v-72957a96="">
+            <img src="备案图标.png" alt="备案图标" style="width: 18px; height: 18px; margin-right: 10px;">
             吉公网安备22032302000081号
         </a>
     </div>
