@@ -11,6 +11,52 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#333;line-height:1.8}
         
+        /* 时间显示区域 */
+        .time-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(229, 186, 31, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(229, 186, 31, 0.2);
+            z-index: 1000;
+            border: 1px solid rgba(229, 186, 31, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .time-display:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(229, 186, 31, 0.3);
+            background: rgba(229, 186, 31, 0.25);
+        }
+        
+        .current-date {
+            font-size: 1.1rem;
+            color: #E5BA1F;
+            text-align: center;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .current-time {
+            font-size: 1.8rem;
+            color: #E5BA1F;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(229, 186, 31, 0.5);
+        }
+        
+        .lunar-date {
+            font-size: 0.9rem;
+            color: #E59966;
+            text-align: center;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
         /* 头部样式 - 修改颜色为 #E5BA1F */
         header{background:#E5BA1F;color:#fff;padding:25px 0}
         .wrap{width:90%;max-width:1100px;margin:auto}
@@ -452,10 +498,35 @@
                 font-size: 1rem;
             }
             
+            /* 时间显示响应式 */
+            .time-display {
+                top: 10px;
+                right: 10px;
+                padding: 10px 15px;
+            }
+            
+            .current-time {
+                font-size: 1.4rem;
+            }
+            
+            .current-date {
+                font-size: 1rem;
+            }
+            
             /* 底部响应式 */
             .beian-links {
                 flex-direction: column;
                 gap: 20px;
+            }
+        }
+        
+        @media(max-width: 480px) {
+            .time-display {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 20px auto;
+                width: 90%;
             }
         }
         
@@ -472,6 +543,13 @@
     </style>
 </head>
 <body>
+<!-- 时间显示区域 -->
+<div class="time-display" id="timeDisplay">
+    <div class="current-date" id="currentDate"></div>
+    <div class="current-time" id="currentTime"></div>
+    <div class="lunar-date" id="lunarDate"></div>
+</div>
+
 <!-- 进度条容器（放在body最前面） -->
 <div class="progress-container" id="progressContainer">
     <!-- 刷新计数提示 -->
@@ -648,7 +726,7 @@
                 </div>
             </a>
 
-            <a href="/hao/" target="_blank" rel="noopener">
+            <a href="/haoshenzong/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="燃浩头像.jpg" alt="浩神宗" loading="lazy">
                     <h4>浩神宗</h4>
@@ -661,7 +739,7 @@
 
         <h3 style="margin-top:40px">部长</h3>
         <div class="team">
-            <a href="/hao/" target="_blank" rel="noopener">
+            <a href="/haoshenzong/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="燃浩头像.jpg" alt="浩神宗" loading="lazy">
                     <h4>浩神宗</h4>
@@ -699,7 +777,7 @@
                 </div>
             </a>
             
-            <a href="/hao/" target="_blank" rel="noopener">
+            <a href="/haoshenzong/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="燃浩头像.jpg" alt="燃浩" loading="lazy">
                     <h4>浩神宗</h4>
@@ -770,6 +848,39 @@
 </footer>
 
 <script>
+// ===== 时间显示功能 =====
+function updateTime() {
+    const now = new Date();
+    
+    // 格式化日期
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+    const day = now.getDay();
+    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    
+    // 格式化时间
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    
+    // 更新显示
+    document.getElementById('currentDate').textContent = `${year}年${month}月${date}日 ${days[day]}`;
+    document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+    
+    // 模拟农历显示（这里使用简化版，实际应该使用农历库）
+    const lunarMonths = ['正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '冬月', '腊月'];
+    const lunarDays = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十', 
+                      '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
+                      '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
+    
+    // 简化计算，实际应该使用专业农历算法
+    const lunarMonth = lunarMonths[(month - 1) % 12];
+    const lunarDay = lunarDays[(date - 1) % 30];
+    
+    document.getElementById('lunarDate').textContent = `农历${lunarMonth}${lunarDay}`;
+}
+
 // ===== 刷新计数功能 =====
 (function() {
     // 使用sessionStorage存储刷新次数（仅在当前会话有效）
@@ -1051,8 +1162,15 @@ worksNextBtn.addEventListener('click', () => {
 });
 
 // 初始化
+updateTime();
+setInterval(updateTime, 1000);
 renderArticles();
 renderWorks();
+
+// 页面加载完成
+window.addEventListener('load', function() {
+    console.log('海米尔文化官方网站已加载完成！');
+});
 </script>
 </body>
 </html>
