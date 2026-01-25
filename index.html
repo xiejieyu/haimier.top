@@ -450,7 +450,26 @@
             width:100%;
         }
         
-        /* 新年特别节目区域 - 精简版（只保留一个） */
+        /* 新年特别节目区域样式 */
+        .special-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 40px 0 30px 0;
+            color: #ff3333;
+            font-weight: 600;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .special-title:before,
+        .special-title:after {
+            content: '🎆';
+            font-size: 1.5rem;
+        }
+        
         .new-year-special {
             display:flex;
             gap:20px;
@@ -500,26 +519,6 @@
             background: rgba(0, 0, 0, 0.3);
             margin: 0;
             font-size: 1.1rem;
-        }
-        
-        /* 新年特别节目标题样式 */
-        .special-title {
-            text-align: center;
-            font-size: 2rem;
-            margin: 40px 0 30px 0;
-            color: #ff3333;
-            font-weight: 600;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .special-title:before,
-        .special-title:after {
-            content: '🎆';
-            font-size: 1.5rem;
         }
         
         /* 作品展示区域 - 新年主题 */
@@ -1099,6 +1098,36 @@
     </div>
 </section>
 
+<!-- 这是融合进去的新年特别节目部分 -->
+<section>
+    <div class="wrap">
+        <h2 class="special-title">2026新年特别节目</h2>
+        <p style="text-align: center; color: #ff9966; margin-bottom: 30px; font-size: 1.1rem;">
+            为庆祝2026新年，海米尔文化特别推出AmongUs拜年纪，带您领略创意与艺术的完美结合！
+        </p>
+        
+        <div class="new-year-special">
+            <a href="https://www.bilibili.com/video/BV1mtBDBSELG" target="_blank" rel="noopener noreferrer">
+                <img src="二版封面.jpg" 
+                     alt="2026 AmongUs 拜年纪"
+                     loading="lazy"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"225\" viewBox=\"0 0 400 225\"><rect width=\"400\" height=\"225\" fill=\"%231a0b0b\"/><rect x=\"50\" y=\"50\" width=\"300\" height=\"125\" rx=\"10\" fill=\"%23ff3333\" opacity=\"0.8\"/><text x=\"50%\" y=\"50%\" font-family=\"Arial\" font-size=\"24\" fill=\"%23ffcc00\" text-anchor=\"middle\" dy=\".3em\">2026 AmongUs 拜年纪</text></svg>'">
+                <p class="desc">
+                    <strong>2026 AmongUs 拜年纪</strong><br>
+                    <span style="font-size: 0.95rem; opacity: 0.9;">
+                        AmongUs主题拜年纪，为您带来全新的游戏创意盛宴！
+                    </span>
+                </p>
+            </a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; color: #ffcc00; font-style: italic; font-size: 1.1rem;">
+            🎬 点击上方卡片，观看2026 AmongUs 拜年纪完整视频！
+        </div>
+    </div>
+</section>
+<!-- 新年特别节目部分结束 -->
+
 <section>
     <div class="wrap">
         <h3>文章墙</h3>
@@ -1112,28 +1141,6 @@
                 <span class="page-info" id="pageInfo">第 <span id="currentPage">1</span> 页 / 共 <span id="totalPages">1</span> 页</span>
                 <button class="page-btn" id="nextBtn">下一页</button>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- 精简版：新年特别节目（2026amongus拜年纪） -->
-<section>
-    <div class="wrap">
-        <h2 class="special-title">2026新年特别节目</h2>
-        <p style="text-align: center; color: #ff9966; margin-bottom: 30px;">为庆祝2026新年，海米尔文化特别推出AmongUs拜年纪，带您领略创意与艺术的完美结合！</p>
-        
-        <div class="new-year-special">
-            <a href="https://www.bilibili.com/video/BV1mtBDBSELG" target="_blank" rel="noopener">
-                <img src="二版封面.jpg" alt="2026amongus拜年纪" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"225\" viewBox=\"0 0 400 225\"><rect width=\"400\" height=\"225\" fill=\"%231a0b0b\"/><rect x=\"50\" y=\"50\" width=\"300\" height=\"125\" rx=\"10\" fill=\"%23ff3333\" opacity=\"0.8\"/><text x=\"50%\" y=\"50%\" font-family=\"Arial\" font-size=\"24\" fill=\"%23ffcc00\" text-anchor=\"middle\" dy=\".3em\">2026AmongUs拜年纪</text></svg>'">
-                <p class="desc">
-                    <strong>2026 AmongUs 拜年纪</strong><br>
-                    <small style="font-size: 0.95rem; opacity: 0.9;">AmongUs主题拜年纪，为您带来全新的游戏创意盛宴！</small>
-                </p>
-            </a>
-        </div>
-        
-        <div style="text-align: center; margin-top: 30px; color: #ffcc00; font-style: italic;">
-            🎬 点击上方卡片，观看2026 AmongUs 拜年纪完整视频！
         </div>
     </div>
 </section>
@@ -1249,7 +1256,7 @@
                 </div>
             </a>
 
-            <a href="/haoshenzong/" target="_blank" rel="noopener">
+            <a href="/hao/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="燃浩头像.jpg" alt="浩神宗" loading="lazy">
                     <h4>浩神宗</h4>
@@ -1262,7 +1269,7 @@
 
         <h3 style="margin-top:40px">部长</h3>
         <div class="team">
-            <a href="/haoshenzong/" target="_blank" rel="noopener">
+            <a href="/hao/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="燃浩头像.jpg" alt="浩神宗" loading="lazy">
                     <h4>浩神宗</h4>
@@ -1300,7 +1307,7 @@
                 </div>
             </a>
             
-            <a href="/haoshenzong/" target="_blank" rel="noopener">
+            <a href="/hao/" target="_blank" rel="noopener">
                 <div class="card">
                     <img src="燃浩头像.jpg" alt="燃浩" loading="lazy">
                     <h4>浩神宗</h4>
@@ -1770,7 +1777,7 @@ renderWorks();
 
 // 页面加载完成后显示新年效果
 window.addEventListener('load', function() {
-    console.log('海米尔文化新年精简版已加载完成！已删除指定内容。🎉');
+    console.log('海米尔文化新年精简版已加载完成！包含2026新年特别节目。🎉');
 });
 </script>
 </body>
