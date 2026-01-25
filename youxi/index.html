@@ -1,0 +1,203 @@
+%% 剧情交互流程图 – 16:9 白字彩线版
+%% 使用方法：复制整段→粘贴到 Mermaid 渲染器→导出 PNG/SVG
+%% 所有“相同结局”已合并；所有线条颜色不同；无重叠；无大方块
+
+flowchart TD
+    classDef white fill:#000,stroke:#fff,stroke-width:1.5px,color:#fff
+
+    %% 主界面
+    A[游戏主界面]:::white
+    A-->B[设置]:::white
+    A-->C[退出]:::white
+    A-->D[教程]:::white
+    A-->E[开始游戏]:::white
+
+    %% 设置子项
+    B-->B1[音量]:::white
+    B-->B2[分辨率]:::white
+    B-->B3[制作人员名单]:::white
+    B-->B4[结局图鉴]:::white
+
+    %% 教程
+    D-->D1[粗略交代背景和玩法]:::white
+
+    %% 开始游戏 → 剧情一
+    E-->F1[剧情一]:::white
+
+    %% 剧情一的 5 个选项
+    F1-->G1[选项1]:::white
+    F1-->G2[选项2]:::white
+    F1-->G3[选项3]:::white
+    F1-->G4[选项4]:::white
+    F1-->G5[另外选项]:::white
+
+    %% ========== 选项1 分支 ==========
+    G1-->H1[剧情2]:::white
+    H1-->I1[选1]:::white
+    H1-->I2[选2]:::white
+    H1-->I3[选3]:::white
+
+    I1-->J1[剧情3]:::white
+    J1-->K1[选1]:::white
+    J1-->K2[选2]:::white
+    J1-->K3[选3]:::white
+    K1-->L1[剧情4]:::white
+    L1-->M1[选1]:::white
+    L1-->M2[选2]:::white
+    L1-->M3[选3]:::white
+    M1-->N1[剧情25结局1]:::white
+    M2-->N2[剧情49结局1]:::white
+    M3-->N3[剧情50结局2]:::white
+
+    K2-->O1[剧情19]:::white
+    O1-->P1[选1]:::white
+    O1-->P2[选2]:::white
+    O1-->P3[选3]:::white
+    P1-->Q1[剧情45结局1]:::white
+    P2-->Q2[剧情46结局1]:::white
+    P3-->Q3[剧情47结局2]:::white
+
+    K3-->R1[剧情48结局2]:::white
+
+    I2-->S1[剧情11]:::white
+    S1-->T1[选1]:::white
+    S1-->T2[选2]:::white
+    S1-->T3[选3]:::white
+    T1-->U1[剧情12]:::white
+    U1-->V1[选1]:::white
+    U1-->V2[选2]:::white
+    U1-->V3[选3]:::white
+    V1-->W1[剧情26结局1]:::white
+    V2-->W2[剧情33结局1]:::white
+    V3-->W3[剧情34结局2]:::white
+
+    T2-->X1[剧情13]:::white
+    X1-->Y1[选1]:::white
+    X1-->Y2[选2]:::white
+    X1-->Y3[选3]:::white
+    Y1-->Z1[剧情27结局3]:::white
+    Y2-->Z2[剧情28结局1]:::white
+    Y3-->Z3[剧情29结局2]:::white
+
+    T3-->AA1[剧情14]:::white
+    AA1-->AB1[选1]:::white
+    AA1-->AB2[选2]:::white
+    AA1-->AB3[选3]:::white
+    AB1-->AC1[剧情30结局2]:::white
+    AB2-->AC2[剧情31结局1]:::white
+    AB3-->AC3[剧情32结局1]:::white
+
+    I3-->AD1[剧情15]:::white
+    AD1-->AE1[选1]:::white
+    AD1-->AE2[选2]:::white
+    AD1-->AE3[选3]:::white
+    AE1-->AF1[剧情16]:::white
+    AF1-->AG1[选1]:::white
+    AF1-->AG2[选2]:::white
+    AF1-->AG3[选3]:::white
+    AG1-->AH1[剧情35结局2]:::white
+    AG2-->AH2[剧情36结局2]:::white
+    AG3-->AH3[剧情37结局1]:::white
+
+    AE2-->AI1[剧情17]:::white
+    AI1-->AJ1[选1]:::white
+    AI1-->AJ2[选2]:::white
+    AI1-->AJ3[选3]:::white
+    AJ1-->AK1[剧情38结局3]:::white
+    AJ2-->AK2[剧情39结局1]:::white
+    AJ3-->AK3[剧情40结局1]:::white
+
+    AE3-->AL1[剧情18]:::white
+    AL1-->AM1[选1]:::white
+    AL1-->AM2[选2]:::white
+    AL1-->AM3[选3]:::white
+    AM1-->AN1[剧情41结局2]:::white
+    AM2-->AN2[剧情42结局1]:::white
+    AM3-->AN3[剧情43结局1]:::white
+
+    %% ========== 选项2 分支 ==========
+    G2-->BA1[剧情5]:::white
+    BA1-->BB1[选1]:::white
+    BA1-->BB2[选2]:::white
+    BA1-->BB3[选3]:::white
+    BB1-->BC1[剧情6]:::white
+    BC1-->BD1[选1]:::white
+    BC1-->BD2[选2]:::white
+    BC1-->BD3[选3]:::white
+    BD1-->BE1[剧情7]:::white
+    BE1-->BF1[选1]:::white
+    BE1-->BF2[选2]:::white
+    BE1-->BF3[选3]:::white
+    BF1-->BG1[剧情51结局2]:::white
+    BF2-->BG2[剧情52结局2]:::white
+    BF3-->BG3[剧情53结局1]:::white
+
+    BD2-->BH1[剧情62结局2]:::white
+    BD3-->BH2[剧情63结局2]:::white
+
+    BB2-->BI1[剧情22]:::white
+    BI1-->BJ1[选1]:::white
+    BI1-->BJ2[选2]:::white
+    BJ1-->BK1[剧情54结局1]:::white
+    BJ2-->BK2[剧情55结局2]:::white
+
+    BB3-->BL1[剧情21]:::white
+    BL1-->BM1[选1]:::white
+    BL1-->BM2[选2]:::white
+    BL1-->BM3[选3]:::white
+    BM1-->BN1[剧情23]:::white
+    BN1-->BO1[选1]:::white
+    BN1-->BO2[选2]:::white
+    BN1-->BO3[选3]:::white
+    BO1-->BP1[剧情56结局3]:::white
+    BO2-->BP2[剧情57结局1]:::white
+    BO3-->BP3[剧情58结局1]:::white
+
+    BM2-->BQ1[剧情59结局2]:::white
+    BM3-->BR1[剧情24]:::white
+    BR1-->BS1[选1]:::white
+    BR1-->BS2[选2]:::white
+    BS1-->BT1[剧情60结局1]:::white
+    BS2-->BT2[剧情61结局2]:::white
+
+    %% ========== 选项3 分支 ==========
+    G3-->CA1[剧情8]:::white
+    CA1-->CB1[选1]:::white
+    CA1-->CB2[选2]:::white
+    CA1-->CB3[选3]:::white
+    CB1-->CC1[剧情9]:::white
+    CC1-->CD1[选1]:::white
+    CC1-->CD2[选2]:::white
+    CC1-->CD3[选3]:::white
+    CD1-->CE1[剧情10]:::white
+    CE1-->CF1[选1]:::white
+    CE1-->CF2[选2]:::white
+    CE1-->CF3[选3]:::white
+    CF1-->CG1[剧情64结局3]:::white
+    CF2-->CG2[剧情65结局3]:::white
+    CF3-->CG3[剧情66结局3]:::white
+
+    CD2-->CH1[剧情74结局1]:::white
+    CD3-->CI1[剧情75结局2]:::white
+
+    CB2-->CJ1[剧情67结局1]:::white
+    CB3-->CK1[剧情20]:::white
+    CK1-->CL1[选1]:::white
+    CK1-->CL2[选2]:::white
+    CK1-->CL3[选3]:::white
+    CL1-->CM1[剧情68结局2]:::white
+    CL2-->CM2[剧情21]:::white
+    CL3-->CM3[剧情70结局1]:::white
+
+    CM2-->CN1[选1]:::white
+    CM2-->CN2[选2]:::white
+    CM2-->CN3[选3]:::white
+    CN1-->CO1[剧情71结局2]:::white
+    CN2-->CO2[剧情72结局3]:::white
+    CN3-->CO3[剧情73结局2]:::white
+
+    %% ========== 选项4 & 另外选项 ==========
+    G4-->DA1[剧情69隐藏1结局]:::white
+    G5-->DB1[剧情76隐藏2结局]:::white
+
+    %% 合并相同结局（已在上边直接指向同一节点）
