@@ -420,6 +420,17 @@
             font-size: 0.95rem;
         }
         
+        .project-status {
+            display: inline-block;
+            background: rgba(255, 78, 80, 0.2);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
         /* 联系区域样式 */
         .contact-content {
             display: flex;
@@ -432,16 +443,19 @@
             display: flex;
             gap: 40px;
             margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
         .contact-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 15px;
+            max-width: 300px;
         }
         
         .contact-icon {
-            width: 50px;
+            min-width: 50px;
             height: 50px;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border-radius: 50%;
@@ -449,6 +463,22 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-item div {
+            text-align: left;
+        }
+        
+        .contact-item h4 {
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+        
+        .contact-item p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         /* 页脚样式 */
@@ -550,6 +580,7 @@
             .contact-info {
                 flex-direction: column;
                 gap: 25px;
+                align-items: flex-start;
             }
             
             .team-icons {
@@ -569,6 +600,16 @@
             .footer-content {
                 flex-direction: column;
                 gap: 30px;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .contact-item div {
+                text-align: center;
             }
         }
     </style>
@@ -684,18 +725,37 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-dragon"></i>
+                        <i class="fas fa-fire"></i>
                     </div>
                     <div class="project-content">
-                        <h3>老板真的生气了（正在开发中）</h3>
+                        <h3>老板真的生气了</h3>
                         <p>一款视觉小说类游戏，游戏剧情丰富多彩，共三个结局与两个隐藏结局，欢迎探索！</p>
+                        <div class="project-status">正在开发中</div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-robot"></i>
+                        <i class="fas fa-compass"></i>
                     </div>
-                   
+                    <div class="project-content">
+                        <h3>未命名探索游戏</h3>
+                        <p>一款开放世界探索游戏，玩家将在一个神秘的世界中冒险，发现隐藏的秘密和故事。</p>
+                        <div class="project-status">规划中</div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>谜境解谜</h3>
+                        <p>一款充满挑战的解谜游戏，玩家需要通过逻辑推理解决各种复杂的谜题，揭开背后的故事。</p>
+                        <div class="project-status">构思阶段</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- 联系区域 -->
     <section class="section" id="contact">
@@ -712,6 +772,7 @@
                         <div>
                             <h4>邮箱</h4>
                             <p>us@haimier.top</p>
+                            <p>s@haimier.top</p>
                         </div>
                     </div>
                     <div class="contact-item">
