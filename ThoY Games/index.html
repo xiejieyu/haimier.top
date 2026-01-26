@@ -382,6 +382,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
+            max-width: 400px;
+            margin: 0 auto;
         }
         
         .project-card {
@@ -527,6 +529,35 @@
             transform: translateY(-5px);
         }
         
+        /* 备案信息样式 */
+        .beian-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .beian-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+        
+        .beian-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        .beian-link img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+        
         /* 响应式设计 */
         @media (max-width: 992px) {
             .hero-content {
@@ -585,6 +616,12 @@
             
             .team-icons {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .beian-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
             }
         }
         
@@ -733,26 +770,6 @@
                         <div class="project-status">正在开发中</div>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-compass"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>未命名探索游戏</h3>
-                        <p>一款开放世界探索游戏，玩家将在一个神秘的世界中冒险，发现隐藏的秘密和故事。</p>
-                        <div class="project-status">规划中</div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-puzzle-piece"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>谜境解谜</h3>
-                        <p>一款充满挑战的解谜游戏，玩家需要通过逻辑推理解决各种复杂的谜题，揭开背后的故事。</p>
-                        <div class="project-status">构思阶段</div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -824,6 +841,19 @@
                         <i class="fab fa-steam"></i>
                     </a>
                 </div>
+            </div>
+            
+            <!-- 备案信息 -->
+            <div class="beian-links">
+                <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
+                    <img src="ICP.png" alt="ICP图标">
+                    吉ICP备2026000319号
+                </a>    
+                
+                <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank">
+                    <img src="备案图标.png" alt="备案图标">
+                    吉公网安备22032302000081号
+                </a>
             </div>
             
             <div class="copyright">
