@@ -1031,6 +1031,64 @@
             outline: none;
             border: none;
         }
+
+        /* ===== 新增板块样式：跳转到 thoy.top ===== */
+        .thoy-section {
+            margin: 40px 0 20px 0;
+            padding: 30px 20px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 30px;
+            border: 2px dashed #ffcc00;
+            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .thoy-section:hover {
+            background: rgba(255, 215, 0, 0.15);
+            border: 2px solid #ff3333;
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 51, 51, 0.4);
+        }
+
+        .thoy-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #ffcc00;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px #ff3333;
+            gap: 10px;
+        }
+
+        .thoy-link span {
+            font-size: 1.2rem;
+            background: #ff3333;
+            color: #fff5d6;
+            padding: 8px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 0 #990000;
+            transition: 0.2s;
+        }
+
+        .thoy-link:hover span {
+            background: #ffcc00;
+            color: #1a0b0b;
+            box-shadow: 0 5px 0 #b37400;
+        }
+
+        .thoy-link small {
+            font-size: 1rem;
+            opacity: 0.8;
+            color: #ff9966;
+            font-weight: normal;
+        }
+        /* ===== 新增板块样式结束 ===== */
     </style>
 </head>
 <body>
@@ -1098,6 +1156,20 @@
     </div>
 </section>
 
+<!-- ===== 新增板块：跳转到 thoy.top ===== -->
+<section>
+    <div class="wrap">
+        <div class="thoy-section">
+            <a href="https://thoy.top" target="_blank" rel="noopener" class="thoy-link">
+                🚀 即刻跳转 thoy.top 🚀
+                <span>✨ 科赛帝尔知识产权 ✨</span>
+                <small>版权业务专项跳转通道</small>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- ===== 新增板块结束 ===== -->
+
 <!-- 这是融合进去的新年特别节目部分 -->
 <section>
     <div class="wrap">
@@ -1111,7 +1183,7 @@
         <img src="二版封面.png" 
              alt="2026 AmongUs 拜年纪"
              loading="lazy"
-             onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"225\" viewBox=\"0 0 400 225\"><rect width=\"400\" height=\"225\" fill=\"%231a0b0b\"/><rect x=\"50\" y=\"50\" width=\"300\" height=\"125\" rx=\"10\" fill=\"%23ff3333\" opacity=\"0.8\"/><text x=\"50%\" y=\"50%\" font-family=\"Arial\" font-size=\"24\" fill=\"%23ffcc00\" text-anchor=\"middle\" dy=\".3em</text></svg>
+             onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"225\" viewBox=\"0 0 400 225\"><rect width=\"400\" height=\"225\" fill=\"%231a0b0b\"/><rect x=\"50\" y=\"50\" width=\"300\" height=\"125\" rx=\"10\" fill=\"%23ff3333\" opacity=\"0.8\"/><text x=\"50%\" y=\"50%\" font-family=\"Arial\" font-size=\"24\" fill=\"%23ffcc00\" text-anchor=\"middle\" dy=\".3em\">封面</text></svg>'">
         <p class="desc">
             <strong>2026 AmongUs 拜年纪</strong><br>
             <span style="font-size: 0.95rem; opacity: 0.9;">
