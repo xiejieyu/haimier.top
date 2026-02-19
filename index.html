@@ -537,6 +537,57 @@
             font-size: 1.1rem;
         }
         
+        /* 系列展示区 - 替换原有的优秀案例 */
+        .series-showcase {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .series-showcase a {
+            flex: 0 0 calc(33.333% - 14px);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.3);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 204, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .series-showcase a:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+        }
+        
+        .series-showcase img {
+            width: 100%;
+            display: block;
+            transition: .3s;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+        
+        .series-showcase a:hover img {
+            transform: scale(1.05);
+        }
+        
+        .series-showcase .desc {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
         /* 作品展示区域 - 新年主题 */
         .works{
             display:flex;
@@ -921,14 +972,14 @@
         
         /* 响应式设计 */
         @media(max-width: 1100px){
-            .team a, .works a, .mascot .card {flex:0 0 calc(50% - 10px)}
+            .team a, .works a, .mascot .card, .series-showcase a {flex:0 0 calc(50% - 10px)}
             .new-year-special a {flex:0 0 calc(100% - 10px)}
         }
         
         @media(max-width: 700px){
             .banner h2{font-size:1.8rem}
-            .team, .works, .mascot, .new-year-special {flex-direction:column}
-            .team a, .works a, .mascot .card, .card, .new-year-special a {flex:1 1 auto;width:100%}
+            .team, .works, .mascot, .new-year-special, .series-showcase {flex-direction:column}
+            .team a, .works a, .mascot .card, .card, .new-year-special a, .series-showcase a {flex:1 1 auto;width:100%}
             .article-meta {
                 flex-direction: column;
                 align-items: flex-start;
@@ -1216,6 +1267,27 @@
 </section>
 <!-- 新年特别节目部分结束 -->
 
+<!-- 系列展示：替代原来的优秀案例版权证书 -->
+<section>
+    <div class="wrap">
+        <h3>系列展示</h3>
+        <div class="series-showcase">
+            <a href="https://space.bilibili.com/1367029000" target="_blank" rel="noopener">
+                <img src="迫害老板.jpg" alt="迫害老板" loading="lazy">
+                <p class="desc">迫害老板，我们在所不辞</p>
+            </a>
+            <a href="https://space.bilibili.com/1367029000" target="_blank" rel="noopener">
+                <img src="奇葩客户.jpg" alt="奇葩客户" loading="lazy">
+                <p class="desc">做业务时碰见奇葩客户</p>
+            </a>
+            <a href="https://space.bilibili.com/1367029000" target="_blank" rel="noopener">
+                <img src="官号.jpg" alt="励志成为最有病的官号" loading="lazy">
+                <p class="desc">励志成为最有病的官号</p>
+            </a>
+        </div>
+    </div>
+</section>
+
 <section>
     <div class="wrap">
         <h3>文章墙</h3>
@@ -1230,15 +1302,6 @@
                 <button class="page-btn" id="nextBtn">下一页</button>
             </div>
         </div>
-    </div>
-</section>
-    
-<section>
-    <div class="wrap">
-        <h3>优秀案例</h3>
-        <div class="spacer"></div>
-        <img src="版权证书.jpg" alt="优秀案例" style="width: 300px; height: auto; border: 2px solid #ffcc00; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);" loading="lazy">
-        <p>我司自行办理的海米尔LOGO2.0证书</p>
     </div>
 </section>
 
