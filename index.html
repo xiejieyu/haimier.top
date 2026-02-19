@@ -675,7 +675,7 @@
             font-weight: 500;
         }
         
-        /* 二维码区域 - 全新样式，带LOGO水印背景 */
+        /* 二维码区域 - 移除原水印，保留干净背景 */
         .qr-section {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 20px;
@@ -685,21 +685,6 @@
             overflow: hidden;
             border: 1px solid rgba(255, 204, 0, 0.2);
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-        
-        .qr-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('LOGO.jpg'); /* 使用公司LOGO作为水印 */
-            background-repeat: repeat;
-            background-size: 150px auto;  /* 水印大小 */
-            opacity: 0.07;  /* 透明度极低，只作为隐约水印 */
-            pointer-events: none;
-            z-index: 0;
         }
         
         .qr-section > * {
@@ -738,7 +723,7 @@
             font-weight: 500;
         }
         
-        /* 官方社交媒体链接列表 */
+        /* 官方社交媒体链接 - 水印仅限此板块，单图平铺（不重复） */
         .official-links {
             margin-top: 35px;
             text-align: center;
@@ -746,6 +731,25 @@
             padding: 25px 20px;
             border-radius: 20px;
             border: 1px solid rgba(255, 204, 0, 0.15);
+            position: relative;
+            overflow: hidden;  /* 确保水印不溢出 */
+        }
+        
+        /* 单张LOGO平铺作为水印（只显示一次，非重复排列） */
+        .official-links::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('LOGO.jpg');  /* 使用公司LOGO */
+            background-repeat: no-repeat;       /* 不重复，只显示一张 */
+            background-position: center;        /* 居中显示 */
+            background-size: 40% auto;          /* 控制单张水印大小，避免过大 */
+            opacity: 0.08;                       /* 极浅透明度，作为水印 */
+            pointer-events: none;
+            z-index: 0;
         }
         
         .official-links h4 {
@@ -756,6 +760,8 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            position: relative;
+            z-index: 2;
         }
         
         .social-link-grid {
@@ -763,6 +769,8 @@
             flex-wrap: wrap;
             gap: 15px;
             justify-content: center;
+            position: relative;
+            z-index: 2;
         }
         
         .social-link-item {
@@ -796,7 +804,7 @@
             object-fit: contain;
             display: inline-block;
             vertical-align: middle;
-            border-radius: 0;  /* 不强制圆角，保持原图标形状 */
+            border-radius: 0;
         }
         
         /* 管理团队区域 - 新年主题 */
@@ -1158,6 +1166,11 @@
                 flex-direction: column;
                 gap: 20px;
             }
+            
+            /* 水印在小屏幕上适当调整 */
+            .official-links::before {
+                background-size: 70% auto;
+            }
         }
         
         @media(max-width: 480px) {
@@ -1187,6 +1200,10 @@
             .special-title:before,
             .special-title:after {
                 font-size: 1.2rem;
+            }
+            
+            .official-links::before {
+                background-size: 90% auto;
             }
         }
         
@@ -1445,24 +1462,25 @@
     </div>
 </section>
 
-<!-- ===== 二维码 + 官号链接区域 (已按要求修改：删除微信二维码下方文字 + 替换各平台图标) ===== -->
+<!-- ===== 二维码 + 官号链接区域 (水印已移到官方账号板块，且为单张平铺) ===== -->
 <section>
     <div class="wrap">
         <div class="qr-section">
             <h3 style="border-left-color: #ff3333; margin-bottom: 25px;">关注我们</h3>
             
-            <!-- 二维码网格 (已删除“扫码添加微信”等具体描述，仅保留“扫码关注”) -->
+            <!-- 二维码网格 -->
             <div class="qr-grid">
                 <div class="qr-item">
                     <img src="公众号二维码.jpg" alt="公众号二维码" class="qr-img" loading="lazy">
                     <p>扫码关注公众号</p>
                 </div>
-                    <!-- 此段落已留空，不显示任何文字，满足删除要求 -->
-                    <p></p>
+                <div class="qr-item">
+                    <img src="燃浩二维码.jpg" alt="微信二维码" class="qr-img" loading="lazy">
+                    <p></p> <!-- 留空，已按要求删除文字 -->
                 </div>
             </div>
             
-            <!-- 官方社交媒体链接 (图标已替换为对应图片文件) -->
+            <!-- 官方社交媒体链接 (带单张LOGO水印平铺，background-repeat: no-repeat) -->
             <div class="official-links">
                 <h4>📱 官方账号  📱</h4>
                 <div class="social-link-grid">
@@ -1850,7 +1868,7 @@ setInterval(updateTime, 1000);
 renderArticles();
 renderWorks();
 
-window.addEventListener('load', function() { console.log('海米尔文化新年特别版（最终调整）已加载！🎉'); });
+window.addEventListener('load', function() { console.log('海米尔文化 - 水印已移至官方账号板块（单张平铺）🎉'); });
 </script>
 </body>
 </html>
