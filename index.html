@@ -19,10 +19,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 预加载首屏唯一大图 -->
     <link rel="preload" href="以年少之心敬未来无限可能.png" as="image">
-    <!-- 其余样式代码保持不变... -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 预加载首屏唯一大图 -->
-    <link rel="preload" href="以年少之心敬未来无限可能.png" as="image">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{
@@ -679,23 +675,128 @@
             font-weight: 500;
         }
         
-        /* 二维码区域 */
-        .qr{
-            text-align:center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
+        /* 二维码区域 - 全新样式，带LOGO水印背景 */
+        .qr-section {
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 20px;
-            border: 1px solid rgba(255, 204, 0, 0.1);
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
         
-        .qr img{
-            width:200px;
-            margin-top:10px;
-            aspect-ratio:1/1;
-            object-fit:cover;
+        .qr-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('LOGO.jpg'); /* 使用公司LOGO作为水印 */
+            background-repeat: repeat;
+            background-size: 150px auto;  /* 水印大小 */
+            opacity: 0.07;  /* 透明度极低，只作为隐约水印 */
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .qr-section > * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .qr-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .qr-item {
+            flex: 0 0 auto;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+        }
+        
+        .qr-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
             border: 3px solid #ffcc00;
             border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .qr-item p {
+            margin-top: 10px;
+            color: #ffcc00;
+            font-weight: 500;
+        }
+        
+        /* 官方社交媒体链接列表 */
+        .official-links {
+            margin-top: 35px;
+            text-align: center;
+            background: rgba(255, 204, 0, 0.05);
+            padding: 25px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 204, 0, 0.15);
+        }
+        
+        .official-links h4 {
+            color: #ffcc00;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-link-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .social-link-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 51, 51, 0.15);
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            font-size: 1rem;
+        }
+        
+        .social-link-item:hover {
+            background: #ff3333;
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 51, 51, 0.4);
+            border-color: #ffcc00;
+        }
+        
+        /* 图标样式：限定宽高，保持原比例 */
+        .social-link-item img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 0;  /* 不强制圆角，保持原图标形状 */
         }
         
         /* 管理团队区域 - 新年主题 */
@@ -974,6 +1075,7 @@
         @media(max-width: 1100px){
             .team a, .works a, .mascot .card, .series-showcase a {flex:0 0 calc(50% - 10px)}
             .new-year-special a {flex:0 0 calc(100% - 10px)}
+            .qr-item {flex:0 0 180px;}
         }
         
         @media(max-width: 700px){
@@ -1099,7 +1201,7 @@
             border: none;
         }
 
-        /* ===== 新增板块样式：跳转到 thoy.top ===== */
+        /* 跳转板块样式 */
         .thoy-section {
             margin: 40px 0 20px 0;
             padding: 30px 20px;
@@ -1155,7 +1257,6 @@
             color: #ff9966;
             font-weight: normal;
         }
-        /* ===== 新增板块样式结束 ===== */
     </style>
 </head>
 <body>
@@ -1223,7 +1324,7 @@
     </div>
 </section>
 
-<!-- ===== 新增板块：跳转到 thoy.top ===== -->
+<!-- 跳转到 thoy.top 板块 -->
 <section>
     <div class="wrap">
         <div class="thoy-section">
@@ -1235,9 +1336,8 @@
         </div>
     </div>
 </section>
-<!-- ===== 新增板块结束 ===== -->
 
-<!-- 这是融合进去的新年特别节目部分 -->
+<!-- 新年特别节目部分 -->
 <section>
     <div class="wrap">
         <h2 class="special-title">2026新年特别节目</h2>
@@ -1245,29 +1345,26 @@
             为庆祝2026新年，海米尔文化特别推出AmongUs拜年纪，带您领略创意与艺术的完美结合！
         </p>
         
-       <div class="new-year-special">
-    <a href="https://www.bilibili.com/video/BV1WxcFzbEq9/" target="_blank" rel="noopener noreferrer">
-        <img src="二版封面.png" 
-             alt="2026 AmongUs 拜年纪"
-             loading="lazy"
-             onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"225\" viewBox=\"0 0 400 225\"><rect width=\"400\" height=\"225\" fill=\"%231a0b0b\"/><rect x=\"50\" y=\"50\" width=\"300\" height=\"125\" rx=\"10\" fill=\"%23ff3333\" opacity=\"0.8\"/><text x=\"50%\" y=\"50%\" font-family=\"Arial\" font-size=\"24\" fill=\"%23ffcc00\" text-anchor=\"middle\" dy=\".3em\"</text></svg>
-        <p class="desc">
-            <strong>2026 AmongUs 拜年纪</strong><br>
-            <span style="font-size: 0.95rem; opacity: 0.9;">
-                AmongUs主题拜年纪，为您带来全新的游戏创意盛宴！
-            </span>
-        </p>
-    </a>
-</div>
+        <div class="new-year-special">
+            <a href="https://www.bilibili.com/video/BV1WxcFzbEq9/" target="_blank" rel="noopener noreferrer">
+                <img src="二版封面.png" 
+                     alt="2026 AmongUs 拜年纪"
+                     loading="lazy"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\' viewBox=\'0 0 400 225\'><rect width=\'400\' height=\'225\' fill=\'%231a0b0b\'/><rect x=\'50\' y=\'50\' width=\'300\' height=\'125\' rx=\'10\' fill=\'%23ff3333\' opacity=\'0.8\'/></svg>'">
+                <p class="desc">
+                    <strong>2026 AmongUs 拜年纪</strong><br>
+                    <span style="font-size: 0.95rem; opacity: 0.9;">AmongUs主题拜年纪，为您带来全新的游戏创意盛宴！</span>
+                </p>
+            </a>
+        </div>
 
-<div style="text-align: center; margin-top: 30px; color: #ffcc00; font-style: italic; font-size: 1.1rem;">
-    🎬 点击上方卡片，观看2026 AmongUs 拜年纪完整视频！
-</div>
-             </div>
+        <div style="text-align: center; margin-top: 30px; color: #ffcc00; font-style: italic; font-size: 1.1rem;">
+            🎬 点击上方卡片，观看2026 AmongUs 拜年纪完整视频！
+        </div>
+    </div>
 </section>
-<!-- 新年特别节目部分结束 -->
 
-<!-- 系列展示：替代原来的优秀案例版权证书 -->
+<!-- 系列展示 -->
 <section>
     <div class="wrap">
         <h3>系列展示</h3>
@@ -1348,21 +1445,45 @@
     </div>
 </section>
 
+<!-- ===== 二维码 + 官号链接区域 (已按要求修改：删除微信二维码下方文字 + 替换各平台图标) ===== -->
 <section>
-    <div class="wrap qr">
-        <h3>二维码</h3>
-        <div class="qr-container">
-            <div class="qr-item">
-                <img src="公众号二维码.jpg" alt="微信二维码" class="qr-img" loading="lazy">
-                <p>扫码关注公众号</p>
+    <div class="wrap">
+        <div class="qr-section">
+            <h3 style="border-left-color: #ff3333; margin-bottom: 25px;">关注我们</h3>
+            
+            <!-- 二维码网格 (已删除“扫码添加微信”等具体描述，仅保留“扫码关注”) -->
+            <div class="qr-grid">
+                <div class="qr-item">
+                    <img src="公众号二维码.jpg" alt="公众号二维码" class="qr-img" loading="lazy">
+                    <p>扫码关注公众号</p>
+                </div>
+                    <!-- 此段落已留空，不显示任何文字，满足删除要求 -->
+                    <p></p>
+                </div>
             </div>
-            <div class="qr-item">
-                <img src="燃浩二维码.jpg" alt="微信二维码" class="qr-img" loading="lazy">
-                <p>扫码添加版权业务负责人</p>
+            
+            <!-- 官方社交媒体链接 (图标已替换为对应图片文件) -->
+            <div class="official-links">
+                <h4>📱 官方账号  📱</h4>
+                <div class="social-link-grid">
+                    <a href="https://space.bilibili.com/3546964079675934" target="_blank" class="social-link-item">
+                        <img src="bili.png" alt="bili"> B站官号
+                    </a>
+                    <a href="https://www.kuaishou.com/profile/3xuivzyiw6u5cew" target="_blank" class="social-link-item">
+                        <img src="快手.png" alt="kuaishou"> 快手官号
+                    </a>
+                    <a href="https://www.douyin.com/user/self?from_tab_name=main" target="_blank" class="social-link-item">
+                        <img src="抖音.png" alt="douyin"> 抖音官号
+                    </a>
+                    <a href="https://www.xiaohongshu.com/user/profile/68f8297e000000003702f299" target="_blank" class="social-link-item">
+                        <img src="小红书.png" alt="xiaohongshu"> 小红书官号
+                    </a>
+                    <a href="https://weibo.com/u/8222033389" target="_blank" class="social-link-item">
+                        <img src="微博.png" alt="weibo"> 微博官号
+                    </a>
+                </div>
+                <p style="color: #ff9966; margin-top: 15px; font-size: 0.95rem;">点击图标直达官方主页，获取最新动态</p>
             </div>
-        </div>
-        <div class="description">
-            关注我们获取最新资讯，添加负责人获取专业版权服务
         </div>
     </div>
 </section>
@@ -1533,409 +1654,203 @@
 // ===== 新年装饰生成 =====
 function createNewYearDecorations() {
     const container = document.getElementById('newYearDecorations');
+    if (!container) return;
     
-    // 创建灯笼
     for (let i = 0; i < 6; i++) {
         const lantern = document.createElement('div');
         lantern.className = 'new-year-decoration lantern';
         lantern.classList.add(i % 2 === 0 ? 'red' : 'gold');
-        
-        // 随机位置
         const left = Math.random() * 90 + 5;
         const top = Math.random() * 30 + 10;
         const delay = Math.random() * 3;
-        
         lantern.style.left = left + '%';
         lantern.style.top = top + '%';
         lantern.style.animationDelay = delay + 's';
-        
         container.appendChild(lantern);
     }
     
-    // 创建烟花
     for (let i = 0; i < 10; i++) {
         const firework = document.createElement('div');
         firework.className = 'new-year-decoration firework';
-        
-        // 随机位置和颜色
         const left = Math.random() * 100;
         const top = Math.random() * 100;
         const color = ['#ff3333', '#ffcc00', '#ff9966'][Math.floor(Math.random() * 3)];
         const delay = Math.random() * 2;
         const duration = 0.5 + Math.random() * 1;
-        
         firework.style.left = left + '%';
         firework.style.top = top + '%';
         firework.style.backgroundColor = color;
         firework.style.animationDelay = delay + 's';
         firework.style.animationDuration = duration + 's';
-        
         container.appendChild(firework);
     }
     
-    // 创建金币雨
     for (let i = 0; i < 15; i++) {
         const coin = document.createElement('div');
         coin.className = 'new-year-decoration gold-coin';
-        
-        // 随机位置和延迟
         const left = Math.random() * 100;
         const delay = Math.random() * 10;
         const duration = 5 + Math.random() * 10;
-        
         coin.style.left = left + '%';
         coin.style.animationDelay = delay + 's';
         coin.style.animationDuration = duration + 's';
-        
         container.appendChild(coin);
     }
 }
 
-// ===== 时间显示功能 =====
 function updateTime() {
     const now = new Date();
-    
-    // 格式化日期
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
     const date = now.getDate();
     const day = now.getDay();
     const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-    
-    // 格式化时间
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');
     
-    // 更新显示
     document.getElementById('currentDate').textContent = `${year}年${month}月${date}日 ${days[day]}`;
     document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
     
-    // 模拟农历显示（这里使用简化版，实际应该使用农历库）
     const lunarMonths = ['正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '冬月', '腊月'];
     const lunarDays = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十', 
                       '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
                       '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
-    
-    // 简化计算，实际应该使用专业农历算法
     const lunarMonth = lunarMonths[(month - 1) % 12];
     const lunarDay = lunarDays[(date - 1) % 30];
-    
     document.getElementById('lunarDate').textContent = `农历${lunarMonth}${lunarDay}`;
-    
-    // 新年祝福语变化
-    const greetings = [
-        "海米尔文化祝您2026新年快乐，万事如意！",
-        "恭贺新禧，马年大吉！",
-        "心想事成，阖家欢乐！",
-        "事业兴旺，财源广进！",
-        "健康平安，幸福美满！"
-    ];
-    
-    // 每分钟更换一次祝福语
-    if (seconds === '00') {
-        const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-        document.getElementById('newYearGreeting').textContent = randomGreeting;
-    }
 }
 
-// ===== 刷新计数功能 =====
+// 刷新计数
 (function() {
-    // 使用sessionStorage存储刷新次数（仅在当前会话有效）
-    const REFRESH_LIMIT = 5; // 刷新次数限制
-    const REDIRECT_URL = "https://haimier.top/friends"; // 跳转地址
-    
-    // 获取当前刷新次数
+    const REFRESH_LIMIT = 5;
+    const REDIRECT_URL = "https://haimier.top/friends";
     let refreshCount = sessionStorage.getItem('haimier_refresh_count');
-    if (refreshCount === null) {
-        refreshCount = 1; // 第一次访问
-    } else {
-        refreshCount = parseInt(refreshCount) + 1; // 增加计数
-    }
-    
-    // 保存刷新次数
+    if (refreshCount === null) refreshCount = 1;
+    else refreshCount = parseInt(refreshCount) + 1;
     sessionStorage.setItem('haimier_refresh_count', refreshCount.toString());
-    
-    // 更新显示
     document.getElementById('refreshCount').textContent = refreshCount;
     
-    // 检查是否达到限制
     if (refreshCount >= REFRESH_LIMIT) {
-        // 达到5次，准备跳转
-        console.log(`刷新次数已达${REFRESH_LIMIT}次，即将跳转到: ${REDIRECT_URL}`);
-        
-        // 显示跳转提示
-        const progressText = document.getElementById('progressText');
-        progressText.textContent = "跳转中...";
-        
-        // 2秒后跳转
-        setTimeout(() => {
-            window.location.href = REDIRECT_URL;
-        }, 2000);
-        
-        // 禁用跳过按钮
+        document.getElementById('progressText').textContent = "跳转中...";
+        setTimeout(() => { window.location.href = REDIRECT_URL; }, 2000);
         document.querySelector('.skip-progress').disabled = true;
         document.querySelector('.skip-progress').textContent = "即将跳转...";
-        document.querySelector('.skip-progress').style.opacity = "0.5";
-        document.querySelector('.skip-progress').style.cursor = "not-allowed";
-        
-        // 修改加载提示文字
-        document.querySelector('.loading-text').innerHTML = 
-            `刷新次数已达${REFRESH_LIMIT}次，正在跳转到友链页面...`;
-            
-        return; // 不执行后续的进度条动画
+        document.querySelector('.loading-text').innerHTML = `刷新次数已达${REFRESH_LIMIT}次，正在跳转到友链页面...`;
+        return;
     }
 })();
 
-// ===== 进度条系统（实时加载版本）=====
+// 进度条
 (function() {
     const progressContainer = document.getElementById('progressContainer');
     const progressBar = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
-    
-    // 显示进度条
     progressContainer.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    
-    // 模拟真实加载进度
     let progress = 0;
-    const totalSteps = 10; // 模拟10个加载步骤
-    const stepDuration = 200; // 每个步骤200ms
-    
-    // 更新进度条函数
     function updateProgress() {
-        progress += Math.random() * 10 + 5; // 随机增加5-15%
+        progress += Math.random() * 10 + 5;
         if (progress > 100) progress = 100;
-        
         progressBar.style.width = progress + '%';
         progressText.textContent = Math.floor(progress) + '%';
-        
-        // 当进度达到100%时，延迟一小段时间后隐藏进度条
         if (progress >= 100) {
-            setTimeout(() => {
-                hideProgress();
-            }, 500);
+            setTimeout(() => { hideProgress(); }, 500);
         } else {
-            // 继续更新进度
-            setTimeout(updateProgress, stepDuration + Math.random() * 100);
+            setTimeout(updateProgress, 200 + Math.random() * 100);
         }
     }
-    
-    // 开始加载进度
     setTimeout(updateProgress, 500);
-    
-    console.log('进度条已启动，正在模拟加载过程...');
 })();
 
-// 跳过进度条
 function skipProgress() {
-    // 检查是否已禁用（达到刷新限制时禁用）
     const skipBtn = document.querySelector('.skip-progress');
     if (skipBtn.disabled) return;
-    
     hideProgress();
 }
 
-// 隐藏进度条
 function hideProgress() {
     const progressContainer = document.getElementById('progressContainer');
     progressContainer.style.opacity = '0';
     progressContainer.style.transition = 'opacity 0.5s ease';
-    
     setTimeout(() => {
         progressContainer.style.display = 'none';
         document.body.style.overflow = 'auto';
-        console.log('进度条已关闭，页面加载完成');
     }, 500);
 }
 
-// 文章数据
 const articles = [
-    {
-        title: "海米尔文化祝所有人新春快乐",
-        link: "https://mp.weixin.qq.com/s/wVsRzXu_i-2kO7s0a8N4nQ",
-        date: "2026年2月16日",
-        author: "海米尔文化"
-    },
-    {
-        title: "海米尔文化官方吉祥物公布",
-        link: "https://mp.weixin.qq.com/s/fO0EfimpkZvOAY0cUu_Mkg",
-        date: "2026年1月3日",
-        author: "海米尔文化"
-    },
-    {
-        title: "海米尔文化祝贺大家2026新年快乐",
-        link: "https://mp.weixin.qq.com/s/OVGXN4bx5_MvDuJhdsjk3A?scene=1&click_id=2",
-        date: "2026年1月1日",
-        author: "海米尔文化"
-    },
-    {
-        title: "海米尔文化官方网站正式投入使用",
-        link: "https://mp.weixin.qq.com/s/u8K0ABrptwLs5CFiIzU_hA",
-        date: "2026年1月1日",
-        author: "海米尔文化"
-    },
+    { title: "海米尔文化祝所有人新春快乐", link: "https://mp.weixin.qq.com/s/wVsRzXu_i-2kO7s0a8N4nQ", date: "2026年2月16日", author: "海米尔文化" },
+    { title: "海米尔文化官方吉祥物公布", link: "https://mp.weixin.qq.com/s/fO0EfimpkZvOAY0cUu_Mkg", date: "2026年1月3日", author: "海米尔文化" },
+    { title: "海米尔文化祝贺大家2026新年快乐", link: "https://mp.weixin.qq.com/s/OVGXN4bx5_MvDuJhdsjk3A?scene=1&click_id=2", date: "2026年1月1日", author: "海米尔文化" },
+    { title: "海米尔文化官方网站正式投入使用", link: "https://mp.weixin.qq.com/s/u8K0ABrptwLs5CFiIzU_hA", date: "2026年1月1日", author: "海米尔文化" },
 ];
-
-// 分页设置
 const articlesPerPage = 3;
 let currentPage = 1;
-
-// DOM元素
 const articleList = document.getElementById('articleList');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const currentPageSpan = document.getElementById('currentPage');
 const totalPagesSpan = document.getElementById('totalPages');
-
-// 计算总页数
 const totalPages = Math.ceil(articles.length / articlesPerPage);
 totalPagesSpan.textContent = totalPages;
-
-// 渲染文章列表
 function renderArticles() {
     articleList.innerHTML = '';
-    
-    const startIndex = (currentPage - 1) * articlesPerPage;
-    const endIndex = startIndex + articlesPerPage;
-    const pageArticles = articles.slice(startIndex, endIndex);
-    
-    pageArticles.forEach(article => {
-        const articleItem = document.createElement('div');
-        articleItem.className = 'article-item';
-        
-        articleItem.innerHTML = `
-            <a href="${article.link}" target="_blank" rel="noopener">
-                <div class="article-title">${article.title}</div>
-                <div class="article-meta">
-                    <span class="article-date">发布日期：${article.date}</span>
-                    <span class="article-author">发布者：${article.author}</span>
-                </div>
-            </a>
-        `;
-        
-        articleList.appendChild(articleItem);
+    const start = (currentPage - 1) * articlesPerPage;
+    const end = start + articlesPerPage;
+    articles.slice(start, end).forEach(article => {
+        const div = document.createElement('div');
+        div.className = 'article-item';
+        div.innerHTML = `<a href="${article.link}" target="_blank"><div class="article-title">${article.title}</div><div class="article-meta"><span class="article-date">发布日期：${article.date}</span><span class="article-author">发布者：${article.author}</span></div></a>`;
+        articleList.appendChild(div);
     });
-    
-    // 更新分页按钮状态
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;
     currentPageSpan.textContent = currentPage;
 }
+prevBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderArticles(); } });
+nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderArticles(); } });
 
-// 分页按钮事件
-prevBtn.addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        renderArticles();
-    }
-});
-
-nextBtn.addEventListener('click', () => {
-    if (currentPage < totalPages) {
-        currentPage++;
-        renderArticles();
-    }
-});
-
-// ===== 作品分页功能 =====
-// 作品数据
 const worksData = [
-    {
-        title: "2024amongus拜年祭",
-        link: "https://www.bilibili.com/video/BV1Tx4y1f7Uw?spm_id_from=333.788.player.switch&vd_source=48e557edd3bf164f1acf9453d12b659c",
-        image: "新封面.jpg",
-        alt: "2024AmongUs拜年祭"
-    },
-    {
-        title: "2025amongus拜年纪",
-        link: "https://www.bilibili.com/video/BV1gPFpezEZP?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c",
-        image: "封面.jpg",
-        alt: "2025AmongUs拜年纪"
-    },
-    {
-        title: "坏人与好人（7）",
-        link: "https://www.bilibili.com/video/BV1M2mYYqE2F?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c",
-        image: "坏人与好人（7）-封面.jpg",
-        alt: "坏人与好人(7)"
-    },
+    { title: "2024amongus拜年祭", link: "https://www.bilibili.com/video/BV1Tx4y1f7Uw?spm_id_from=333.788.player.switch&vd_source=48e557edd3bf164f1acf9453d12b659c", image: "新封面.jpg", alt: "2024AmongUs拜年祭" },
+    { title: "2025amongus拜年纪", link: "https://www.bilibili.com/video/BV1gPFpezEZP?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c", image: "封面.jpg", alt: "2025AmongUs拜年纪" },
+    { title: "坏人与好人（7）", link: "https://www.bilibili.com/video/BV1M2mYYqE2F?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c", image: "坏人与好人（7）-封面.jpg", alt: "坏人与好人(7)" },
 ];
-
-// 作品分页设置
 const worksPerPage = 3;
 let currentWorksPage = 1;
-
-// DOM元素
 const worksContainer = document.getElementById('worksContainer');
 const worksPagination = document.getElementById('worksPagination');
 const worksPrevBtn = document.getElementById('worksPrevBtn');
 const worksNextBtn = document.getElementById('worksNextBtn');
 const worksCurrentPageSpan = document.getElementById('worksCurrentPage');
 const worksTotalPagesSpan = document.getElementById('worksTotalPages');
-
-// 计算作品总页数
 const totalWorksPages = Math.ceil(worksData.length / worksPerPage);
-
-// 显示或隐藏作品分页
-if (totalWorksPages > 1) {
-    worksPagination.style.display = 'flex';
-}
-
-// 渲染作品列表
+if (totalWorksPages > 1) worksPagination.style.display = 'flex';
 function renderWorks() {
     worksContainer.innerHTML = '';
-    
-    const startIndex = (currentWorksPage - 1) * worksPerPage;
-    const endIndex = startIndex + worksPerPage;
-    const pageWorks = worksData.slice(startIndex, endIndex);
-    
-    pageWorks.forEach(work => {
-        const workItem = document.createElement('a');
-        workItem.href = work.link;
-        workItem.target = "_blank";
-        workItem.rel = "noopener";
-        
-        workItem.innerHTML = `
-            <img src="${work.image}" alt="${work.alt}" loading="lazy">
-            <p class="desc">${work.title}</p>
-        `;
-        
-        worksContainer.appendChild(workItem);
+    const start = (currentWorksPage - 1) * worksPerPage;
+    const end = start + worksPerPage;
+    worksData.slice(start, end).forEach(work => {
+        const a = document.createElement('a');
+        a.href = work.link; a.target = "_blank"; a.rel = "noopener";
+        a.innerHTML = `<img src="${work.image}" alt="${work.alt}" loading="lazy"><p class="desc">${work.title}</p>`;
+        worksContainer.appendChild(a);
     });
-    
-    // 更新分页按钮状态
     worksPrevBtn.disabled = currentWorksPage === 1;
     worksNextBtn.disabled = currentWorksPage === totalWorksPages;
     worksCurrentPageSpan.textContent = currentWorksPage;
     worksTotalPagesSpan.textContent = totalWorksPages;
 }
+worksPrevBtn.addEventListener('click', () => { if (currentWorksPage > 1) { currentWorksPage--; renderWorks(); } });
+worksNextBtn.addEventListener('click', () => { if (currentWorksPage < totalWorksPages) { currentWorksPage++; renderWorks(); } });
 
-// 作品分页按钮事件
-worksPrevBtn.addEventListener('click', () => {
-    if (currentWorksPage > 1) {
-        currentWorksPage--;
-        renderWorks();
-    }
-});
-
-worksNextBtn.addEventListener('click', () => {
-    if (currentWorksPage < totalWorksPages) {
-        currentWorksPage++;
-        renderWorks();
-    }
-});
-
-// 初始化
 createNewYearDecorations();
 updateTime();
 setInterval(updateTime, 1000);
 renderArticles();
 renderWorks();
 
-// 页面加载完成后显示新年效果
-window.addEventListener('load', function() {
-    console.log('海米尔文化新年精简版已加载完成！🎉');
-});
+window.addEventListener('load', function() { console.log('海米尔文化新年特别版（最终调整）已加载！🎉'); });
 </script>
 </body>
 </html>
