@@ -12,10 +12,10 @@
     
     <!-- 针对搜索引擎的额外优化 -->
     <meta name="msapplication-TileImage" content="/favicon.ico">
-    <meta name="msapplication-TileColor" content="#FBC500">
+    <meta name="msapplication-TileColor" content="#ffcc00">
     
     <meta charset="UTF-8">
-    <title>海米尔文化官方网站</title>
+    <title>海米尔文化官方网站 - 2026新年快乐</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 预加载首屏唯一大图 -->
     <link rel="preload" href="以年少之心敬未来无限可能.png" as="image">
@@ -30,30 +30,106 @@
             overflow-x: hidden;
         }
         
-        /* 时间显示区域 - 仅保留时间功能，移除装饰性 */
+        /* 新年装饰元素 */
+        .new-year-decoration {
+            position: fixed;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .lantern {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 10px 20px rgba(255, 51, 51, 0.3);
+            animation: swing 3s infinite ease-in-out;
+        }
+        
+        .lantern:before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            background: #ffcc00;
+            border-radius: 5px;
+        }
+        
+        .lantern:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 15px;
+            background: #ffcc00;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .lantern.red { background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%); }
+        .lantern.gold { background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%); }
+        
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: explode 1.5s infinite;
+        }
+        
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(20); opacity: 0; }
+        }
+        
+        .gold-coin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #ffcc00, #cc9900);
+            border-radius: 50%;
+            animation: fall 10s linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* 时间显示区域 */
         .time-display {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(251, 197, 0, 0.15);  /* FBC500 透明 */
+            background: rgba(229, 186, 31, 0.15);
             backdrop-filter: blur(10px);
             padding: 15px 25px;
             border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(251, 197, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(229, 186, 31, 0.2);
             z-index: 1000;
-            border: 1px solid rgba(251, 197, 0, 0.3);
+            border: 1px solid rgba(229, 186, 31, 0.3);
             transition: all 0.3s ease;
         }
         
         .time-display:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(251, 197, 0, 0.3);
-            background: rgba(251, 197, 0, 0.25);
+            box-shadow: 0 15px 40px rgba(229, 186, 31, 0.3);
+            background: rgba(229, 186, 31, 0.25);
         }
         
         .current-date {
             font-size: 1.1rem;
-            color: #FBC500;  /* 主题色 */
+            color: #ffcc00;
             text-align: center;
             margin-bottom: 5px;
             font-weight: 600;
@@ -61,29 +137,45 @@
         
         .current-time {
             font-size: 1.8rem;
-            color: #FBC500;  /* 主题色 */
+            color: #ffcc00;
             text-align: center;
             font-weight: 700;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(251, 197, 0, 0.5);
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
         }
         
         .lunar-date {
             font-size: 0.9rem;
-            color: #ff9966;  /* 保留暖色点缀，不与主题色冲突 */
+            color: #ff9966;
             text-align: center;
             margin-top: 5px;
             font-style: italic;
         }
         
-        /* 头部样式 - 去除新年装饰，保留基础 */
+        /* 头部样式 - 新年主题 */
         header{
-            background: linear-gradient(135deg, rgba(251, 197, 0, 0.9) 0%, rgba(220, 165, 0, 0.9) 100%); /* FBC500 渐变 */
+            background: linear-gradient(135deg, rgba(229, 186, 31, 0.9) 0%, rgba(204, 153, 0, 0.9) 100%);
             color:#fff;
             padding:25px 0;
             position: relative;
             overflow: hidden;
             z-index: 10;
+        }
+        
+        header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff3333, #ffcc00, #ff3333);
+            animation: shimmer 3s infinite linear;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
         }
         
         .wrap{width:90%;max-width:1100px;margin:auto}
@@ -98,13 +190,13 @@
         
         @keyframes logoGlow {
             0% { filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3)); }
-            100% { filter: drop-shadow(0 5px 25px rgba(251, 197, 0, 0.5)); } /* FBC500 */
+            100% { filter: drop-shadow(0 5px 25px rgba(255, 204, 0, 0.5)); }
         }
         
         h1{
             font-size:2.2rem;
             margin-bottom:10px;
-            background: linear-gradient(45deg, #fff, #FBC500); /* 主题色 */
+            background: linear-gradient(45deg, #fff, #ffcc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -132,26 +224,26 @@
             height: 180px;
             margin-bottom: 40px;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(251, 197, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(229, 186, 31, 0.3);
             animation: logoPulse 1.5s infinite alternate;
-            border: 3px solid #FBC500;
+            border: 3px solid #ffcc00;
             object-fit: cover;
         }
         
         @keyframes logoPulse {
             0% {
                 transform: scale(1);
-                box-shadow: 0 15px 35px rgba(251, 197, 0, 0.2);
+                box-shadow: 0 15px 35px rgba(229, 186, 31, 0.2);
                 opacity: 0.8;
             }
             100% {
                 transform: scale(1.08);
-                box-shadow: 0 25px 45px rgba(251, 197, 0, 0.5);
+                box-shadow: 0 25px 45px rgba(255, 204, 0, 0.5);
                 opacity: 1;
             }
         }
         
-        /* 进度条区域 - 使用主题色 FBC500 搭配深红点缀（保持品牌识别） */
+        /* 进度条区域 - 新年主题 */
         .progress-wrapper {
             width: 80%;
             max-width: 800px;
@@ -159,7 +251,7 @@
             position: relative;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 30px;
-            border: 2px solid rgba(251, 197, 0, 0.3);
+            border: 2px solid rgba(255, 204, 0, 0.3);
             overflow: hidden;
             margin-top: 20px;
         }
@@ -170,10 +262,10 @@
             left: 0;
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #cc0000, #FBC500, #cc0000); /* 主题色配深红 */
+            background: linear-gradient(90deg, #ff3333, #ffcc00, #ff3333);
             border-radius: 30px;
             transition: width 0.3s ease;
-            box-shadow: 0 0 20px rgba(251, 197, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
         }
         
         .progress-text {
@@ -183,14 +275,14 @@
             transform: translate(-50%, -50%);
             font-size: 1.8rem;
             font-weight: bold;
-            color: #FBC500;
+            color: #ffcc00;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
             z-index: 2;
         }
         
         /* 加载文字 */
         .loading-text {
-            color: #FBC500;
+            color: #ffcc00;
             margin-top: 30px;
             font-size: 1.1rem;
             opacity: 0.8;
@@ -198,38 +290,38 @@
         }
         
         .loading-text span {
-            color: #cc0000; /* 深红点缀 */
+            color: #ff3333;
             font-weight: bold;
             font-size: 1.3rem;
         }
         
-        /* 刷新计数提示 */
+        /* 刷新计数提示 - 新年主题 */
         .refresh-counter {
             position: absolute;
             top: 30px;
             right: 30px;
-            color: rgba(251, 197, 0, 0.8);
+            color: rgba(255, 204, 0, 0.8);
             font-size: 0.9rem;
             background: rgba(0, 0, 0, 0.3);
             padding: 8px 15px;
             border-radius: 15px;
-            border: 1px solid rgba(251, 197, 0, 0.3);
+            border: 1px solid rgba(255, 204, 0, 0.3);
         }
         
         .refresh-counter span {
-            color: #cc0000;
+            color: #ff3333;
             font-weight: bold;
             font-size: 1.1rem;
         }
         
-        /* 跳过按钮 */
+        /* 跳过按钮 - 新年主题 */
         .skip-progress {
             position: absolute;
             bottom: 40px;
             right: 40px;
             padding: 12px 30px;
-            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
-            color: #FBC500;
+            background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+            color: #ffcc00;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
@@ -237,13 +329,13 @@
             cursor: pointer;
             transition: all 0.3s;
             z-index: 999999;
-            box-shadow: 0 5px 15px rgba(204, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.3);
         }
         
         .skip-progress:hover {
-            background: linear-gradient(135deg, #990000 0%, #660000 100%);
+            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(204, 0, 0, 0.5);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.5);
         }
         
         /* 品牌口号 */
@@ -252,20 +344,20 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(251, 197, 0, 0.8);
+            color: rgba(255, 204, 0, 0.8);
             font-size: 1.2rem;
             font-weight: 300;
             text-align: center;
         }
         
         .brand-slogan span {
-            color: #cc0000;
+            color: #ff3333;
             font-weight: 600;
         }
         
-        /* Banner区域 */
+        /* Banner区域 - 新年主题 */
         .banner{
-            background: linear-gradient(135deg, rgba(251, 197, 0, 0.8) 0%, rgba(204, 153, 0, 0.8) 100%), url(https://cdn.jsdelivr.net/gh/xiejieyu/haimier.top/main/slogan.png) center/cover no-repeat;
+            background: linear-gradient(135deg, rgba(229, 186, 31, 0.8) 0%, rgba(204, 153, 0, 0.8) 100%), url(https://cdn.jsdelivr.net/gh/xiejieyu/haimier.top/main/slogan.png) center/cover no-repeat;
             height:420px;
             display:flex;
             align-items:center;
@@ -280,6 +372,23 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
         
+        .banner:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="rgba(255,204,0,0.1)" stroke-width="2"/></svg>');
+            opacity: 0.5;
+            animation: bannerPattern 20s linear infinite;
+        }
+        
+        @keyframes bannerPattern {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+        
         .banner img{
             max-width:640px;
             width:90%;
@@ -292,7 +401,7 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* 内容区域 */
+        /* 内容区域 - 新年主题 */
         section{
             padding:60px 0;
             margin-bottom:40px;
@@ -303,14 +412,22 @@
         h3{
             font-size:1.8rem;
             margin-bottom:20px;
-            color:#FBC500;  /* 主题色 */
-            border-left:5px solid #cc0000;
+            color:#ffcc00;
+            border-left:5px solid #ff3333;
             padding-left:10px;
             display:block;
             width:100%;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             position: relative;
             padding-bottom: 10px;
+        }
+        
+        h3:after {
+            content: '🎉';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.5rem;
         }
         
         p{
@@ -320,12 +437,12 @@
             width:100%;
         }
         
-        /* 特别板块（原新年特别节目改为常规内容） */
+        /* 新年特别节目区域样式 */
         .special-title {
             text-align: center;
             font-size: 2rem;
             margin: 40px 0 30px 0;
-            color: #cc0000;  /* 深红保留作为点缀 */
+            color: #ff3333;
             font-weight: 600;
             position: relative;
             display: flex;
@@ -336,9 +453,8 @@
         
         .special-title:before,
         .special-title:after {
-            content: '✦';  /* 改为中性符号 */
+            content: '🎆';
             font-size: 1.5rem;
-            color: #FBC500;
         }
         
         .new-year-special {
@@ -358,14 +474,14 @@
             text-decoration:none;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 197, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.1);
             transition: all 0.3s ease;
         }
         
         .new-year-special a:hover{
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(251, 197, 0, 0.3);
-            border: 1px solid rgba(251, 197, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
+            border: 1px solid rgba(255, 204, 0, 0.3);
         }
         
         .new-year-special img{
@@ -380,8 +496,9 @@
             transform:scale(1.05);
         }
         
+        /* 新年特别节目描述样式 */
         .new-year-special .desc {
-            color: #FBC500;
+            color: #ffcc00;
             text-decoration: none;
             font-weight: 500;
             padding: 20px;
@@ -391,7 +508,7 @@
             font-size: 1.1rem;
         }
         
-        /* 系列展示区 */
+        /* 系列展示区 - 替换原有的优秀案例 */
         .series-showcase {
             display: flex;
             gap: 20px;
@@ -409,14 +526,14 @@
             text-decoration: none;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 197, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.1);
             transition: all 0.3s ease;
         }
         
         .series-showcase a:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(251, 197, 0, 0.3);
-            border: 1px solid rgba(251, 197, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
+            border: 1px solid rgba(255, 204, 0, 0.3);
         }
         
         .series-showcase img {
@@ -432,7 +549,7 @@
         }
         
         .series-showcase .desc {
-            color: #FBC500;
+            color: #ffcc00;
             text-decoration: none;
             font-weight: 500;
             padding: 15px;
@@ -442,7 +559,7 @@
             font-size: 1.1rem;
         }
         
-        /* 作品展示区域 */
+        /* 作品展示区域 - 新年主题 */
         .works{
             display:flex;
             gap:20px;
@@ -460,14 +577,14 @@
             text-decoration:none;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 197, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.1);
             transition: all 0.3s ease;
         }
         
         .works a:hover{
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(251, 197, 0, 0.3);
-            border: 1px solid rgba(251, 197, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
+            border: 1px solid rgba(255, 204, 0, 0.3);
         }
         
         .works img{
@@ -482,8 +599,9 @@
             transform:scale(1.05);
         }
         
+        /* 作品描述样式 */
         .works .desc {
-            color: #FBC500;
+            color: #ffcc00;
             text-decoration: none;
             font-weight: 500;
             padding: 15px;
@@ -493,7 +611,7 @@
             font-size: 1rem;
         }
         
-        /* 作品分页样式 */
+        /* 作品分页样式 - 新年主题 */
         .works-pagination {
             display: flex;
             justify-content: center;
@@ -504,8 +622,8 @@
         }
         
         .works-page-btn {
-            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
-            color: #FBC500;
+            background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+            color: #ffcc00;
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -517,7 +635,7 @@
         
         .works-page-btn:hover:not(:disabled) {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.4);
         }
         
         .works-page-btn:disabled {
@@ -528,11 +646,11 @@
         
         .works-page-info {
             font-size: 1rem;
-            color: #FBC500;
+            color: #ffcc00;
             font-weight: 500;
         }
         
-        /* 二维码区域 */
+        /* 二维码区域 - 移除原水印，保留干净背景 */
         .qr-section {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 20px;
@@ -540,7 +658,7 @@
             margin: 30px 0;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(251, 197, 0, 0.2);
+            border: 1px solid rgba(255, 204, 0, 0.2);
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
         
@@ -562,21 +680,21 @@
             background: rgba(0, 0, 0, 0.3);
             padding: 15px;
             border-radius: 15px;
-            border: 1px solid rgba(251, 197, 0, 0.2);
+            border: 1px solid rgba(255, 204, 0, 0.2);
         }
         
         .qr-item img {
             width: 150px;
             height: 150px;
             object-fit: cover;
-            border: 3px solid #FBC500;
+            border: 3px solid #ffcc00;
             border-radius: 10px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
         
         .qr-item p {
             margin-top: 10px;
-            color: #FBC500;
+            color: #ffcc00;
             font-weight: 500;
         }
         
@@ -584,12 +702,12 @@
         .official-links {
             margin-top: 35px;
             text-align: center;
-            background: rgba(251, 197, 0, 0.05);
+            background: rgba(255, 204, 0, 0.05);
             padding: 25px 20px;
             border-radius: 20px;
-            border: 1px solid rgba(251, 197, 0, 0.15);
+            border: 1px solid rgba(255, 204, 0, 0.15);
             position: relative;
-            overflow: hidden;
+            overflow: hidden;  /* 确保水印不溢出 */
         }
         
         /* 单张LOGO平铺作为水印（只显示一次，非重复排列） */
@@ -600,17 +718,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('LOGO.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 40% auto;
-            opacity: 0.08;
+            background-image: url('LOGO.jpg');  /* 使用公司LOGO */
+            background-repeat: no-repeat;       /* 不重复，只显示一张 */
+            background-position: center;        /* 居中显示 */
+            background-size: 40% auto;          /* 控制单张水印大小，避免过大 */
+            opacity: 0.08;                       /* 极浅透明度，作为水印 */
             pointer-events: none;
             z-index: 0;
         }
         
         .official-links h4 {
-            color: #FBC500;
+            color: #ffcc00;
             font-size: 1.4rem;
             margin-bottom: 20px;
             display: flex;
@@ -634,11 +752,11 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(204, 0, 0, 0.15);
+            background: rgba(255, 51, 51, 0.15);
             padding: 8px 20px;
             border-radius: 40px;
-            border: 1px solid rgba(251, 197, 0, 0.3);
-            color: #FBC500;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            color: #ffcc00;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -647,13 +765,14 @@
         }
         
         .social-link-item:hover {
-            background: #cc0000;
+            background: #ff3333;
             color: #fff;
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.4);
-            border-color: #FBC500;
+            box-shadow: 0 10px 20px rgba(255, 51, 51, 0.4);
+            border-color: #ffcc00;
         }
         
+        /* 图标样式：限定宽高，保持原比例 */
         .social-link-item img {
             width: 20px;
             height: 20px;
@@ -663,7 +782,7 @@
             border-radius: 0;
         }
         
-        /* 管理团队区域 */
+        /* 管理团队区域 - 新年主题 */
         .team{
             display:flex;
             gap:20px;
@@ -692,7 +811,7 @@
             justify-content:center;
             align-items:center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 197, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -700,18 +819,17 @@
         
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(251, 197, 0, 0.2);
-            border: 1px solid rgba(251, 197, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.2);
+            border: 1px solid rgba(255, 204, 0, 0.3);
         }
         
         .card:before {
-            content: '✦';  /* 中性符号 */
+            content: '✨';
             position: absolute;
             top: 10px;
             right: 10px;
             font-size: 1.2rem;
             opacity: 0.7;
-            color: #FBC500;
         }
         
         .card img{
@@ -721,20 +839,20 @@
             object-fit:cover;
             margin-bottom:15px;
             aspect-ratio:1/1;
-            border: 3px solid #FBC500;
+            border: 3px solid #ffcc00;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
         
         .card:hover img {
             transform: scale(1.1);
-            border-color: #cc0000;
+            border-color: #ff3333;
         }
         
         .card h4{
             margin:10px 0;
             font-size:1.2rem;
-            color:#FBC500;
+            color:#ffcc00;
         }
         
         .card p{
@@ -748,7 +866,7 @@
         .mascot{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
         .mascot .card{flex:0 0 calc(50% - 10px)}
         
-        /* 文章墙样式 */
+        /* 文章墙样式 - 新年主题 */
         .article-wall {
             margin-top: 20px;
         }
@@ -766,13 +884,13 @@
             box-shadow: 0 5px 15px rgba(0,0,0,.3);
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(251, 197, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.1);
         }
         
         .article-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(251, 197, 0, 0.2);
-            border: 1px solid rgba(251, 197, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
+            border: 1px solid rgba(255, 204, 0, 0.3);
         }
         
         .article-item a {
@@ -784,7 +902,7 @@
         .article-title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #FBC500;
+            color: #ffcc00;
             margin-bottom: 8px;
         }
         
@@ -798,7 +916,7 @@
         }
         
         .article-date {
-            color: #FBC500;
+            color: #ffcc00;
         }
         
         .pagination {
@@ -810,8 +928,8 @@
         }
         
         .page-btn {
-            background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
-            color: #FBC500;
+            background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+            color: #ffcc00;
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -823,7 +941,7 @@
         
         .page-btn:hover:not(:disabled) {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.4);
         }
         
         .page-btn:disabled {
@@ -833,7 +951,7 @@
         
         .page-info {
             font-size: 1rem;
-            color: #FBC500;
+            color: #ffcc00;
         }
         
         /* 联系信息 */
@@ -842,23 +960,23 @@
             background: rgba(255, 255, 255, 0.05);
             padding: 25px;
             border-radius: 15px;
-            border: 1px solid rgba(251, 197, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.1);
         }
         
         .contact-info a {
-            color: #FBC500;
+            color: #ffcc00;
             text-decoration: none;
             transition: all 0.3s;
         }
         
         .contact-info a:hover {
-            color: #cc0000;
+            color: #ff3333;
             text-decoration: underline;
         }
         
-        /* 底部样式 */
+        /* 底部样式 - 新年主题 */
         footer{
-            background: linear-gradient(135deg, rgba(251, 197, 0, 0.9) 0%, rgba(204, 153, 0, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(229, 186, 31, 0.9) 0%, rgba(204, 153, 0, 0.9) 100%);
             color: #fff;
             padding: 40px 0;
             text-align: center;
@@ -868,7 +986,25 @@
             overflow: hidden;
         }
 
-        /* 版权信息 */
+        footer:before {
+            content: '🎊 新年快乐 🎊';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #ff3333;
+            font-weight: bold;
+            white-space: nowrap;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* 版权信息样式 */
         .copyright-info {
             font-size: 1.05rem;
             margin-bottom: 25px;
@@ -899,13 +1035,13 @@
             padding: 10px 20px;
             border-radius: 25px;
             font-weight: 600;
-            border: 2px solid #cc0000;
+            border: 2px solid #ff3333;
         }
 
         .beian-link:hover {
             transform: scale(1.08);
-            background-color: #FBC500;
-            box-shadow: 0 5px 15px rgba(204, 0, 0, 0.3);
+            background-color: #ffcc00;
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.3);
         }
 
         .beian-link img {
@@ -985,6 +1121,7 @@
                 font-size: 1.4rem;
             }
             
+            /* 新年特别节目响应式 */
             .special-title {
                 font-size: 1.6rem;
             }
@@ -1000,6 +1137,7 @@
                 gap: 20px;
             }
             
+            /* 水印在小屏幕上适当调整 */
             .official-links::before {
                 background-size: 70% auto;
             }
@@ -1030,6 +1168,7 @@
             }
         }
         
+        /* 去掉杰鱼卡片下划线 */
         a[href="/jieyu/"],
         a[href="/jieyu/"]:hover,
         a[href="/jieyu/"]:active,
@@ -1044,20 +1183,20 @@
         .thoy-section {
             margin: 40px 0 20px 0;
             padding: 30px 20px;
-            background: rgba(251, 197, 0, 0.08);
+            background: rgba(255, 215, 0, 0.08);
             border-radius: 30px;
-            border: 2px dashed #FBC500;
-            box-shadow: 0 15px 35px rgba(251, 197, 0, 0.3);
+            border: 2px dashed #ffcc00;
+            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.3);
             backdrop-filter: blur(5px);
             transition: all 0.4s ease;
             text-align: center;
         }
 
         .thoy-section:hover {
-            background: rgba(251, 197, 0, 0.15);
-            border: 2px solid #cc0000;
+            background: rgba(255, 215, 0, 0.15);
+            border: 2px solid #ff3333;
             transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(204, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(255, 51, 51, 0.4);
         }
 
         .thoy-link {
@@ -1066,17 +1205,17 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: #FBC500;
+            color: #ffcc00;
             font-size: 2.2rem;
             font-weight: 800;
             letter-spacing: 4px;
-            text-shadow: 0 0 15px #cc0000;
+            text-shadow: 0 0 15px #ff3333;
             gap: 10px;
         }
 
         .thoy-link span {
             font-size: 1.2rem;
-            background: #cc0000;
+            background: #ff3333;
             color: #fff5d6;
             padding: 8px 25px;
             border-radius: 50px;
@@ -1085,7 +1224,7 @@
         }
 
         .thoy-link:hover span {
-            background: #FBC500;
+            background: #ffcc00;
             color: #1a0b0b;
             box-shadow: 0 5px 0 #b37400;
         }
@@ -1099,14 +1238,19 @@
     </style>
 </head>
 <body>
-<!-- 时间显示区域（无新年装饰） -->
+<!-- 新年装饰元素 -->
+<div id="newYearDecorations"></div>
+
+<!-- 时间显示区域 -->
 <div class="time-display" id="timeDisplay">
     <div class="current-date" id="currentDate"></div>
     <div class="current-time" id="currentTime"></div>
     <div class="lunar-date" id="lunarDate"></div>
 </div>
 
-<!-- 进度条容器（保持不变，但移除新年相关文案，仅保留功能） -->
+<!-- 新年祝福语提示框已删除 -->
+
+<!-- 进度条容器（放在body最前面） -->
 <div class="progress-container" id="progressContainer">
     <!-- 刷新计数提示 -->
     <div class="refresh-counter" id="refreshCounter">
@@ -1137,7 +1281,7 @@
             <img src="LOGO.jpg" alt="海米尔">
             <div>
                 <h1>吉林海米尔文化传播有限公司</h1>
-                <p style="color: #fff; font-size: 1.1rem;">年轻视角 · 无限可能</p>
+                <p style="color: #fff; font-size: 1.1rem;">2026新年特别版</p>
             </div>
         </div>
     </div>
@@ -1151,7 +1295,7 @@
     <div class="wrap">
         <h3>关于我们</h3>
         <p>吉林海米尔文化传播有限公司简称海米尔文化，是一家MCN与版权代理的结合公司，成立于2025年8月21日，公司创始人：吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
-        <p style="color: #ff9966; font-style: italic; margin-top: 20px;">✦ 与海米尔同行，共创内容新生态 ✦</p>
+        <p style="color: #ff9966; font-style: italic; margin-top: 20px;">✨ 新年新气象，海米尔文化与您共创美好未来！</p>
     </div>
 </section>
 
@@ -1164,6 +1308,33 @@
                 <span>✨ 科赛帝尔知识产权 ✨</span>
                 <small>版权业务专项跳转通道</small>
             </a>
+        </div>
+    </div>
+</section>
+
+<!-- 新年特别节目部分 -->
+<section>
+    <div class="wrap">
+        <h2 class="special-title">2026新年特别节目</h2>
+        <p style="text-align: center; color: #ff9966; margin-bottom: 30px; font-size: 1.1rem;">
+            为庆祝2026新年，海米尔文化特别推出AmongUs拜年纪，带您领略创意与艺术的完美结合！
+        </p>
+        
+        <div class="new-year-special">
+            <a href="https://www.bilibili.com/video/BV1WxcFzbEq9/" target="_blank" rel="noopener noreferrer">
+                <img src="二版封面.png" 
+                     alt="2026 AmongUs 拜年纪"
+                     loading="lazy"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\' viewBox=\'0 0 400 225\'><rect width=\'400\' height=\'225\' fill=\'%231a0b0b\'/><rect x=\'50\' y=\'50\' width=\'300\' height=\'125\' rx=\'10\' fill=\'%23ff3333\' opacity=\'0.8\'/></svg>'">
+                <p class="desc">
+                    <strong>2026 AmongUs 拜年纪</strong><br>
+                    <span style="font-size: 0.95rem; opacity: 0.9;">AmongUs主题拜年纪，为您带来全新的游戏创意盛宴！</span>
+                </p>
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; color: #ffcc00; font-style: italic; font-size: 1.1rem;">
+            🎬 点击上方卡片，观看2026 AmongUs 拜年纪完整视频！
         </div>
     </div>
 </section>
@@ -1233,11 +1404,13 @@
         <h3>作品示例</h3>
         <div class="spacer"></div>
         
+        <!-- 作品分页容器 -->
         <div class="works-pagination-container">
             <div class="works" id="worksContainer">
                 <!-- 作品会通过JavaScript动态加载 -->
             </div>
             
+            <!-- 分页控制 -->
             <div class="works-pagination" id="worksPagination" style="display: none;">
                 <button class="works-page-btn" id="worksPrevBtn" disabled>上一页</button>
                 <span class="works-page-info" id="worksPageInfo">第 <span id="worksCurrentPage">1</span> 页 / 共 <span id="worksTotalPages">1</span> 页</span>
@@ -1247,12 +1420,13 @@
     </div>
 </section>
 
-<!-- 二维码 + 官号链接区域 (水印保留，无新年元素) -->
+<!-- ===== 二维码 + 官号链接区域 (水印已移到官方账号板块，且为单张平铺) ===== -->
 <section>
     <div class="wrap">
         <div class="qr-section">
-            <h3 style="border-left-color: #cc0000; margin-bottom: 25px;">关注我们</h3>
+            <h3 style="border-left-color: #ff3333; margin-bottom: 25px;">关注我们</h3>
             
+            <!-- 二维码网格 -->
             <div class="qr-grid">
                 <div class="qr-item">
                     <img src="公众号二维码.jpg" alt="公众号二维码" class="qr-img" loading="lazy">
@@ -1260,6 +1434,7 @@
                 </div>
             </div>
             
+            <!-- 官方社交媒体链接 (带单张LOGO水印平铺，background-repeat: no-repeat) -->
             <div class="official-links">
                 <h4>📱 官方账号  📱</h4>
                 <div class="social-link-grid">
@@ -1287,7 +1462,7 @@
 
 <section>
     <div class="wrap">
-        <h3>管理团队 (点击可跳转界面)</h3>
+        <h3>管理团队(点击可跳转界面)</h3>
         <div class="team">
             <a href="/jieyu/" target="_blank" rel="noopener">
                 <div class="card">
@@ -1422,16 +1597,18 @@
             邮箱：<a href="mailto:us@haimier.top">us@haimier.top</a> &nbsp;<a href="mailto:haimier@qq.com">haimier@qq.com</a><br>
             艺人合作商务邮箱：<a href="mailto:us@haimier.top">up@haimier.top</a><br>
             地址：吉林省四平市伊通满族自治县靠山镇九龙村二组</p>
-            <p style="color: #ff9966; margin-top: 15px; font-style: italic;">海米尔文化期待与您合作</p>
+            <p style="color: #ff9966; margin-top: 15px; font-style: italic;">🎇 新年期间，海米尔文化团队祝您阖家欢乐，万事如意！</p>
         </div>
     </div>
 </section>
 
 <footer>
+    <!-- 版权信息 -->
     <div class="copyright-info">
         ©2025-2026 版权所有 吉林海米尔文化传播有限公司
     </div>
     
+    <!-- 备案信息链接 -->
     <div class="beian-links">
         <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="">
             <img src="ICP.png" alt="ICP图标">
@@ -1446,7 +1623,77 @@
 </footer>
 
 <script>
-// 刷新计数和进度条保持不变，仅移除新年装饰相关代码
+// ===== 新年装饰生成 =====
+function createNewYearDecorations() {
+    const container = document.getElementById('newYearDecorations');
+    if (!container) return;
+    
+    for (let i = 0; i < 6; i++) {
+        const lantern = document.createElement('div');
+        lantern.className = 'new-year-decoration lantern';
+        lantern.classList.add(i % 2 === 0 ? 'red' : 'gold');
+        const left = Math.random() * 90 + 5;
+        const top = Math.random() * 30 + 10;
+        const delay = Math.random() * 3;
+        lantern.style.left = left + '%';
+        lantern.style.top = top + '%';
+        lantern.style.animationDelay = delay + 's';
+        container.appendChild(lantern);
+    }
+    
+    for (let i = 0; i < 10; i++) {
+        const firework = document.createElement('div');
+        firework.className = 'new-year-decoration firework';
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const color = ['#ff3333', '#ffcc00', '#ff9966'][Math.floor(Math.random() * 3)];
+        const delay = Math.random() * 2;
+        const duration = 0.5 + Math.random() * 1;
+        firework.style.left = left + '%';
+        firework.style.top = top + '%';
+        firework.style.backgroundColor = color;
+        firework.style.animationDelay = delay + 's';
+        firework.style.animationDuration = duration + 's';
+        container.appendChild(firework);
+    }
+    
+    for (let i = 0; i < 15; i++) {
+        const coin = document.createElement('div');
+        coin.className = 'new-year-decoration gold-coin';
+        const left = Math.random() * 100;
+        const delay = Math.random() * 10;
+        const duration = 5 + Math.random() * 10;
+        coin.style.left = left + '%';
+        coin.style.animationDelay = delay + 's';
+        coin.style.animationDuration = duration + 's';
+        container.appendChild(coin);
+    }
+}
+
+function updateTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+    const day = now.getDay();
+    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    
+    document.getElementById('currentDate').textContent = `${year}年${month}月${date}日 ${days[day]}`;
+    document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+    
+    const lunarMonths = ['正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '冬月', '腊月'];
+    const lunarDays = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十', 
+                      '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
+                      '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
+    const lunarMonth = lunarMonths[(month - 1) % 12];
+    const lunarDay = lunarDays[(date - 1) % 30];
+    document.getElementById('lunarDate').textContent = `农历${lunarMonth}${lunarDay}`;
+}
+
+// 刷新计数
 (function() {
     const REFRESH_LIMIT = 5;
     const REDIRECT_URL = "https://haimier.top/friends";
@@ -1504,30 +1751,6 @@ function hideProgress() {
     }, 500);
 }
 
-// 时间更新
-function updateTime() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const date = now.getDate();
-    const day = now.getDay();
-    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    
-    document.getElementById('currentDate').textContent = `${year}年${month}月${date}日 ${days[day]}`;
-    document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
-    
-    const lunarMonths = ['正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '冬月', '腊月'];
-    const lunarDays = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十', 
-                      '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
-                      '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
-    const lunarMonth = lunarMonths[(month - 1) % 12];
-    const lunarDay = lunarDays[(date - 1) % 30];
-    document.getElementById('lunarDate').textContent = `农历${lunarMonth}${lunarDay}`;
-}
-
 const articles = [
     { title: "海米尔文化祝所有人新春快乐", link: "https://mp.weixin.qq.com/s/wVsRzXu_i-2kO7s0a8N4nQ", date: "2026年2月16日", author: "海米尔文化" },
     { title: "海米尔文化官方吉祥物公布", link: "https://mp.weixin.qq.com/s/fO0EfimpkZvOAY0cUu_Mkg", date: "2026年1月3日", author: "海米尔文化" },
@@ -1563,7 +1786,7 @@ nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { curren
 const worksData = [
     { title: "2024amongus拜年祭", link: "https://www.bilibili.com/video/BV1Tx4y1f7Uw?spm_id_from=333.788.player.switch&vd_source=48e557edd3bf164f1acf9453d12b659c", image: "新封面.jpg", alt: "2024AmongUs拜年祭" },
     { title: "2025amongus拜年纪", link: "https://www.bilibili.com/video/BV1gPFpezEZP?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c", image: "封面.jpg", alt: "2025AmongUs拜年纪" },
-    { title: "2026amongus拜年纪", link: "https://www.bilibili.com/video/BV1WxcFzbEq9/", image: "二版封面.png", alt: "2026amongus拜年纪" },
+    { title: "坏人与好人（7）", link: "https://www.bilibili.com/video/BV1M2mYYqE2F?spm_id_from=333.788.videopod.sections&vd_source=48e557edd3bf164f1acf9453d12b659c", image: "坏人与好人（7）-封面.jpg", alt: "坏人与好人(7)" },
 ];
 const worksPerPage = 3;
 let currentWorksPage = 1;
@@ -1593,12 +1816,13 @@ function renderWorks() {
 worksPrevBtn.addEventListener('click', () => { if (currentWorksPage > 1) { currentWorksPage--; renderWorks(); } });
 worksNextBtn.addEventListener('click', () => { if (currentWorksPage < totalWorksPages) { currentWorksPage++; renderWorks(); } });
 
+createNewYearDecorations();
 updateTime();
 setInterval(updateTime, 1000);
 renderArticles();
 renderWorks();
 
-window.addEventListener('load', function() { console.log('海米尔文化 - 新年元素已移除，主题色 #FBC500 保留'); });
+window.addEventListener('load', function() { console.log('海米尔文化 - 水印已移至官方账号板块（单张平铺）🎉'); });
 </script>
 </body>
 </html>
