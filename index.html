@@ -152,7 +152,7 @@
             font-style: italic;
         }
         
-        /* 新年祝福语 (庆典期间可改为周年祝福) */
+        /* 周年祝福语 (位于底部但不再飘动，调整位置) */
         .new-year-greeting {
             position: fixed;
             bottom: 20px;
@@ -1127,7 +1127,7 @@
             text-decoration: underline;
         }
         
-        /* 底部样式 - 周年特别版 */
+        /* 底部样式 - 移除飘动，改为静态 */
         footer{
             background: linear-gradient(135deg, rgba(229, 186, 31, 0.95) 0%, rgba(204, 102, 0, 0.95) 100%);
             color: #fff;
@@ -1140,32 +1140,26 @@
             border-top: 4px solid #ffcc00;
         }
 
-        footer:before {
-            content: '🎂 1st Anniversary · 感谢有你 🎂';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+        /* 移除之前飘动的:before，改为静态祝福语行（放在版权和备案之间） */
+        .footer-bless {
             font-size: 1.3rem;
-            color: #ff3333;
-            font-weight: bold;
-            white-space: nowrap;
-            animation: marquee 12s linear infinite;
-            background: rgba(255,255,255,0.2);
-            padding: 5px 20px;
-            border-radius: 40px;
+            font-weight: 600;
+            color: #1a0b0b;
+            background: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(4px);
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(-150%); }
-            100% { transform: translateX(150%); }
+            padding: 12px 25px;
+            border-radius: 60px;
+            display: inline-block;
+            margin: 10px auto 25px auto;
+            border: 2px solid #ff3333;
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.3);
+            width: fit-content;
         }
 
         /* 版权信息样式 */
         .copyright-info {
             font-size: 1.05rem;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             line-height: 1.6;
             max-width: 800px;
             margin-left: auto;
@@ -1180,7 +1174,9 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 25px;
-            margin-top: 15px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 5;
         }
 
         .beian-link {
@@ -1212,7 +1208,7 @@
         /* 间距元素 */
         .spacer {height:20px;display:block}
         
-        /* ===== 一周年倒计时条样式 (已整合) ===== */
+        /* ===== 一周年倒计时条样式 ===== */
         .anniversary-countdown {
             background: linear-gradient(145deg, #cc7b1f, #b35e1a);
             color: #fff5d6;
@@ -1377,7 +1373,7 @@
     <div class="lunar-date" id="lunarDate"></div>
 </div>
 
-<!-- 周年祝福语 (取代新年祝福) -->
+<!-- 周年祝福语 (位于底部居中，不飘动) -->
 <div class="new-year-greeting" id="newYearGreeting">
     海米尔文化一周年 · 感恩有你，共赴未来！
 </div>
@@ -1722,7 +1718,12 @@
         ©2025-2026 版权所有 吉林海米尔文化传播有限公司 · 一周年纪念版
     </div>
     
-    <!-- 备案信息链接 -->
+    <!-- 将原来的飘动祝福语改为静态行，放在版权和备案之间 -->
+    <div class="footer-bless">
+        🎉 海米尔文化一周年 · 感恩有你 🎉
+    </div>
+    
+    <!-- 备案信息链接 (现在完全不被遮挡) -->
     <div class="beian-links">
         <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="">
             <img src="ICP.png" alt="ICP图标">
@@ -1946,7 +1947,7 @@ renderWorks();
 updateAnniversaryCountdown();
 setInterval(updateAnniversaryCountdown, 1000);
 
-window.addEventListener('load', function() { console.log('海米尔文化 · 一周年庆典版 loaded'); });
+window.addEventListener('load', function() { console.log('海米尔文化 · 一周年庆典版 (底部优化)'); });
 </script>
 </body>
 </html>
