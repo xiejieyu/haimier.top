@@ -125,25 +125,23 @@
         }
 
         /* 图片区域 */
-        .announcement-image {
-            margin: 25px 0 30px 0;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            background: rgba(0,0,0,0.2);
-            text-align: center;
-        }
-        .announcement-image img {
-            width: 100%;
-            max-height: 480px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        .announcement-image img:hover {
-            transform: scale(1.01);
-        }
-
+.announcement-image {
+    margin: 25px 0 30px 0;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(0,0,0,0.2);
+    text-align: center;
+}
+.announcement-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+.announcement-image img:hover {
+    transform: scale(1.01);
+}
         /* 正文内容样式 */
         .notice-content-full {
             font-size: 1.1rem;
