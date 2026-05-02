@@ -90,10 +90,37 @@
         header .wrap{display:flex;align-items:center;justify-content:space-between}
         section .wrap{display:block}
         .logo-txt{display:flex;align-items:center;gap:12px}
+        
+        /* ===== 修复LOGO显示过小BUG：大幅增大图片尺寸 ===== */
         .logo-txt img{
-            height:64px;
+            height: 96px;           /* 原64px → 提升至96px，显著增大且比例协调 */
+            width: auto;
+            max-width: 160px;
             filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
             animation: logoGlow 3s infinite alternate;
+            object-fit: contain;    /* 保证图片不变形 */
+        }
+        
+        /* 响应式适配：平板及手机稍微缩小但依然比之前大 */
+        @media (max-width: 768px) {
+            .logo-txt img {
+                height: 76px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 550px) {
+            .logo-txt img {
+                height: 64px;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+            .logo-txt p {
+                font-size: 0.9rem;
+            }
         }
         
         @keyframes logoGlow {
@@ -1161,6 +1188,11 @@
             .official-links::before {
                 background-size: 70% auto;
             }
+            
+            /* 手机端头部门微调 */
+            .logo-txt img {
+                height: 70px;
+            }
         }
         
         @media(max-width: 480px) {
@@ -1185,6 +1217,9 @@
             
             .official-links::before {
                 background-size: 90% auto;
+            }
+            .logo-txt img {
+                height: 56px;
             }
         }
         
@@ -1330,12 +1365,6 @@
         <div class="notice-date"><i>📅</i> 2026-04-24</div>
     </div>
 </div>
-        </div>
-
-
-
-            
-            <!-- 公告动态渲染 -->
         </div>
         <div class="notice-more-link">
             <a href="https://haimier.top/announcementList" target="_blank" rel="noopener" class="notice-more" id="jumpToNoticeBoard">📌 查看更多公告 &raquo;</a>
@@ -1780,7 +1809,7 @@ setInterval(updateTime, 1000);
 renderArticles();
 renderWorks();
 
-window.addEventListener('load', function() { console.log('海米尔文化 - 新年元素已移除，主题色 #FBC500 保留'); });
+window.addEventListener('load', function() { console.log('海米尔文化 - 新年元素已移除，主题色 #FBC500 保留，LOGO尺寸已修复增大'); });
 </script>
 </body>
 </html>
