@@ -51,8 +51,29 @@
       align-items:center;
       gap:12px;
     }
+    /* ===== 修复左上角LOGO显示过小BUG：与主站保持同等增大幅度（110px/90px/75px） ===== */
     .logo-txt img{
-      height:64px;
+      height: 110px;           /* 原64px → 增至110px，与主站一致 */
+      width: auto;
+      max-width: 200px;
+      object-fit: contain;
+    }
+    /* 响应式适配：与主站完全统一 */
+    @media (max-width: 768px) {
+      .logo-txt img {
+        height: 90px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+    @media (max-width: 550px) {
+      .logo-txt img {
+        height: 75px;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
     }
     h1{
       font-size:2.2rem;
@@ -339,14 +360,6 @@
     }
     
     @media (max-width: 480px) {
-      .logo-txt img {
-        height: 50px;
-      }
-      
-      h1 {
-        font-size: 1.6rem;
-      }
-      
       .hero img {
         width: 140px;
         height: 140px;
