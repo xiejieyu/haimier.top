@@ -1374,9 +1374,18 @@
 
 <section>
     <div class="wrap">
-        <h3>关于我们</h3>
-        <p>吉林海米尔文化传播有限公司简称海米尔文化，是一家MCN与版权代理的结合公司，成立于2025年8月21日，公司创始人：吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
-        <p style="color: #ff9966; font-style: italic; margin-top: 20px;">✦ 与海米尔同行，共创内容新生态 ✦</p>
+        <h3>文章墙</h3>
+        <div class="article-wall">
+            <div class="article-list" id="articleList">
+                <!-- 文章列表会通过JavaScript动态加载 -->
+            </div>
+            
+            <div class="pagination">
+                <button class="page-btn" id="prevBtn" disabled>上一页</button>
+                <span class="page-info" id="pageInfo">第 <span id="currentPage">1</span> 页 / 共 <span id="totalPages">1</span> 页</span>
+                <button class="page-btn" id="nextBtn">下一页</button>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1406,23 +1415,6 @@
                 <img src="奇葩客户.jpg" alt="奇葩客户" loading="lazy">
                 <p class="desc">做业务时碰见奇葩客户</p>
             </a>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="wrap">
-        <h3>文章墙</h3>
-        <div class="article-wall">
-            <div class="article-list" id="articleList">
-                <!-- 文章列表会通过JavaScript动态加载 -->
-            </div>
-            
-            <div class="pagination">
-                <button class="page-btn" id="prevBtn" disabled>上一页</button>
-                <span class="page-info" id="pageInfo">第 <span id="currentPage">1</span> 页 / 共 <span id="totalPages">1</span> 页</span>
-                <button class="page-btn" id="nextBtn">下一页</button>
-            </div>
         </div>
     </div>
 </section>
@@ -1628,6 +1620,14 @@
     </div>
 </section>
 
+    <section>
+    <div class="wrap">
+        <h3>关于我们</h3>
+        <p>吉林海米尔文化传播有限公司简称海米尔文化，是一家MCN与版权代理的结合公司，成立于2025年8月21日，公司创始人：吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
+        <p style="color: #ff9966; font-style: italic; margin-top: 20px;">✦ 与海米尔同行，共创内容新生态 ✦</p>
+    </div>
+</section>
+    
 <section>
     <div class="wrap">
         <h3>联系我们</h3>
@@ -1743,6 +1743,7 @@ function updateTime() {
 }
 
 const articles = [
+    { title: "海米尔文化与吉天行律所达成合作", link: "https://mp.weixin.qq.com/s/Xsv0EeJT7ocrUBH-0JYMQw", date: "2026年5月7日", author: "海米尔文化" },
     { title: "海米尔文化关于更换LOGO的公告", link: "https://mp.weixin.qq.com/s/peiWOeCvUjs510pa2-w43w", date: "2026年5月3日", author: "海米尔文化" },
     { title: "海米尔文化祝贺大家2026新年快乐", link: "https://mp.weixin.qq.com/s/OVGXN4bx5_MvDuJhdsjk3A?scene=1&click_id=2", date: "2026年1月1日", author: "海米尔文化" },
 ];
