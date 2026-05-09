@@ -319,6 +319,90 @@
             50% { transform: translateY(-10px); }
         }
         
+        /* ========= 视频展示区域样式 ========= */
+        .video-showcase {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto 20px auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .video-container {
+            background: linear-gradient(135deg, rgba(204, 0, 0, 0.15) 0%, rgba(251, 197, 0, 0.1) 100%);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            border: 1px solid rgba(251, 197, 0, 0.3);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .video-container:hover {
+            box-shadow: 0 15px 40px rgba(251, 197, 0, 0.2);
+            border-color: rgba(251, 197, 0, 0.5);
+        }
+        
+        .video-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, rgba(204, 0, 0, 0.8) 0%, rgba(153, 0, 0, 0.8) 100%);
+            border-bottom: 2px solid #FBC500;
+        }
+        
+        .video-icon {
+            font-size: 1.8rem;
+        }
+        
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FBC500;
+            letter-spacing: 1px;
+        }
+        
+        .video-subtitle {
+            font-size: 0.9rem;
+            color: #ffcc88;
+            margin-left: auto;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 宽高比 */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .video-description {
+            padding: 16px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(251, 197, 0, 0.2);
+            color: #f0e6d2;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .video-description a {
+            color: #FBC500;
+            text-decoration: none;
+        }
+        
+        .video-description a:hover {
+            text-decoration: underline;
+        }
+        
         /* ========= 新增公告栏样式 (添加至Banner之后) ========= */
         .announcement-section {
             width: 90%;
@@ -473,6 +557,11 @@
             .notice-list { padding: 6px 12px 10px 16px; }
             .notice-item { padding: 12px 8px; gap: 10px; }
             .notice-content { font-size: 0.9rem; }
+            
+            .video-header { padding: 12px 18px; }
+            .video-title { font-size: 1.1rem; }
+            .video-subtitle { display: none; }
+            .video-description { padding: 12px 18px; font-size: 0.85rem; }
         }
         @media (max-width: 480px) {
             .notice-item { flex-direction: column; gap: 8px; }
@@ -1332,6 +1421,29 @@
     <img src="以年少之心敬未来无限可能.png" alt="以年少之心敬未来无限可能">
 </div>
 
+<!-- ========= 视频展示区域（嵌入B站视频） ========= -->
+<div class="video-showcase">
+    <div class="video-container">
+        <div class="video-header">
+            <div class="video-icon">🎬</div>
+            <div class="video-title">版权代理宣传片</div>
+            <div class="video-subtitle">点击播放 ▶</div>
+        </div>
+        <div class="video-wrapper">
+            <iframe 
+                src="//player.bilibili.com/player.html?bvid=BV1qFdGBTEdr&high_quality=1&autoplay=0&danmaku=1"
+                scrolling="no"
+                frameborder="0"
+                allowfullscreen="true">
+            </iframe>
+        </div>
+        <div class="video-description">
+            📌 视频来源：<a href="https://www.bilibili.com/video/BV1qFdGBTEdr/" target="_blank" rel="noopener">B站 海米尔文化官方账号</a> 
+            | 本视频介绍版权业务相关内容，更多详情可访问 <a href="https://thoy.top" target="_blank">科赛帝尔知识产权</a>
+        </div>
+    </div>
+</div>
+
 <!-- ========= 新增公告栏区域 - 放置于 banner 之后 ========= -->
 <div class="announcement-section">
     <div class="notice-board">
@@ -1742,6 +1854,7 @@ function updateTime() {
 }
 
 const articles = [
+    { title: "海米尔文化版权代理宣传片", link: "https://mp.weixin.qq.com/s/9H3D9-DsSBqgFPjqC0HhKw", date: "2026年5月9日", author: "海米尔文化" },
     { title: "海米尔文化与吉天行律所达成合作", link: "https://mp.weixin.qq.com/s/Xsv0EeJT7ocrUBH-0JYMQw", date: "2026年5月7日", author: "海米尔文化" },
     { title: "海米尔文化关于更换LOGO的公告", link: "https://mp.weixin.qq.com/s/peiWOeCvUjs510pa2-w43w", date: "2026年5月3日", author: "海米尔文化" },
     { title: "海米尔文化祝贺大家2026新年快乐", link: "https://mp.weixin.qq.com/s/OVGXN4bx5_MvDuJhdsjk3A?scene=1&click_id=2", date: "2026年1月1日", author: "海米尔文化" },
