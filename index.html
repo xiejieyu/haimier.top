@@ -35,7 +35,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(251, 197, 0, 0.15);
+            background: rgba(251, 197, 0, 0.15);  /* FBC500 透明 */
             backdrop-filter: blur(10px);
             padding: 15px 25px;
             border-radius: 15px;
@@ -53,7 +53,7 @@
         
         .current-date {
             font-size: 1.1rem;
-            color: #FBC500;
+            color: #FBC500;  /* 主题色 */
             text-align: center;
             margin-bottom: 5px;
             font-weight: 600;
@@ -61,7 +61,7 @@
         
         .current-time {
             font-size: 1.8rem;
-            color: #FBC500;
+            color: #FBC500;  /* 主题色 */
             text-align: center;
             font-weight: 700;
             letter-spacing: 2px;
@@ -70,15 +70,15 @@
         
         .lunar-date {
             font-size: 0.9rem;
-            color: #ff9966;
+            color: #ff9966;  /* 保留暖色点缀，不与主题色冲突 */
             text-align: center;
             margin-top: 5px;
             font-style: italic;
         }
         
-        /* 头部样式 */
+        /* 头部样式 - 去除新年装饰，保留基础 */
         header{
-            background: linear-gradient(135deg, rgba(251, 197, 0, 0.9) 0%, rgba(220, 165, 0, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(251, 197, 0, 0.9) 0%, rgba(220, 165, 0, 0.9) 100%); /* FBC500 渐变 */
             color:#fff;
             padding:25px 0;
             position: relative;
@@ -91,35 +91,47 @@
         section .wrap{display:block}
         .logo-txt{display:flex;align-items:center;gap:12px}
         
+        /* ===== 修复LOGO显示过小BUG：大幅增大图片尺寸 ===== */
         .logo-txt img{
-            height: 110px;
+            height: 110px;           /* 原64px → 增至110px，显著增大 */
             width: auto;
             max-width: 200px;
             filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
             animation: logoGlow 3s infinite alternate;
-            object-fit: contain;
+            object-fit: contain;    /* 保证图片不变形 */
         }
         
+        /* 响应式适配：平板及手机适当缩小但依然比之前大 */
         @media (max-width: 768px) {
-            .logo-txt img { height: 90px; }
-            h1 { font-size: 1.6rem; }
+            .logo-txt img {
+                height: 90px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
         }
         
         @media (max-width: 550px) {
-            .logo-txt img { height: 75px; }
-            h1 { font-size: 1.3rem; }
-            .logo-txt p { font-size: 0.9rem; }
+            .logo-txt img {
+                height: 75px;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+            .logo-txt p {
+                font-size: 0.9rem;
+            }
         }
         
         @keyframes logoGlow {
             0% { filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3)); }
-            100% { filter: drop-shadow(0 5px 25px rgba(251, 197, 0, 0.5)); }
+            100% { filter: drop-shadow(0 5px 25px rgba(251, 197, 0, 0.5)); } /* FBC500 */
         }
         
         h1{
             font-size:2.2rem;
             margin-bottom:10px;
-            background: linear-gradient(45deg, #fff, #FBC500);
+            background: linear-gradient(45deg, #fff, #FBC500); /* 主题色 */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -141,6 +153,7 @@
             overflow: hidden;
         }
         
+        /* 公司LOGO - 方形LOGO */
         .progress-logo {
             width: 180px;
             height: 180px;
@@ -153,10 +166,19 @@
         }
         
         @keyframes logoPulse {
-            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(251, 197, 0, 0.2); opacity: 0.8; }
-            100% { transform: scale(1.08); box-shadow: 0 25px 45px rgba(251, 197, 0, 0.5); opacity: 1; }
+            0% {
+                transform: scale(1);
+                box-shadow: 0 15px 35px rgba(251, 197, 0, 0.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.08);
+                box-shadow: 0 25px 45px rgba(251, 197, 0, 0.5);
+                opacity: 1;
+            }
         }
         
+        /* 进度条区域 - 使用主题色 FBC500 搭配深红点缀（保持品牌识别） */
         .progress-wrapper {
             width: 80%;
             max-width: 800px;
@@ -175,7 +197,7 @@
             left: 0;
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #cc0000, #FBC500, #cc0000);
+            background: linear-gradient(90deg, #cc0000, #FBC500, #cc0000); /* 主题色配深红 */
             border-radius: 30px;
             transition: width 0.3s ease;
             box-shadow: 0 0 20px rgba(251, 197, 0, 0.5);
@@ -193,6 +215,7 @@
             z-index: 2;
         }
         
+        /* 加载文字 */
         .loading-text {
             color: #FBC500;
             margin-top: 30px;
@@ -201,6 +224,13 @@
             text-align: center;
         }
         
+        .loading-text span {
+            color: #cc0000; /* 深红点缀 */
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        /* 刷新计数提示 */
         .refresh-counter {
             position: absolute;
             top: 30px;
@@ -219,6 +249,7 @@
             font-size: 1.1rem;
         }
         
+        /* 跳过按钮 */
         .skip-progress {
             position: absolute;
             bottom: 40px;
@@ -242,6 +273,7 @@
             box-shadow: 0 8px 20px rgba(204, 0, 0, 0.5);
         }
         
+        /* 品牌口号 */
         .brand-slogan {
             position: absolute;
             bottom: 40px;
@@ -287,7 +319,7 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* ========= 视频展示区域样式（使用原生HTML5播放器） ========= */
+        /* ========= 视频展示区域样式 ========= */
         .video-showcase {
             width: 90%;
             max-width: 1100px;
@@ -337,63 +369,20 @@
             margin-left: auto;
         }
         
-        /* 原生HTML5视频播放器样式 */
-        .native-video-wrapper {
+        .video-wrapper {
             position: relative;
-            background: #000;
+            padding-bottom: 56.25%; /* 16:9 宽高比 */
+            height: 0;
+            overflow: hidden;
         }
         
-        .native-video {
-            width: 100%;
-            display: block;
-            cursor: pointer;
-        }
-        
-        /* 自定义播放按钮覆盖层（可选，让视频看起来更直观） */
-        .video-play-overlay {
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-            z-index: 2;
-        }
-        
-        .video-play-overlay.hidden {
-            display: none;
-        }
-        
-        .play-btn-large {
-            width: 80px;
-            height: 80px;
-            background: rgba(204, 0, 0, 0.8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: #FBC500;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(251, 197, 0, 0.5);
-        }
-        
-        .play-btn-large:hover {
-            transform: scale(1.1);
-            background: #cc0000;
-        }
-        
-        @media (max-width: 700px) {
-            .play-btn-large {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
-            }
+            border: 0;
         }
         
         .video-description {
@@ -414,7 +403,7 @@
             text-decoration: underline;
         }
         
-        /* 公告栏样式 */
+        /* ========= 新增公告栏样式 (添加至Banner之后) ========= */
         .announcement-section {
             width: 90%;
             max-width: 1100px;
@@ -532,6 +521,12 @@
             gap: 6px;
         }
         
+        .notice-date i {
+            font-style: normal;
+            font-size: 0.75rem;
+        }
+        
+        /* 公告栏跳转小按钮 (可选) */
         .notice-more-link {
             text-align: right;
             padding: 8px 24px 16px 24px;
@@ -554,7 +549,7 @@
             color: #fff1c1;
             transform: translateX(5px);
         }
-        
+        /* 响应式 */
         @media (max-width: 700px) {
             .notice-header { padding: 12px 18px; }
             .notice-icon { width: 32px; height: 32px; font-size: 1.2rem; }
@@ -572,6 +567,7 @@
             .notice-item { flex-direction: column; gap: 8px; }
             .notice-badge { align-self: flex-start; }
         }
+        /* ========= 公告栏样式结束 ========= */
         
         /* 内容区域 */
         section{
@@ -584,7 +580,7 @@
         h3{
             font-size:1.8rem;
             margin-bottom:20px;
-            color:#FBC500;
+            color:#FBC500;  /* 主题色 */
             border-left:5px solid #cc0000;
             padding-left:10px;
             display:block;
@@ -599,6 +595,77 @@
             margin-bottom:15px;
             display:block;
             width:100%;
+        }
+        
+        /* 特别板块（原新年特别节目改为常规内容） */
+        .special-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 40px 0 30px 0;
+            color: #cc0000;  /* 深红保留作为点缀 */
+            font-weight: 600;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .special-title:before,
+        .special-title:after {
+            content: '✦';  /* 改为中性符号 */
+            font-size: 1.5rem;
+            color: #FBC500;
+        }
+        
+        .new-year-special {
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+            margin-top:20px;
+            justify-content:center;
+        }
+        
+        .new-year-special a{
+            flex:0 0 calc(50% - 10px);
+            position:relative;
+            overflow:hidden;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,.3);
+            text-decoration:none;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 197, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .new-year-special a:hover{
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(251, 197, 0, 0.3);
+            border: 1px solid rgba(251, 197, 0, 0.3);
+        }
+        
+        .new-year-special img{
+            width:100%;
+            display:block;
+            transition:.3s;
+            aspect-ratio:16/9;
+            object-fit:cover;
+        }
+        
+        .new-year-special a:hover img{
+            transform:scale(1.05);
+        }
+        
+        .new-year-special .desc {
+            color: #FBC500;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            margin: 0;
+            font-size: 1.1rem;
         }
         
         /* 系列展示区 */
@@ -703,6 +770,7 @@
             font-size: 1rem;
         }
         
+        /* 作品分页样式 */
         .works-pagination {
             display: flex;
             justify-content: center;
@@ -789,6 +857,7 @@
             font-weight: 500;
         }
         
+        /* 官方社交媒体链接 - 水印仅限此板块，单图平铺（不重复） */
         .official-links {
             margin-top: 35px;
             text-align: center;
@@ -800,6 +869,7 @@
             overflow: hidden;
         }
         
+        /* 单张LOGO平铺作为水印（只显示一次，非重复排列） */
         .official-links::before {
             content: '';
             position: absolute;
@@ -912,7 +982,7 @@
         }
         
         .card:before {
-            content: '✦';
+            content: '✦';  /* 中性符号 */
             position: absolute;
             top: 10px;
             right: 10px;
@@ -951,6 +1021,7 @@
             font-size:0.95rem;
         }
         
+        /* 吉祥物区域 */
         .mascot{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
         .mascot .card{flex:0 0 calc(50% - 10px)}
         
@@ -1042,6 +1113,7 @@
             color: #FBC500;
         }
         
+        /* 联系信息 */
         .contact-info {
             margin-top:20px;
             background: rgba(255, 255, 255, 0.05);
@@ -1061,6 +1133,7 @@
             text-decoration: underline;
         }
         
+        /* 底部样式 */
         footer{
             background: linear-gradient(135deg, rgba(251, 197, 0, 0.9) 0%, rgba(204, 153, 0, 0.9) 100%);
             color: #fff;
@@ -1072,6 +1145,7 @@
             overflow: hidden;
         }
 
+        /* 版权信息 */
         .copyright-info {
             font-size: 1.05rem;
             margin-bottom: 25px;
@@ -1083,6 +1157,7 @@
             color: #1a0b0b;
         }
 
+        /* 备案链接容器 */
         .beian-links {
             display: flex;
             flex-wrap: wrap;
@@ -1117,17 +1192,20 @@
             vertical-align: middle;
         }
         
+        /* 间距元素 */
         .spacer {height:20px;display:block}
         
+        /* 响应式设计 */
         @media(max-width: 1100px){
             .team a, .works a, .mascot .card, .series-showcase a {flex:0 0 calc(50% - 10px)}
+            .new-year-special a {flex:0 0 calc(100% - 10px)}
             .qr-item {flex:0 0 180px;}
         }
         
         @media(max-width: 700px){
             .banner h2{font-size:1.8rem}
-            .team, .works, .mascot, .series-showcase {flex-direction:column}
-            .team a, .works a, .mascot .card, .card, .series-showcase a {flex:1 1 auto;width:100%}
+            .team, .works, .mascot, .new-year-special, .series-showcase {flex-direction:column}
+            .team a, .works a, .mascot .card, .card, .new-year-special a, .series-showcase a {flex:1 1 auto;width:100%}
             .article-meta {
                 flex-direction: column;
                 align-items: flex-start;
@@ -1135,17 +1213,70 @@
             }
             .card{height:auto;min-height:280px}
             
-            .progress-logo { width: 120px; height: 120px; margin-bottom: 30px; }
-            .progress-wrapper { width: 90%; height: 50px; }
-            .progress-text { font-size: 1.3rem; }
-            .brand-slogan { font-size: 1rem; bottom: 30px; }
-            .refresh-counter { top: 20px; right: 20px; font-size: 0.8rem; padding: 6px 12px; }
-            .skip-progress { bottom: 30px; right: 20px; padding: 10px 20px; }
-            .loading-text { font-size: 1rem; }
-            .time-display { top: 10px; right: 10px; padding: 10px 15px; }
-            .current-time { font-size: 1.4rem; }
-            .beian-links { flex-direction: column; gap: 20px; }
-            .official-links::before { background-size: 70% auto; }
+            .progress-logo {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 30px;
+            }
+            
+            .progress-wrapper {
+                width: 90%;
+                height: 50px;
+            }
+            
+            .progress-text {
+                font-size: 1.3rem;
+            }
+            
+            .brand-slogan {
+                font-size: 1rem;
+                bottom: 30px;
+            }
+            
+            .refresh-counter {
+                top: 20px;
+                right: 20px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+            
+            .skip-progress {
+                bottom: 30px;
+                right: 20px;
+                padding: 10px 20px;
+            }
+            
+            .loading-text {
+                font-size: 1rem;
+            }
+            
+            .time-display {
+                top: 10px;
+                right: 10px;
+                padding: 10px 15px;
+            }
+            
+            .current-time {
+                font-size: 1.4rem;
+            }
+            
+            .special-title {
+                font-size: 1.6rem;
+            }
+            
+            .new-year-special .desc {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .beian-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .official-links::before {
+                background-size: 70% auto;
+            }
         }
         
         @media(max-width: 480px) {
@@ -1156,7 +1287,21 @@
                 margin: 20px auto;
                 width: 90%;
             }
-            .official-links::before { background-size: 90% auto; }
+            
+            .special-title {
+                font-size: 1.4rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .special-title:before,
+            .special-title:after {
+                font-size: 1.2rem;
+            }
+            
+            .official-links::before {
+                background-size: 90% auto;
+            }
         }
         
         a[href="/jieyu/"],
@@ -1169,6 +1314,7 @@
             border: none;
         }
 
+        /* 跳转板块样式 */
         .thoy-section {
             margin: 40px 0 20px 0;
             padding: 30px 20px;
@@ -1227,13 +1373,16 @@
     </style>
 </head>
 <body>
+<!-- 时间显示区域（无新年装饰） -->
 <div class="time-display" id="timeDisplay">
     <div class="current-date" id="currentDate"></div>
     <div class="current-time" id="currentTime"></div>
     <div class="lunar-date" id="lunarDate"></div>
 </div>
 
+<!-- 进度条容器（保持不变，但移除新年相关文案，仅保留功能） -->
 <div class="progress-container" id="progressContainer">
+    <!-- 刷新计数提示 -->
     <div class="refresh-counter" id="refreshCounter">
         刷新次数: <span id="refreshCount">0</span>/5
     </div>
@@ -1272,32 +1421,30 @@
     <img src="以年少之心敬未来无限可能.png" alt="以年少之心敬未来无限可能">
 </div>
 
-<!-- ========= 视频展示区域（使用原生HTML5播放器） ========= -->
+<!-- ========= 视频展示区域（嵌入B站视频） ========= -->
 <div class="video-showcase">
     <div class="video-container">
         <div class="video-header">
             <div class="video-icon">🎬</div>
-            <div class="video-title">版权代理宣传片</div>
-            <div class="video-subtitle">点击视频即可播放 ▶</div>
+            <div class="video-title">【官方视频】想上版权的看过来 [让创作有迹可循]</div>
+            <div class="video-subtitle">点击播放 ▶</div>
         </div>
-        <div class="native-video-wrapper" id="videoWrapper">
-            <!-- ⚠️ 重要：你需要将下面这个视频文件上传到你的服务器或GitHub仓库 -->
-            <!-- 把 "版权宣传片.mp4" 替换成你实际的文件名 -->
-            <video id="nativeVideo" class="native-video" preload="metadata">
-                <source src="版权宣传片.mp4" type="video/mp4">
-                您的浏览器不支持 video 标签。
-            </video>
-            <div class="video-play-overlay" id="videoPlayOverlay">
-                <div class="play-btn-large">▶</div>
-            </div>
+        <div class="video-wrapper">
+            <iframe 
+                src="//player.bilibili.com/player.html?bvid=BV1qFdGBTEdr&high_quality=1&autoplay=0&danmaku=1"
+                scrolling="no"
+                frameborder="0"
+                allowfullscreen="true">
+            </iframe>
         </div>
         <div class="video-description">
-            📌 海米尔文化版权代理业务介绍 | 让创作有迹可循 
-            | 更多详情可访问 <a href="https://thoy.top" target="_blank">科赛帝尔知识产权</a>
+            📌 视频来源：<a href="https://www.bilibili.com/video/BV1qFdGBTEdr/" target="_blank" rel="noopener">B站 海米尔文化官方账号</a> 
+            | 本视频介绍版权业务相关内容，更多详情可访问 <a href="https://thoy.top" target="_blank">科赛帝尔知识产权</a>
         </div>
     </div>
 </div>
 
+<!-- ========= 新增公告栏区域 - 放置于 banner 之后 ========= -->
 <div class="announcement-section">
     <div class="notice-board">
         <div class="notice-header">
@@ -1305,30 +1452,31 @@
             <div class="notice-title">公 告 栏</div>
         </div>
         <div class="notice-list" id="announcementList">
+
             <div class="notice-item">
-                <span class="notice-badge">最新</span>
-                <div class="notice-content">
-                    <div>关于海米尔文化更换LOGO的公告</div>
-                    <div><a href="https://haimier.top/announcementList/E260503001" target="_blank" rel="noopener" style="display: inline-block; margin-top: 6px;">查看详情 →</a></div>
-                    <div class="notice-date"><i>📅</i> 2026-05-03</div>
-                </div>
-            </div>
-            <div class="notice-item">
-                <span class="notice-badge">普通</span>
-                <div class="notice-content">
-                    <div>关于海米尔文化账号注销迁移的公告</div>
-                    <div><a href="https://haimier.top/announcementList/E260426001" target="_blank" rel="noopener" style="display: inline-block; margin-top: 6px;">查看详情 →</a></div>
-                    <div class="notice-date"><i>📅</i> 2026-04-26</div>
-                </div>
-            </div>
-            <div class="notice-item">
-                <span class="notice-badge">重要</span>
-                <div class="notice-content">
-                    <div>关于海米尔文化于2026年6月1日起停用分支彩蛋页面、并更新网站的公告</div>
-                    <div><a href="https://haimier.top/announcementList/E260424001" target="_blank" rel="noopener" style="display: inline-block; margin-top: 6px;">查看详情 →</a></div>
-                    <div class="notice-date"><i>📅</i> 2026-04-24</div>
-                </div>
-            </div>
+    <span class="notice-badge">最新</span>
+    <div class="notice-content">
+        <div>关于海米尔文化更换LOGO的公告</div>
+        <div><a href="https://haimier.top/announcementList/E260503001" target="_blank" rel="noopener" style="display: inline-block; margin-top: 6px;">查看详情 →</a></div>
+        <div class="notice-date"><i>📅</i> 2026-05-03</div>
+    </div>
+          </div>
+          <div class="notice-item">
+    <span class="notice-badge">普通</span>
+    <div class="notice-content">
+        <div>关于海米尔文化账号注销迁移的公告</div>
+        <div><a href="https://haimier.top/announcementList/E260426001" target="_blank" rel="noopener" style="display: inline-block; margin-top: 6px;">查看详情 →</a></div>
+        <div class="notice-date"><i>📅</i> 2026-04-26</div>
+    </div>
+          </div>
+              <div class="notice-item">
+    <span class="notice-badge">重要</span>
+    <div class="notice-content">
+        <div>关于海米尔文化于2026年6月1日起停用分支彩蛋页面、并更新网站的公告</div>
+        <div><a href="https://haimier.top/announcementList/E260424001" target="_blank" rel="noopener" style="display: inline-block; margin-top: 6px;">查看详情 →</a></div>
+        <div class="notice-date"><i>📅</i> 2026-04-24</div>
+    </div>
+</div>
         </div>
         <div class="notice-more-link">
             <a href="https://haimier.top/announcementList" target="_blank" rel="noopener" class="notice-more" id="jumpToNoticeBoard">📌 查看更多公告 &raquo;</a>
@@ -1340,7 +1488,10 @@
     <div class="wrap">
         <h3>文章墙</h3>
         <div class="article-wall">
-            <div class="article-list" id="articleList"></div>
+            <div class="article-list" id="articleList">
+                <!-- 文章列表会通过JavaScript动态加载 -->
+            </div>
+            
             <div class="pagination">
                 <button class="page-btn" id="prevBtn" disabled>上一页</button>
                 <span class="page-info" id="pageInfo">第 <span id="currentPage">1</span> 页 / 共 <span id="totalPages">1</span> 页</span>
@@ -1350,6 +1501,7 @@
     </div>
 </section>
 
+<!-- 跳转到 thoy.top 板块 -->
 <section>
     <div class="wrap">
         <div class="thoy-section">
@@ -1362,6 +1514,7 @@
     </div>
 </section>
 
+<!-- 系列展示 -->
 <section>
     <div class="wrap">
         <h3>系列展示</h3>
@@ -1404,8 +1557,12 @@
     <div class="wrap">
         <h3>作品示例</h3>
         <div class="spacer"></div>
+        
         <div class="works-pagination-container">
-            <div class="works" id="worksContainer"></div>
+            <div class="works" id="worksContainer">
+                <!-- 作品会通过JavaScript动态加载 -->
+            </div>
+            
             <div class="works-pagination" id="worksPagination" style="display: none;">
                 <button class="works-page-btn" id="worksPrevBtn" disabled>上一页</button>
                 <span class="works-page-info" id="worksPageInfo">第 <span id="worksCurrentPage">1</span> 页 / 共 <span id="worksTotalPages">1</span> 页</span>
@@ -1415,16 +1572,19 @@
     </div>
 </section>
 
+<!-- 二维码 + 官号链接区域 (水印保留，无新年元素) -->
 <section>
     <div class="wrap">
         <div class="qr-section">
             <h3 style="border-left-color: #cc0000; margin-bottom: 25px;">关注我们</h3>
+            
             <div class="qr-grid">
                 <div class="qr-item">
                     <img src="公众号二维码.jpg" alt="公众号二维码" class="qr-img" loading="lazy">
                     <p>扫码关注公众号</p>
                 </div>
             </div>
+            
             <div class="official-links">
                 <h4>📱 官方账号  📱</h4>
                 <div class="social-link-grid">
@@ -1454,30 +1614,125 @@
     <div class="wrap">
         <h3>管理团队 (点击可跳转界面)</h3>
         <div class="team">
-            <a href="/jieyu/" target="_blank" rel="noopener"><div class="card"><img src="jie.jpg" alt="杰鱼记忆有点差" loading="lazy"><h4>杰鱼记忆有点差</h4><p><strong>职位</strong>：领导者 / 创始人<br>吕健泽，一手引领公司发展，掌控运营与技能全局。</p></div></a>
-            <a href="/shumiao/" target="_blank" rel="noopener"><div class="card"><img src="树苗头像.jpg" alt="树苗" loading="lazy"><h4>树苗</h4><p><strong>职位</strong>：副总 / 监事<br>业务能力突出，主管部分业务及日常事项。</p></div></a>
-            <a href="/mangu/" target="_blank" rel="noopener"><div class="card"><img src="蛮顾头像.jpg" alt="蛮顾" loading="lazy"><h4>蛮顾</h4><p><strong>职位</strong>：经理<br>负责公司整体管理事务，承担重要管理职责。</p></div></a>
-            <a href="/luoqingshuang/" target="_blank" rel="noopener"><div class="card"><img src="luoqingshuang.png" alt="洛轻霜" loading="lazy"><h4>洛轻霜</h4><p><strong>职位</strong>：股东<br>参与公司重大事项决策，与管理团队共同决定方向。</p></div></a>
-            <a href="/hao/" target="_blank" rel="noopener"><div class="card"><img src="燃浩头像.jpg" alt="燃浩" loading="lazy"><h4>燃浩</h4><p><strong>职位</strong>：股东<br>参与公司重大事项决策，与管理团队共同决定方向。</p></div></a>
+            <a href="/jieyu/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="jie.jpg" alt="杰鱼记忆有点差" loading="lazy">
+                    <h4>杰鱼记忆有点差</h4>
+                    <p><strong>职位</strong>：领导者 / 创始人<br>
+                    吕健泽，一手引领公司发展，掌控运营与技能全局。</p>
+                </div>
+            </a>
+            
+            <a href="/shumiao/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="树苗头像.jpg" alt="树苗" loading="lazy">
+                    <h4>树苗</h4>
+                    <p><strong>职位</strong>：副总 / 监事<br>
+                    业务能力突出，主管部分业务及日常事项。</p>
+                </div>
+            </a>
+            
+            <a href="/mangu/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="蛮顾头像.jpg" alt="蛮顾" loading="lazy">
+                    <h4>蛮顾</h4>
+                    <p><strong>职位</strong>：经理<br>
+                    负责公司整体管理事务，承担重要管理职责。</p>
+                </div>
+            </a>
+            
+            <a href="/luoqingshuang/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="luoqingshuang.png" alt="洛轻霜" loading="lazy">
+                    <h4>洛轻霜</h4>
+                    <p><strong>职位</strong>：股东<br>
+                    参与公司重大事项决策，与管理团队共同决定方向。</p>
+                </div>
+            </a>
+
+            <a href="/hao/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="燃浩头像.jpg" alt="燃浩" loading="lazy">
+                    <h4>燃浩</h4>
+                    <p><strong>职位</strong>：股东<br>
+                    参与公司重大事项决策，与管理团队共同决定方向。</p>
+                </div>
+            </a>
+            
         </div>
 
         <h3 style="margin-top:40px">部长</h3>
         <div class="team">
-            <a href="/hao/" target="_blank" rel="noopener"><div class="card"><img src="燃浩头像.jpg" alt="燃浩" loading="lazy"><h4>燃浩</h4><p><strong>职位</strong>：版权综合管理部部长<br>引领版权业务与部门管理，统筹版权综合事务。</p></div></a>
-            <a href="/luoqingshuang/" target="_blank" rel="noopener"><div class="card"><img src="luoqingshuang.png" alt="洛轻霜" loading="lazy"><h4>洛轻霜</h4><p><strong>职位</strong>：策划宣传部部长<br>策划出公司所用需求，为公司明确宣传理念</p></div></a>
-            <a href="/xiaoxiao/" target="_blank" rel="noopener"><div class="card"><img src="潇.jpg" alt="潇潇" loading="lazy"><h4>潇潇</h4><p><strong>职位</strong>：美工部部长<br>绘制公司画作，创新优秀设计</p></div></a>
+            <a href="/hao/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="燃浩头像.jpg" alt="燃浩" loading="lazy">
+                    <h4>燃浩</h4>
+                    <p><strong>职位</strong>：版权综合管理部部长<br>
+                    引领版权业务与部门管理，统筹版权综合事务。</p>
+                </div>
+            </a>
+            
+            <a href="/luoqingshuang/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="luoqingshuang.png" alt="洛轻霜" loading="lazy">
+                    <h4>洛轻霜</h4>
+                    <p><strong>职位</strong>：策划宣传部部长<br>
+                    策划出公司所用需求，为公司明确宣传理念</p>
+                </div>
+            </a>
+            <a href="/xiaoxiao/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="潇.jpg" alt="潇潇" loading="lazy">
+                    <h4>潇潇</h4>
+                    <p><strong>职位</strong>：美工部部长<br>
+                    绘制公司画作，创新优秀设计</p>
+                </div>
+            </a>
+            
         </div>
         <h3 style="margin-top:40px">艺人</h3>
         <div class="team">
-            <a href="/jieyu/" target="_blank" rel="noopener"><div class="card"><img src="jie.jpg" alt="杰鱼" loading="lazy"><h4>杰鱼</h4><p><strong>职位</strong>：艺人<br>舵手即造梦者，掌舵创意星河</p></div></a>
-            <a href="/hao/" target="_blank" rel="noopener"><div class="card"><img src="燃浩头像.jpg" alt="燃浩" loading="lazy"><h4>燃浩</h4><p><strong>职位</strong>：艺人<br>像素即吟游者，砌筑数字史诗</p></div></a>
-            <a href="/yibai/" target="_blank" rel="noopener"><div class="card"><img src="一白头像.jpg" alt="一白" loading="lazy"><h4>一白</h4><p><strong>职位</strong>：艺人<br>画师即墨客，勾勒意境留白</p></div></a>
-            <a href="/luoqingshuang/" target="_blank" rel="noopener"><div class="card"><img src="luoqingshuang.png" alt="洛轻霜" loading="lazy"><h4>洛轻霜</h4><p><strong>职位</strong>：艺人<br>旅者即传灯人，点亮交互史诗</p></div></a>
+            <a href="/jieyu/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="jie.jpg" alt="杰鱼" loading="lazy">
+                    <h4>杰鱼</h4>
+                    <p><strong>职位</strong>：艺人<br>
+                    舵手即造梦者，掌舵创意星河</p>
+                </div>
+            </a>
+            
+            <a href="/hao/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="燃浩头像.jpg" alt="燃浩" loading="lazy">
+                    <h4>燃浩</h4>
+                    <p><strong>职位</strong>：艺人<br>
+                    像素即吟游者，砌筑数字史诗</p>
+                </div>
+            </a>
+            <a href="/yibai/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="一白头像.jpg" alt="一白" loading="lazy">
+                    <h4>一白</h4>
+                    <p><strong>职位</strong>：艺人<br>
+                    画师即墨客，勾勒意境留白</p>
+                </div>
+            </a>
+          
+
+            <a href="/luoqingshuang/" target="_blank" rel="noopener">
+                <div class="card">
+                    <img src="luoqingshuang.png" alt="洛轻霜" loading="lazy">
+                    <h4>洛轻霜</h4>
+                    <p><strong>职位</strong>：艺人<br>
+                    旅者即传灯人，点亮交互史诗</p>
+                </div>
+            </a>
+            
         </div>
     </div>
 </section>
 
-<section>
+    <section>
     <div class="wrap">
         <h3>关于我们</h3>
         <p>吉林海米尔文化传播有限公司简称海米尔文化，是一家MCN与版权代理的结合公司，成立于2025年8月21日，公司创始人：吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
@@ -1501,14 +1756,22 @@
     <div class="copyright-info">
         ©2025-2026 版权所有 吉林海米尔文化传播有限公司
     </div>
+    
     <div class="beian-links">
-        <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"><img src="ICP.png" alt="ICP图标">吉ICP备2026000319号-1</a>    
-        <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank"><img src="备案图标.png" alt="备案图标">吉公网安备22032302000081号</a>
+        <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" data-v-72957a96="">
+            <img src="ICP.png" alt="ICP图标">
+            吉ICP备2026000319号-1
+        </a>    
+        
+        <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" data-v-72957a96="">
+            <img src="备案图标.png" alt="备案图标">
+            吉公网安备22032302000081号
+        </a>
     </div>
 </footer>
 
 <script>
-// 刷新计数和进度条
+// 刷新计数和进度条保持不变，仅移除新年装饰相关代码
 (function() {
     const REFRESH_LIMIT = 5;
     const REDIRECT_URL = "https://haimier.top/friends";
@@ -1590,42 +1853,7 @@ function updateTime() {
     document.getElementById('lunarDate').textContent = `农历${lunarMonth}${lunarDay}`;
 }
 
-// 原生视频播放器控制逻辑
-const video = document.getElementById('nativeVideo');
-const playOverlay = document.getElementById('videoPlayOverlay');
-
-if (video && playOverlay) {
-    // 点击覆盖层开始播放
-    playOverlay.addEventListener('click', function() {
-        video.play();
-        playOverlay.classList.add('hidden');
-    });
-    
-    // 视频播放时隐藏覆盖层
-    video.addEventListener('play', function() {
-        playOverlay.classList.add('hidden');
-    });
-    
-    // 视频暂停时显示覆盖层（方便再次点击播放）
-    video.addEventListener('pause', function() {
-        if (!video.ended) {
-            playOverlay.classList.remove('hidden');
-        }
-    });
-    
-    // 视频结束时显示覆盖层（可以重新播放）
-    video.addEventListener('ended', function() {
-        playOverlay.classList.remove('hidden');
-    });
-    
-    // 点击视频本身也能暂停/播放，但覆盖层会出现
-    video.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-}
-
 const articles = [
-    { title: "海米尔文化版权代理宣传片", link: "https://mp.weixin.qq.com/s/9H3D9-DsSBqgFPjqC0HhKw", date: "2026年5月9日", author: "海米尔文化" },
     { title: "海米尔文化与吉天行律所达成合作", link: "https://mp.weixin.qq.com/s/Xsv0EeJT7ocrUBH-0JYMQw", date: "2026年5月7日", author: "海米尔文化" },
     { title: "海米尔文化关于更换LOGO的公告", link: "https://mp.weixin.qq.com/s/peiWOeCvUjs510pa2-w43w", date: "2026年5月3日", author: "海米尔文化" },
     { title: "海米尔文化祝贺大家2026新年快乐", link: "https://mp.weixin.qq.com/s/OVGXN4bx5_MvDuJhdsjk3A?scene=1&click_id=2", date: "2026年1月1日", author: "海米尔文化" },
@@ -1693,6 +1921,8 @@ updateTime();
 setInterval(updateTime, 1000);
 renderArticles();
 renderWorks();
+
+window.addEventListener('load', function() { console.log('海米尔文化 - 新年元素已移除，主题色 #FBC500 保留，LOGO尺寸已修复增大至110px'); });
 </script>
 </body>
 </html>
