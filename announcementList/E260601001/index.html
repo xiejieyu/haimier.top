@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>关于封杀QQ用户的公告 - 海米尔文化</title>
+    <meta name="description" content="海米尔文化关于更换LOGO的公告。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a0b0b 0%, #2d1a1a 100%);
+            color: #f0e6d2;
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 主容器 - 与独立公告栏UI完全一致 */
+        .detail-page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 头部导航区 (复用公告栏样式) */
+        .page-header {
+            margin-bottom: 35px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 2px solid rgba(251, 197, 0, 0.4);
+            padding-bottom: 20px;
+        }
+        .title-section h1 {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #fff, #FBC500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .title-section h1::before {
+            content: "📄";
+            font-size: 2rem;
+            background: none;
+            -webkit-background-clip: unset;
+            color: #FBC500;
+        }
+        .back-home {
+            background: rgba(251, 197, 0, 0.15);
+            backdrop-filter: blur(6px);
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: 0.25s;
+            border: 1px solid rgba(251, 197, 0, 0.4);
+        }
+        .back-home a {
+            color: #FBC500;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .back-home:hover {
+            background: #cc0000;
+            border-color: #FBC500;
+            transform: translateY(-3px);
+        }
+        .back-home:hover a {
+            color: #fff;
+        }
+
+        /* 公告详细卡片 (同样使用公告卡片增强样式) */
+        .announcement-detail-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            border: 1px solid rgba(251, 197, 0, 0.25);
+            overflow: hidden;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+            margin-bottom: 40px;
+        }
+
+        .card-inner {
+            padding: 36px 36px 48px 36px;
+        }
+
+        /* 标签 + 标题区域 */
+        .badge-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            background: #cc0000;
+            color: #FBC500;
+            font-weight: bold;
+            font-size: 0.75rem;
+            padding: 5px 18px;
+            border-radius: 40px;
+            letter-spacing: 1px;
+        }
+        .announcement-main-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FBC500;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            border-left: 5px solid #FBC500;
+            padding-left: 20px;
+        }
+
+        /* 图片区域 */
+.announcement-image {
+    margin: 25px 0 30px 0;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(0,0,0,0.2);
+    text-align: center;
+}
+.announcement-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+.announcement-image img:hover {
+    transform: scale(1.01);
+}
+        /* 正文内容样式 */
+        .notice-content-full {
+            font-size: 1.1rem;
+            color: #f5e7dc;
+            line-height: 1.8;
+            margin: 20px 0 25px;
+        }
+        .notice-content-full p {
+            margin-bottom: 1.2em;
+        }
+        .notice-quote {
+            background: rgba(251, 197, 0, 0.08);
+            border-left: 4px solid #FBC500;
+            padding: 18px 24px;
+            border-radius: 20px;
+            margin: 28px 0;
+            font-style: normal;
+            color: #ffdfb3;
+        }
+        .date-signature {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(251, 197, 0, 0.3);
+            color: #ffc489;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .signature-right {
+            text-align: right;
+        }
+
+        /* 返回公告栏按钮 */
+        .back-to-list {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #cc0000 0%, #a00000 100%);
+            color: #FBC500;
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.25s;
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        .back-btn:hover {
+            background: #FBC500;
+            color: #1a0b0b;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(251, 197, 0, 0.3);
+        }
+
+        .footer-note {
+            margin-top: 60px;
+            text-align: center;
+            border-top: 1px solid rgba(251, 197, 0, 0.2);
+            padding-top: 30px;
+            font-size: 0.85rem;
+            color: #f0cca0;
+        }
+        .footer-note a {
+            color: #FBC500;
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 20px 16px; }
+            .card-inner { padding: 24px 20px; }
+            .announcement-main-title { font-size: 1.6rem; padding-left: 15px; }
+            .notice-content-full { font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .badge-row { margin-bottom: 12px; }
+            .announcement-main-title { font-size: 1.4rem; }
+            .date-signature { flex-direction: column; gap: 8px; }
+            .signature-right { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="detail-page">
+    <!-- 头部导航区，与独立公告栏样式相同 -->
+    <div class="page-header">
+        <div class="title-section">
+            <h1>海米尔文化 · 详细公告</h1>
+            <p style="color: #ffb485; margin-top: 8px;">官方说明 · 封杀通告</p>
+        </div>
+        <div class="back-home">
+            <a href="/" target="_self">
+                <span>🏠</span> 返回官网首页
+            </a>
+        </div>
+    </div>
+
+    <!-- 详细公告卡片 (包含图片 + 完整文字) -->
+    <div class="announcement-detail-card">
+        <div class="card-inner">
+            <!-- 标签 + 标题 -->
+            <div class="badge-row">
+                <span class="badge">重要公告</span>
+                <span style="color: #ffaa66; font-size: 0.9rem;">发布即执行</span>
+            </div>
+            <div class="announcement-main-title">
+                关于版权服务的活动说明
+            </div>
+
+            <!-- 插入图片: 图片名 E260424001.jpg (与公告文字搭配) -->
+           
+            <!-- 完整公告文字内容 -->
+            <div class="notice-content-full">
+                <p>尊敬的创作者们：</p>
+                <p>您们好</p>
+                <p>近期，我司与抖音账号“白糖阿布”达成合作，其内容为我方在其小程序中悬挂版权代理业务</p>
+                <p>在相关的视频内容下方我们关注到</p>
+              <p>有许多创作者在不断提及“版权登记为免费”的相关言论</p>
+              <p>在此我司表明：</p>
+              <p>各省版权登记多数均为免费登记，国版与部分平台会收取一定的官费，我方收取的仅为代理费用，为创作者免去一切麻烦流程</p>
+              <p>同时还有一些创作者有提及其他平台“中胤”，而此平台已于2026年4月14日发布通告（下文引用中胤版权服务号通告）：</p>
+              <p>“尊敬的各位著作权人：
+自2021年平台成立以来，我们始终坚持“免费版权登记”的初心，面向全体用户开放登记入口。这四年多来，感谢大家的信任与支持，截至目前，我们已累计为著作权人免费登记作品近100万件。
+但因免费登记导致平台运营成本持续上升，目前公司资金面临较大压力，经慎重考虑，我们不得不遗憾地决定：即日起，暂停免费版权。
+我们正在积极寻求新的投资与合作伙伴，待资金问题解决后，将第一时间恢复免费登记入口。
+预计恢复的时间，届时会通过公众号另行通知，请大家保持关注。
+对于暂停服务给您带来的不便，我们深表歉意。过往的每一份信任，我们都铭记在心。也感谢大家一路相伴，期待不久后再次为您服务。
+如有版权登记相关疑问，欢迎咨询我们。
+
+中胤版权运营团队
+2026年4月”</p>
+              <p>因我们均为同行，对于其免费登记是表示赞许乃至佩服，由于全国的创作者体量众多，多数还均使用此平台，对其资金压力表示理解</p>
+              <p>在其文章下方也有看到创作者对其的鼓励，因此，海米尔文化发布活动公告</p>
+              <p>“自2026年6月1日起，海米尔文化将于每月的1日至10日开通免费登记渠道，其证书样式等与中胤均为相同，因我司资金压力负重，则无法像中胤一样不间断实行免费登记，还请谅解”</p>
+              <p>“自2026年6月1日起，吉林省户口、吉林省公司、拥有吉林省居住证可以联系我们办理吉林省版权（非相关无法办理），仅收取5元登记费用”</p>
+              <p>“自2026年6月1日起，每月5日均会开通‘仅官费区块链存证’活动，其证书由公证处直系发证，创作者仅需缴纳官费即可”</p>
+              <p>上述活动截止时间将会另行发布通知，免费登记的朋友请将自己微信（仅电话号）联系方式发送到us@haimier.top，标题命名为海米尔免费版权</p>
+              <p>后续会有专员通过企业微信回复添加</p>
+              <P>我司将会延续中胤“免费版权登记”核心，服务好众多创作者，加强全民版权意识，让创作有迹可循</P>
+              <P>此致</P>
+              <p>公告内容截图、引用文章均来自于微信服务号中胤</p>
+              <p>其内容为我方自行引用制作</p>
+              <p>如有侵权请联系up@haimier.top删除</p>
+            </div>
+
+            <!-- 日期与落款 (与原文保持一致) -->
+            <div class="date-signature">
+                <div class="signature-left">吉林海米尔文化传播有限公司</div>
+                <div class="signature-right">2026年6月1日</div>
+            </div>
+
+           <div class="announcement-image">
+                <img src="E2606010011.jpg" alt="海米尔文化免费版权" onerror="this.onerror=null; this.src='https://placehold.co/800x400/3a1f1f/FBC500?text=海米尔文化+公告配图'; this.style.opacity='0.9';">
+              <img src="E2606010012.jpg" alt="海米尔文化免费版权" onerror="this.onerror=null; this.src='https://placehold.co/800x400/3a1f1f/FBC500?text=海米尔文化+公告配图'; this.style.opacity='0.9';">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 返回公告栏 / 查看更多公告的便捷入口 (同UI风格) -->
+    <div class="back-to-list">
+        <a href="/announcementList" class="back-btn">
+            📢 查看全部公告 &nbsp;→
+        </a>
+        <p style="margin-top: 20px; font-size: 0.85rem; color: #FBC500cc;">
+            其他动态请访问海米尔文化官方公告栏
+        </p>
+    </div>
+
+    <div class="footer-note">
+        <p>© 2025-2026 吉林海米尔文化传播有限公司 | 年轻视角 · 无限可能</p>
+        <p style="margin-top: 10px;"><a href="/">官方网站</a> &nbsp;|&nbsp; <a href="mailto:us@haimier.top">联系我们</a></p>
+    </div>
+</div>
+
+<script>
+    // 简单的图片容错 + 控制台友好提示
+    document.addEventListener('DOMContentLoaded', function() {
+        const imgElement = document.querySelector('.announcement-image img');
+        if (imgElement && imgElement.complete) {
+            const naturalWidth = imgElement.naturalWidth;
+            if (naturalWidth === 0 && !imgElement.src.includes('placehold')) {
+                imgElement.src = 'https://placehold.co/800x400/3a1f1f/FBC500?text=海米尔文化+公告配图';
+            }
+        }
+        console.log('详细公告页加载完成 | 图片名称: E260503001.jpg');
+    });
+</script>
+</body>
+</html>
