@@ -35,7 +35,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(251, 197, 0, 0.15);  /* FBC500 透明 */
+            background: rgba(251, 197, 0, 0.15);
             backdrop-filter: blur(10px);
             padding: 15px 25px;
             border-radius: 15px;
@@ -53,7 +53,7 @@
         
         .current-date {
             font-size: 1.1rem;
-            color: #FBC500;  /* 主题色 */
+            color: #FBC500;
             text-align: center;
             margin-bottom: 5px;
             font-weight: 600;
@@ -61,7 +61,7 @@
         
         .current-time {
             font-size: 1.8rem;
-            color: #FBC500;  /* 主题色 */
+            color: #FBC500;
             text-align: center;
             font-weight: 700;
             letter-spacing: 2px;
@@ -70,7 +70,7 @@
         
         .lunar-date {
             font-size: 0.9rem;
-            color: #ff9966;  /* 保留暖色点缀，不与主题色冲突 */
+            color: #ff9966;
             text-align: center;
             margin-top: 5px;
             font-style: italic;
@@ -905,6 +905,45 @@
             transition: all 0.3s;
         }
         
+        /* 微信客服专区样式 */
+        .wechat-kf-area {
+            margin-top: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 60px;
+            padding: 20px 25px;
+            border: 1px solid rgba(251, 197, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        .wechat-kf-area:hover {
+            transform: scale(1.02);
+            background: rgba(251, 197, 0, 0.12);
+            box-shadow: 0 10px 30px rgba(251, 197, 0, 0.2);
+        }
+        .kf-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .kf-button:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+            box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4);
+        }
+        .kf-icon {
+            font-size: 1.6rem;
+        }
+        
         /* 底部样式 */
         footer{
             background: linear-gradient(135deg, rgba(251, 197, 0, 0.9) 0%, rgba(204, 153, 0, 0.9) 100%);
@@ -1179,7 +1218,7 @@
     </div>
 </section>
 
-<!-- 二维码 + 官号链接区域 -->
+<!-- 二维码 + 官号链接区域 + 微信客服专区 -->
 <section>
     <div class="wrap">
         <div class="qr-section">
@@ -1200,6 +1239,14 @@
                     <a href="https://weibo.com/u/8222033389" target="_blank" class="social-link-item">微博官号</a>
                 </div>
                 <p style="color: #ff9966; margin-top: 15px; font-size: 0.95rem;">点击图标直达官方主页，获取最新动态</p>
+            </div>
+            
+            <!-- 微信客服插入位置 -->
+            <div class="wechat-kf-area">
+                <a href="https://work.weixin.qq.com/kfid/kfc051a27383f88495e" target="_blank" rel="noopener noreferrer" class="kf-button">
+                    <span class="kf-icon">💬</span> 企业微信客服 · 1对1咨询
+                </a>
+                <p style="margin-top: 14px; font-size: 0.85rem; color: #FBC500;">业务咨询 / 版权合作 / 问题反馈，点击立即联系</p>
             </div>
         </div>
     </div>
