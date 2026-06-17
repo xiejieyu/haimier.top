@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>海米尔文化 · 奖状公示系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #f4f7fc;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      max-width: 1300px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.15);
+      padding: 2rem 2rem 2.5rem;
+      transition: all 0.2s ease;
+    }
+
+    /* 头部 */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1.2rem 0.8rem;
+    }
+
+    .title-section h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0b2b3f;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .title-section h1 span {
+      background: #d0e2f2;
+      color: #0b2b3f;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.2rem 0.9rem;
+      border-radius: 40px;
+      margin-left: 0.5rem;
+      letter-spacing: 0.3px;
+      background: #e6f0fa;
+    }
+
+    .subhead {
+      color: #3e5e72;
+      margin-top: 0.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.2px;
+    }
+
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      background: #f0f4fa;
+      border-radius: 60px;
+      padding: 0.1rem 0.1rem 0.1rem 1.5rem;
+      border: 1px solid #dce5ed;
+      transition: 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      min-width: 240px;
+    }
+
+    .search-wrapper:focus-within {
+      border-color: #2b7cb8;
+      background: white;
+      box-shadow: 0 4px 10px rgba(27, 85, 140, 0.08);
+    }
+
+    .search-wrapper input {
+      border: none;
+      background: transparent;
+      padding: 0.75rem 0.2rem;
+      font-size: 0.95rem;
+      outline: none;
+      flex: 1;
+      color: #1a3447;
+      min-width: 150px;
+    }
+
+    .search-wrapper input::placeholder {
+      color: #7b95ab;
+      font-weight: 400;
+    }
+
+    .search-wrapper button {
+      background: #1a5c8c;
+      border: none;
+      color: white;
+      font-weight: 500;
+      padding: 0.6rem 1.6rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      border: 1px solid #1a5c8c;
+    }
+
+    .search-wrapper button:hover {
+      background: #0e4570;
+      border-color: #0e4570;
+      transform: scale(0.97);
+    }
+
+    .search-wrapper button:active {
+      background: #083a5e;
+    }
+
+    /* 统计/刷新行 */
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+      color: #2f526a;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #e7eef6;
+      padding-bottom: 0.75rem;
+    }
+
+    .stats-bar .count {
+      background: #e3edf7;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-weight: 500;
+      color: #13415c;
+    }
+
+    .stats-bar .clear-btn {
+      background: transparent;
+      border: 1px solid #d0dce8;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      color: #3d5e75;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+
+    .stats-bar .clear-btn:hover {
+      background: #eaf1f9;
+      border-color: #b0c6d9;
+    }
+
+    /* 卡片网格 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 0.3rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.5rem 1.5rem 1.4rem;
+      box-shadow: 0 4px 12px rgba(0, 20, 30, 0.05);
+      border: 1px solid #e5edf6;
+      transition: 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: #c5d9ed;
+      box-shadow: 0 8px 20px rgba(27, 70, 110, 0.07);
+      transform: translateY(-3px);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: #f0f6fd;
+      color: #1f5780;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.8rem;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      border: 1px solid #d7e4f0;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0b2a40;
+      margin-bottom: 0.4rem;
+      padding-right: 3rem;
+    }
+
+    .card-recipient {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1b4a6b;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-desc {
+      color: #29536e;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin: 0.6rem 0 0.9rem;
+      background: #f7faff;
+      padding: 0.6rem 0.8rem;
+      border-radius: 14px;
+      border-left: 4px solid #b3cee8;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: #57758f;
+      border-top: 1px solid #eef4fa;
+      padding-top: 0.8rem;
+    }
+
+    .card-meta .date {
+      background: #edf3fa;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+    }
+
+    .card .click-hint {
+      margin-top: 0.6rem;
+      font-size: 0.7rem;
+      color: #789bb3;
+      text-align: right;
+      border-top: 1px dashed #dce8f2;
+      padding-top: 0.5rem;
+      opacity: 0.7;
+      letter-spacing: 0.3px;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3.5rem 1rem;
+      background: #f9fcff;
+      border-radius: 48px;
+      color: #4d6f89;
+      border: 2px dashed #d4e2f0;
+    }
+
+    .empty-state p {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .empty-state small {
+      color: #6e8fa8;
+    }
+
+    /* ---------- 模态框 / 详情弹窗 ---------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(8, 30, 45, 0.6);
+      backdrop-filter: blur(3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: white;
+      max-width: 640px;
+      width: 100%;
+      border-radius: 40px;
+      padding: 2rem 2.2rem 2rem;
+      box-shadow: 0 40px 70px rgba(0, 15, 30, 0.35);
+      transform: scale(0.94);
+      transition: transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: #ecf3fa;
+      border: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      width: 44px;
+      height: 44px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #1a405a;
+      transition: 0.1s;
+      margin-bottom: 0.5rem;
+      z-index: 5;
+    }
+
+    .modal-close:hover {
+      background: #d5e2f0;
+      transform: rotate(90deg);
+    }
+
+    .modal-badge {
+      display: inline-block;
+      background: #e1edf9;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #12425f;
+      margin-bottom: 0.5rem;
+      border: 1px solid #c5d9ed;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0a283c;
+      margin: 0.2rem 0 0.5rem;
+      line-height: 1.2;
+    }
+
+    .modal-recipient {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #1b4d6e;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .modal-desc {
+      background: #f5faff;
+      padding: 1rem 1.2rem;
+      border-radius: 20px;
+      border-left: 6px solid #2b7cb8;
+      margin: 0.8rem 0 1.2rem;
+      color: #1d4058;
+      line-height: 1.6;
+    }
+
+    .modal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+      color: #355f7a;
+      border-top: 1px solid #e1ecf6;
+      padding-top: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-image-section {
+      margin-top: 0.5rem;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #f2f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #d9e6f2;
+    }
+
+    .modal-image-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 260px;
+      object-fit: contain;
+      background: white;
+      padding: 0.5rem;
+    }
+
+    .modal-image-placeholder {
+      padding: 2rem 1rem;
+      color: #6c8ba3;
+      font-size: 0.9rem;
+      background: #f0f6fe;
+      width: 100%;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      body { padding: 0.8rem; }
+      .container { padding: 1.5rem 1rem; }
+      .header { flex-direction: column; align-items: stretch; }
+      .search-wrapper { min-width: unset; width: 100%; }
+      .title-section h1 { font-size: 1.5rem; flex-wrap: wrap; }
+      .stats-bar { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .modal-card { padding: 1.5rem; }
+      .modal-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="app">
+  <!-- 头部 -->
+  <div class="header">
+    <div class="title-section">
+      <h1>
+        🏅 奖状公示
+        <span>内部</span>
+      </h1>
+      <div class="subhead">企业荣誉 · 点击卡片查看详情</div>
+    </div>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="搜索奖项、姓名、部门…" aria-label="搜索奖状" />
+      <button id="searchBtn">搜索</button>
+    </div>
+  </div>
+
+  <!-- 统计栏 + 重置 -->
+  <div class="stats-bar">
+    <span class="count" id="resultCount">0 项</span>
+    <button class="clear-btn" id="resetBtn">↺ 显示全部</button>
+  </div>
+
+  <!-- 卡片网格 -->
+  <div class="grid" id="cardGrid"></div>
+</div>
+
+<!-- ---------- 模态框 (详情+图片) ---------- -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalCloseBtn">✕</button>
+    <div class="modal-badge" id="modalBadge">🏅 荣誉</div>
+    <div class="modal-title" id="modalTitle">奖项名称</div>
+    <div class="modal-recipient" id="modalRecipient">👤 获奖人</div>
+    <div class="modal-desc" id="modalDesc">详细描述</div>
+    <div class="modal-meta">
+      <span id="modalDate">📅 日期</span>
+      <span id="modalDept">🏢 部门</span>
+    </div>
+    <!-- 图片区域 -->
+    <div class="modal-image-section" id="modalImageContainer">
+      <img id="modalImage" src="" alt="奖状图片" style="display: none;" />
+      <div class="modal-image-placeholder" id="modalImagePlaceholder">🖼️ 奖状图片展示区</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- 模拟数据 (增加 image 字段) ----------
+    const AWARDS_DATA = [
+      {
+  id: 1,
+  title: '月度优秀美工员工',
+  recipient: '美工部 · 部长：潇潇',
+  description: '在5月的工作中，潇潇获得月度优秀美工员工称号。',
+  date: '2026-06-18',
+  department: '美工部',
+  badge: '🏆 月度优秀美工员工',
+  certificateNumber: 'CERT-2026-001',
+  image: 'https://haimier.top/certificate/jpg/CETR-2026-001.jpg'
+}
+    ];
+
+    // DOM 引用
+    const grid = document.getElementById('cardGrid');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const resultCount = document.getElementById('resultCount');
+
+    // 模态框元素
+    const modalOverlay = document.getElementById('detailModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalBadge = document.getElementById('modalBadge');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalRecipient = document.getElementById('modalRecipient');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalDate = document.getElementById('modalDate');
+    const modalDept = document.getElementById('modalDept');
+    const modalImage = document.getElementById('modalImage');
+    const modalImagePlaceholder = document.getElementById('modalImagePlaceholder');
+
+    // 当前渲染数据
+    let currentData = [...AWARDS_DATA];
+
+    // ---------- 渲染卡片 ----------
+    function render(dataArray) {
+      if (!grid) return;
+      if (resultCount) {
+        resultCount.textContent = `${dataArray.length} 项`;
+      }
+
+      if (dataArray.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <p>🔍 没有找到匹配的奖状</p>
+            <small>试试其他关键词，或点击“显示全部”</small>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      dataArray.forEach(item => {
+        const safeTitle = escapeHtml(item.title);
+        const safeRecipient = escapeHtml(item.recipient);
+        const safeDesc = escapeHtml(item.description);
+        const safeDate = escapeHtml(item.date);
+        const safeBadge = escapeHtml(item.badge || '🏅');
+        const dept = escapeHtml(item.department || '');
+        // 使用 data-id 存储 id
+        html += `
+          <div class="card" data-id="${item.id}">
+            <span class="card-badge">${safeBadge}</span>
+            <div class="card-title">${safeTitle}</div>
+            <div class="card-recipient">👤 ${safeRecipient}</div>
+            <div class="card-desc">${safeDesc}</div>
+            <div class="card-meta">
+              <span class="date">📅 ${safeDate}</span>
+              <span style="background: #e2eefb; padding:0.1rem 0.7rem; border-radius:30px; font-weight:450;">${dept || '--'}</span>
+            </div>
+            <div class="click-hint">👆 点击查看详情 & 奖状图片</div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+
+      // 为每个卡片绑定点击事件 (委托方式)
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function(e) {
+          const id = parseInt(this.dataset.id, 10);
+          const found = AWARDS_DATA.find(item => item.id === id);
+          if (found) {
+            openDetailModal(found);
+          }
+        });
+      });
+    }
+
+    // 转义
+    function escapeHtml(unsafe) {
+      if (!unsafe) return '';
+      return unsafe
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // ---------- 打开详情模态框 ----------
+    function openDetailModal(item) {
+      // 填充数据
+      modalBadge.textContent = item.badge || '🏅 荣誉';
+      modalTitle.textContent = item.title;
+      modalRecipient.textContent = '👤 ' + item.recipient;
+      modalDesc.textContent = item.description;
+      modalDate.textContent = '📅 ' + item.date;
+      modalDept.textContent = '🏢 ' + (item.department || '--');
+
+      // 图片处理
+      const imgSrc = item.image || '';
+      if (imgSrc && imgSrc.trim() !== '') {
+        modalImage.src = imgSrc;
+        modalImage.style.display = 'block';
+        modalImagePlaceholder.style.display = 'none';
+      } else {
+        modalImage.style.display = 'none';
+        modalImagePlaceholder.style.display = 'block';
+        modalImagePlaceholder.textContent = '🖼️ 暂无奖状图片';
+      }
+
+      // 显示模态框
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // ---------- 关闭模态框 ----------
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // ---------- 搜索逻辑 ----------
+    function performSearch(keyword) {
+      const trimmed = keyword.trim().toLowerCase();
+      if (trimmed === '') {
+        currentData = [...AWARDS_DATA];
+        render(currentData);
+        return;
+      }
+
+      const filtered = AWARDS_DATA.filter(item => {
+        const searchable = [
+          item.title,
+          item.recipient,
+          item.description,
+          item.department,
+          item.badge || ''
+        ].join(' ').toLowerCase();
+        return searchable.includes(trimmed);
+      });
+
+      currentData = filtered;
+      render(currentData);
+    }
+
+    // ---------- 重置 ----------
+    function resetToAll() {
+      searchInput.value = '';
+      currentData = [...AWARDS_DATA];
+      render(currentData);
+      searchInput.focus();
+    }
+
+    // ---------- 事件绑定 ----------
+    function initEvents() {
+      if (searchBtn) {
+        searchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          performSearch(searchInput.value || '');
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch(searchInput.value || '');
+          }
+        });
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          resetToAll();
+        });
+      }
+
+      // 模态关闭：按钮 + 点击外部
+      if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+      }
+
+      if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+          if (e.target === modalOverlay) {
+            closeModal();
+          }
+        });
+      }
+
+      // ESC 关闭
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+          closeModal();
+        }
+      });
+    }
+
+    // ---------- 启动 ----------
+    function init() {
+      render(AWARDS_DATA);
+      initEvents();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+</body>
+</html>
