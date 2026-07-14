@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资质公示 · 海米尔文化</title>
+    <!-- 复用门户的 favicon 配置 -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="msapplication-TileImage" content="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#FBC500">
+    <style>
+        /* 全局重置与门户风格一致 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f2eb;
+            color: #2c2c2c;
+            line-height: 1.7;
+        }
+        .wrap {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 顶部导航 (与门户一致) */
+        .top-bar {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 14px 0;
+            border-bottom: 4px solid #FBC500;
+        }
+        .top-bar .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .top-bar .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .top-bar .logo-area img {
+            height: 52px;
+            width: auto;
+        }
+        .top-bar .logo-area h1 {
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 700;
+        }
+        .top-bar .logo-area span {
+            color: #FBC500;
+            font-size: 0.9rem;
+        }
+        .top-bar .back-home {
+            color: #FBC500;
+            text-decoration: none;
+            background: rgba(255,255,255,0.06);
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 500;
+            border: 1px solid rgba(251,197,0,0.25);
+            transition: 0.25s;
+        }
+        .top-bar .back-home:hover {
+            background: #FBC500;
+            color: #1a1a1a;
+            border-color: #FBC500;
+        }
+
+        /* 页面标题区 */
+        .page-header {
+            background: #fff;
+            padding: 40px 0 28px;
+            border-bottom: 1px solid #ede8e0;
+            margin-bottom: 30px;
+        }
+        .page-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .page-header h2 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #7a6a5a;
+            margin-left: 8px;
+        }
+        .page-header .sub {
+            color: #6a5a4a;
+            margin-top: 6px;
+            font-size: 1.05rem;
+        }
+
+        /* 资质卡片网格 - 以图片为核心 */
+        .qual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 20px 0 40px;
+        }
+        .qual-card {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #ede8e0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .qual-card:hover {
+            transform: translateY(-6px);
+            border-color: #FBC500;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+        }
+        /* 资质图片样式 */
+        .qual-image {
+            width: 100%;
+            aspect-ratio: 4 / 3; /* 统一图片比例 */
+            object-fit: cover;
+            display: block;
+            background: #f0ebe5; /* 图片加载前的占位色 */
+        }
+        .card-body {
+            padding: 18px 20px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        .card-body .badge {
+            background: #FBC500;
+            color: #1a1a1a;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 30px;
+            align-self: flex-start;
+            margin: 4px 0 10px;
+            letter-spacing: 0.3px;
+        }
+        .card-body .desc {
+            color: #5a4a3a;
+            font-size: 0.9rem;
+            margin: 0 0 12px;
+            flex: 1;
+        }
+        .card-body .meta {
+            font-size: 0.8rem;
+            color: #8a7a6a;
+            border-top: 1px solid #f0ebe5;
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+
+        /* 底部 (与门户一致) */
+        footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 30px 0 24px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 4px solid #FBC500;
+        }
+        .footer-copy {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        .beian-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 14px;
+        }
+        .beian-link {
+            color: #aaa !important;
+            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.04);
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .beian-link:hover {
+            color: #FBC500 !important;
+            background: rgba(255,255,255,0.08);
+        }
+        .beian-link img {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .top-bar .wrap { flex-direction: column; align-items: flex-start; }
+            .top-bar .logo-area h1 { font-size: 1.1rem; }
+            .page-header h2 { font-size: 1.5rem; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-bar">
+        <div class="wrap">
+            <div class="logo-area">
+                <img src="新LOGO.png" alt="海米尔">
+                <div>
+                    <h1>吉林海米尔文化传播有限公司</h1>
+                    <span>资质公示 · 荣誉认证</span>
+                </div>
+            </div>
+            <a href="javascript:history.back()" class="back-home">← 返回门户</a>
+        </div>
+    </div>
+
+    <!-- 页面标题 -->
+    <div class="page-header">
+        <div class="wrap">
+            <h2>
+                🏅 资质公示
+                <small>｜ 证书 · 资质 · 荣誉</small>
+            </h2>
+            <p class="sub">以下为海米尔文化及相关主体的证书与资质展示，图片仅供参考，证书真实有效。</p>
+        </div>
+    </div>
+
+    <!-- 资质列表 - 以图片为核心 -->
+    <div class="wrap">
+        <div class="qual-grid">
+            <!-- 卡片 1：营业执照 -->
+            <div class="qual-card">
+                <img src="aa3242cda9e3107273175bca0946ae8e.jpg" alt="营业执照图片" class="qual-image" loading="lazy">
+                <div class="card-body">
+                    <h4>营业执照</h4>
+                    <span class="badge">有效</span>
+                    <p class="desc">统一社会信用代码：91220323MAERY9NF6M</p>
+                    <div class="meta">📅 2025-08-21 颁发</div>
+                </div>
+            </div>
+
+            <!-- 卡片 2：三A信息 -->
+            <div class="qual-card">
+                <img src="吉林海米尔文化传播有限公司_AAA级信用企业_牌匾版_电子版 (2).jpg" alt="三A牌匾" class="qual-image" loading="lazy">
+                <div class="card-body">
+                    <h4>三A企业信息</h4>
+                    <span class="badge">资质</span>
+                    <p class="desc">企业三A信息认证</p>
+                    <div class="meta">📅 2026-07-13 颁发</div>
+                </div>
+            </div>
+
+
+        <!-- 说明区域 -->
+        <div style="background: #faf8f5; border-radius: 20px; padding: 24px 28px; border: 1px solid #ede8e0; margin: 10px 0 30px;">
+            <p style="color: #5a4a3a; font-size: 0.95rem;">
+                ⚡ 以上证书及资质均为真实案例或有效资质，部分信息已做脱敏处理。图片仅为示意，具体以实际颁发文件为准。
+            </p>
+            <p style="color: #b8860b; margin-top: 8px; font-weight: 500;">
+                📞 电话：16617152404 ｜ 📧 邮箱：us@haimier.top
+            </p>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer>
+        <div class="wrap">
+            <div class="footer-copy">©2025-2026 吉林海米尔文化传播有限公司 · 资质公示</div>
+            <div class="beian-links">
+                <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"><img src="../ICP.png" alt="ICP">吉ICP备2026000319号-1</a>    
+                <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank"><img src="../备案图标.png" alt="备案">吉公网安备22032302000081号</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载完成后的提示（无额外逻辑）
+        console.log('资质公示页面（图片版）已加载。请替换图片链接。');
+    </script>
+</body>
+</html>
