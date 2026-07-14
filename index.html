@@ -4,16 +4,11 @@
     <!-- 基础 favicon 配置 -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    
-    <!-- 为搜索引擎提供更明确的图标信息 -->
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
-    <!-- 针对搜索引擎的额外优化 -->
     <meta name="msapplication-TileImage" content="/favicon.ico">
     <meta name="msapplication-TileColor" content="#FBC500">
-    
     <meta charset="UTF-8">
     <title>海米尔文化 · 公司门户</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,12 +24,177 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
-            background: #f5f2eb;  /* 柔和浅色背景，更适合门户 */
+            background: #f5f2eb;
             color: #2c2c2c;
             line-height: 1.7;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* 时间显示 - 保持风格但更轻量 */
+        /* 暗色主题变量 */
+        body.dark {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+        body.dark .time-display {
+            background: rgba(30, 30, 30, 0.92);
+            border-color: #444;
+            color: #ddd;
+        }
+        body.dark .time-display .current-date,
+        body.dark .time-display .lunar-date {
+            color: #aaa;
+        }
+        body.dark .time-display .current-time {
+            color: #FBC500;
+        }
+        body.dark .main-nav {
+            background: #2a2a2a;
+            border-bottom-color: #444;
+        }
+        body.dark .nav-links a {
+            color: #ccc;
+        }
+        body.dark .nav-links a:hover,
+        body.dark .nav-links a.active {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+        body.dark .nav-links a.portal-btn {
+            background: #FBC500;
+            color: #1a1a1a;
+            border-color: #FBC500;
+        }
+        body.dark .nav-links a.portal-btn:hover {
+            background: #fff;
+            color: #1a1a1a;
+        }
+        body.dark .banner {
+            background: #2a2a2a;
+            border-bottom-color: #444;
+        }
+        body.dark .section-title {
+            color: #eee;
+        }
+        body.dark .section-title:after {
+            background: linear-gradient(to right, #FBC500, transparent);
+        }
+        body.dark .notice-board,
+        body.dark .portal-card,
+        body.dark .article-item,
+        body.dark .works-grid a,
+        body.dark .card,
+        body.dark .qr-section,
+        body.dark .about-box,
+        body.dark .contact-box,
+        body.dark .video-container {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #ddd;
+        }
+        body.dark .notice-header {
+            background: #222;
+            border-bottom-color: #444;
+        }
+        body.dark .notice-item {
+            border-bottom-color: #3a3a3a;
+        }
+        body.dark .notice-item:hover {
+            background: #333;
+        }
+        body.dark .notice-content a {
+            color: #eee;
+        }
+        body.dark .notice-content a:hover {
+            color: #FBC500;
+        }
+        body.dark .notice-more {
+            background: #333;
+            color: #FBC500;
+        }
+        body.dark .notice-more:hover {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+        body.dark .article-item a {
+            color: #ddd;
+        }
+        body.dark .article-meta {
+            color: #aaa;
+        }
+        body.dark .works-grid .desc {
+            background: #333;
+            color: #ddd;
+        }
+        body.dark .card p {
+            color: #aaa;
+        }
+        body.dark .qr-section .social-link-item {
+            background: #333;
+            color: #ddd;
+        }
+        body.dark .qr-section .social-link-item:hover {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+        body.dark .wechat-kf-area {
+            background: #222;
+            border-color: #444;
+        }
+        body.dark .kf-button {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+        body.dark .kf-button:hover {
+            background: #fff;
+        }
+        body.dark .page-btn,
+        body.dark .works-page-btn {
+            background: #333;
+            border-color: #555;
+            color: #ddd;
+        }
+        body.dark .page-btn:hover:not(:disabled),
+        body.dark .works-page-btn:hover:not(:disabled) {
+            background: #FBC500;
+            border-color: #FBC500;
+            color: #1a1a1a;
+        }
+        body.dark footer {
+            background: #111;
+            border-top-color: #FBC500;
+        }
+        body.dark .footer-copy {
+            color: #aaa;
+        }
+        body.dark .beian-link {
+            color: #aaa !important;
+            background: rgba(255,255,255,0.04);
+        }
+        body.dark .beian-link:hover {
+            color: #FBC500 !important;
+            background: rgba(255,255,255,0.08);
+        }
+        body.dark .contact-box a {
+            color: #FBC500;
+        }
+        body.dark .about-box p {
+            color: #ccc;
+        }
+        body.dark .about-box p:last-child {
+            color: #FBC500;
+        }
+        body.dark .video-container .video-header {
+            background: #111 !important;
+        }
+        body.dark .video-container .video-footer {
+            background: #222 !important;
+            color: #aaa;
+        }
+        body.dark .video-container .video-footer a {
+            color: #FBC500;
+        }
+
+        /* 时间显示 */
         .time-display {
             position: fixed;
             top: 20px;
@@ -73,13 +233,16 @@
             opacity: 0.7;
         }
 
-        /* 头部 - 更清爽的企业风格 */
+        /* 头部 */
         header {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             color: #fff;
             padding: 18px 0;
             border-bottom: 4px solid #FBC500;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        body.dark header {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         }
         .wrap {
             width: 92%;
@@ -99,11 +262,13 @@
         .logo-txt img {
             height: 80px;
             width: auto;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-            transition: 0.3s;
+            filter: drop-shadow(0 0 12px rgba(251, 197, 0, 0.6)) drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            transition: filter 0.3s, transform 0.3s;
+            border-radius: 12px;
         }
         .logo-txt img:hover {
             transform: scale(1.02);
+            filter: drop-shadow(0 0 20px rgba(251, 197, 0, 0.9)) drop-shadow(0 4px 12px rgba(0,0,0,0.4));
         }
         .logo-txt h1 {
             font-size: 1.8rem;
@@ -121,7 +286,7 @@
             font-weight: 400;
         }
 
-        /* 导航栏 - 新增门户导航 */
+        /* 导航栏 */
         .main-nav {
             background: #fff;
             border-bottom: 1px solid #e8e0d8;
@@ -142,6 +307,7 @@
             gap: 8px;
             flex-wrap: wrap;
             padding: 10px 0;
+            align-items: center;
         }
         .nav-links a {
             padding: 8px 20px;
@@ -172,7 +338,36 @@
             border-color: #FBC500;
         }
 
-        /* Banner - 更简洁大气 */
+        /* 主题切换按钮 */
+        .theme-toggle {
+            background: #f0ebe3;
+            border: 1px solid #d4c8bc;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #2c2c2c;
+            background: #fff;
+        }
+        .theme-toggle:hover {
+            background: #FBC500;
+            border-color: #FBC500;
+        }
+        body.dark .theme-toggle {
+            background: #333;
+            border-color: #555;
+            color: #FBC500;
+        }
+        body.dark .theme-toggle:hover {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+
+        /* Banner */
         .banner {
             background: linear-gradient(135deg, #faf6f0 0%, #f0ebe3 100%);
             padding: 30px 0;
@@ -187,7 +382,7 @@
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.06));
         }
 
-        /* 卡片式通用区块 */
+        /* 通用区块 */
         section {
             padding: 50px 0 30px;
         }
@@ -211,7 +406,7 @@
             color: #b8860b;
         }
 
-        /* 公告栏 - 门户卡片风格 */
+        /* 公告栏 */
         .notice-board {
             background: #fff;
             border-radius: 20px;
@@ -313,7 +508,7 @@
             color: #1a1a1a;
         }
 
-        /* 门户功能卡片组 (资质/案例) */
+        /* 门户卡片 */
         .portal-card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -352,7 +547,7 @@
             margin-top: 6px;
         }
 
-        /* 文章墙 - 门户卡片 */
+        /* 文章墙 */
         .article-wall {
             margin-top: 10px;
         }
@@ -392,7 +587,7 @@
             color: #8a7a6a;
         }
 
-        /* 作品展示 - 网格 */
+        /* 作品网格 */
         .works-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -428,7 +623,7 @@
             margin: 0;
         }
 
-        /* 团队 - 卡片网格 */
+        /* 团队 */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -681,7 +876,7 @@
     </div>
 </header>
 
-<!-- 门户导航 -->
+<!-- 门户导航 + 主题切换 -->
 <div class="main-nav">
     <div class="wrap">
         <div class="nav-links">
@@ -692,6 +887,7 @@
             <a href="#about">关于</a>
             <a href="https://haimier.top/qualifications" target="_blank" class="portal-btn">🏅 资质公示</a>
             <a href="https://thoy.top/case/" target="_blank" class="portal-btn">📁 查看案例</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓 主题</button>
         </div>
     </div>
 </div>
@@ -702,10 +898,10 @@
 </div>
 
 <!-- 视频展示 -->
-<div style="background:#fff; padding: 30px 0 10px;">
+<div style="background:#fff; padding: 30px 0 10px; transition: background 0.3s;">
     <div class="wrap">
-        <div class="video-container" style="background:#faf8f5; border-radius:24px; overflow:hidden; border:1px solid #ede8e0;">
-            <div style="display:flex; align-items:center; gap:12px; padding:16px 24px; background:#1a1a1a; border-bottom:2px solid #FBC500;">
+        <div class="video-container" style="background:#faf8f5; border-radius:24px; overflow:hidden; border:1px solid #ede8e0; transition: background 0.3s, border 0.3s;">
+            <div class="video-header" style="display:flex; align-items:center; gap:12px; padding:16px 24px; background:#1a1a1a; border-bottom:2px solid #FBC500;">
                 <span style="font-size:1.6rem;">🎬</span>
                 <span style="font-weight:700; color:#FBC500; font-size:1.1rem;">官方视频 · 让创作有迹可循</span>
                 <span style="margin-left:auto; color:#aaa; font-size:0.85rem;">点击播放 ▶</span>
@@ -713,7 +909,7 @@
             <div style="position:relative; padding-bottom:56.25%; height:0;">
                 <iframe src="//player.bilibili.com/player.html?bvid=BV1qFdGBTEdr&high_quality=1&autoplay=0&danmaku=1" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
             </div>
-            <div style="padding:12px 24px; background:#fcfaf7; color:#5a4a3a; font-size:0.9rem; border-top:1px solid #ede8e0;">
+            <div class="video-footer" style="padding:12px 24px; background:#fcfaf7; color:#5a4a3a; font-size:0.9rem; border-top:1px solid #ede8e0; transition: background 0.3s, color 0.3s;">
                 📌 来源：<a href="https://www.bilibili.com/video/BV1qFdGBTEdr/" target="_blank" style="color:#b8860b; text-decoration:none;">B站 海米尔文化</a> 
                 | 更多版权业务 <a href="https://thoy.top" target="_blank" style="color:#b8860b; text-decoration:none;">科赛帝尔知识产权</a>
             </div>
@@ -1028,6 +1224,15 @@ function renderWorks() {
 }
 document.getElementById('worksPrevBtn').addEventListener('click', ()=>{ if(currentWorksPage>1){currentWorksPage--;renderWorks();}});
 document.getElementById('worksNextBtn').addEventListener('click', ()=>{ if(currentWorksPage<totalWorksPages){currentWorksPage++;renderWorks();}});
+
+// 主题切换
+const themeToggle = document.getElementById('themeToggle');
+let darkMode = false;
+themeToggle.addEventListener('click', () => {
+    darkMode = !darkMode;
+    document.body.classList.toggle('dark', darkMode);
+    themeToggle.textContent = darkMode ? '☀️ 浅色' : '🌓 主题';
+});
 
 updateTime();
 setInterval(updateTime, 1000);
