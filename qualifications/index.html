@@ -24,7 +24,88 @@
             background: #f5f2eb;
             color: #2c2c2c;
             line-height: 1.7;
+            transition: background 0.3s, color 0.3s;
         }
+
+        /* 暗色主题变量 */
+        body.dark {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+        body.dark .top-bar {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+        body.dark .page-header {
+            background: #2a2a2a;
+            border-bottom-color: #444;
+        }
+        body.dark .page-header h2 {
+            color: #eee;
+        }
+        body.dark .page-header .sub {
+            color: #aaa;
+        }
+        body.dark .qual-card {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark .qual-card:hover {
+            border-color: #FBC500;
+        }
+        body.dark .card-body h4 {
+            color: #eee;
+        }
+        body.dark .card-body .desc {
+            color: #bbb;
+        }
+        body.dark .card-body .meta {
+            color: #aaa;
+            border-top-color: #444;
+        }
+        body.dark .qual-card .badge {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+        body.dark .page-header .sub {
+            color: #bbb;
+        }
+        body.dark .top-bar .logo-area h1 {
+            color: #fff;
+        }
+        body.dark .top-bar .back-home {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(251,197,0,0.3);
+        }
+        body.dark .top-bar .back-home:hover {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+        body.dark .wrap > div[style*="background: #faf8f5"] {
+            background: #2a2a2a !important;
+            border-color: #444 !important;
+        }
+        body.dark .wrap > div[style*="background: #faf8f5"] p {
+            color: #bbb !important;
+        }
+        body.dark .wrap > div[style*="background: #faf8f5"] p:last-child {
+            color: #FBC500 !important;
+        }
+        body.dark footer {
+            background: #111;
+            border-top-color: #FBC500;
+        }
+        body.dark .footer-copy {
+            color: #aaa;
+        }
+        body.dark .beian-link {
+            color: #aaa !important;
+            background: rgba(255,255,255,0.04);
+        }
+        body.dark .beian-link:hover {
+            color: #FBC500 !important;
+            background: rgba(255,255,255,0.08);
+        }
+
         .wrap {
             width: 92%;
             max-width: 1200px;
@@ -36,6 +117,7 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             padding: 14px 0;
             border-bottom: 4px solid #FBC500;
+            transition: background 0.3s;
         }
         .top-bar .wrap {
             display: flex;
@@ -52,6 +134,13 @@
         .top-bar .logo-area img {
             height: 52px;
             width: auto;
+            filter: drop-shadow(0 0 10px rgba(251, 197, 0, 0.5)) drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            transition: filter 0.3s, transform 0.3s;
+            border-radius: 8px;
+        }
+        .top-bar .logo-area img:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 0 18px rgba(251, 197, 0, 0.8)) drop-shadow(0 4px 12px rgba(0,0,0,0.3));
         }
         .top-bar .logo-area h1 {
             font-size: 1.3rem;
@@ -78,12 +167,47 @@
             border-color: #FBC500;
         }
 
+        /* 右侧功能区：主题切换 + 返回 */
+        .top-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .theme-toggle {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(251,197,0,0.25);
+            border-radius: 40px;
+            padding: 6px 18px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #FBC500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        .theme-toggle:hover {
+            background: #FBC500;
+            color: #1a1a1a;
+            border-color: #FBC500;
+        }
+        body.dark .theme-toggle {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(251,197,0,0.3);
+        }
+        body.dark .theme-toggle:hover {
+            background: #FBC500;
+            color: #1a1a1a;
+        }
+
         /* 页面标题区 */
         .page-header {
             background: #fff;
             padding: 40px 0 28px;
             border-bottom: 1px solid #ede8e0;
             margin-bottom: 30px;
+            transition: background 0.3s, border-color 0.3s;
         }
         .page-header h2 {
             font-size: 2rem;
@@ -92,6 +216,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
+            transition: color 0.3s;
         }
         .page-header h2 small {
             font-size: 1rem;
@@ -103,6 +228,7 @@
             color: #6a5a4a;
             margin-top: 6px;
             font-size: 1.05rem;
+            transition: color 0.3s;
         }
 
         /* 资质卡片网格 - 以图片为核心 */
@@ -130,10 +256,10 @@
         /* 资质图片样式 */
         .qual-image {
             width: 100%;
-            aspect-ratio: 4 / 3; /* 统一图片比例 */
+            aspect-ratio: 4 / 3;
             object-fit: cover;
             display: block;
-            background: #f0ebe5; /* 图片加载前的占位色 */
+            background: #f0ebe5;
         }
         .card-body {
             padding: 18px 20px 22px;
@@ -146,6 +272,7 @@
             font-weight: 700;
             color: #1a1a1a;
             margin-bottom: 4px;
+            transition: color 0.3s;
         }
         .card-body .badge {
             background: #FBC500;
@@ -163,6 +290,7 @@
             font-size: 0.9rem;
             margin: 0 0 12px;
             flex: 1;
+            transition: color 0.3s;
         }
         .card-body .meta {
             font-size: 0.8rem;
@@ -170,6 +298,7 @@
             border-top: 1px solid #f0ebe5;
             padding-top: 12px;
             margin-top: 4px;
+            transition: color 0.3s, border-color 0.3s;
         }
 
         /* 底部 (与门户一致) */
@@ -180,6 +309,7 @@
             text-align: center;
             margin-top: 40px;
             border-top: 4px solid #FBC500;
+            transition: background 0.3s;
         }
         .footer-copy {
             color: #aaa;
@@ -218,6 +348,7 @@
             .top-bar .wrap { flex-direction: column; align-items: flex-start; }
             .top-bar .logo-area h1 { font-size: 1.1rem; }
             .page-header h2 { font-size: 1.5rem; flex-wrap: wrap; }
+            .top-right-actions { width: 100%; justify-content: flex-start; }
         }
     </style>
 </head>
@@ -232,7 +363,10 @@
                     <span>资质公示 · 荣誉认证</span>
                 </div>
             </div>
-            <a href="javascript:history.back()" class="back-home">← 返回门户</a>
+            <div class="top-right-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓 主题</button>
+                <a href="javascript:history.back()" class="back-home">← 返回门户</a>
+            </div>
         </div>
     </div>
 
@@ -271,14 +405,14 @@
                     <div class="meta">📅 2026-07-13 颁发</div>
                 </div>
             </div>
-
+        </div>
 
         <!-- 说明区域 -->
-        <div style="background: #faf8f5; border-radius: 20px; padding: 24px 28px; border: 1px solid #ede8e0; margin: 10px 0 30px;">
-            <p style="color: #5a4a3a; font-size: 0.95rem;">
+        <div style="background: #faf8f5; border-radius: 20px; padding: 24px 28px; border: 1px solid #ede8e0; margin: 10px 0 30px; transition: background 0.3s, border-color 0.3s;">
+            <p style="color: #5a4a3a; font-size: 0.95rem; transition: color 0.3s;">
                 ⚡ 以上证书及资质均为真实案例或有效资质，部分信息已做脱敏处理。图片仅为示意，具体以实际颁发文件为准。
             </p>
-            <p style="color: #b8860b; margin-top: 8px; font-weight: 500;">
+            <p style="color: #b8860b; margin-top: 8px; font-weight: 500; transition: color 0.3s;">
                 📞 电话：16617152404 ｜ 📧 邮箱：us@haimier.top
             </p>
         </div>
@@ -296,8 +430,17 @@
     </footer>
 
     <script>
-        // 页面加载完成后的提示（无额外逻辑）
-        console.log('资质公示页面（图片版）已加载。请替换图片链接。');
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        let darkMode = false;
+        themeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            document.body.classList.toggle('dark', darkMode);
+            themeToggle.textContent = darkMode ? '☀️ 浅色' : '🌓 主题';
+        });
+
+        // 若页面是从门户带过来的暗色偏好，可考虑读取 localStorage，这里保持简洁
+        console.log('资质公示页面（含主题切换 + LOGO发光）已加载。');
     </script>
 </body>
 </html>
