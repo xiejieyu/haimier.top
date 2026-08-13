@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海米尔文化 · 无限可能</title>
+    <title>海米尔文化 · 视觉叙事</title>
     <link rel="preload" href="以年少之心敬未来无限可能.png" as="image">
     <link rel="preload" href="新LOGO.png" as="image">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -46,14 +46,8 @@
             will-change: transform, opacity;
             transition: transform 0.1s linear;
         }
-        .section-bg .gradient {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            inset: 0;
-        }
 
-        /* ===== 第1屏：Hero（视觉冲击） ===== */
+        /* ===== 第1屏：Hero ===== */
         #hero {
             background: #0a0a0a;
             min-height: 100vh;
@@ -106,53 +100,63 @@
             position: relative;
             z-index: 2;
         }
-        #hero .badge {
+
+        /* Hero区域：LOGO + 标题 + 图片 */
+        #hero .hero-badge {
             display: inline-block;
             background: rgba(251, 197, 0, 0.12);
             color: #FBC500;
-            padding: 8px 36px;
+            padding: 6px 28px;
             border-radius: 60px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 30px;
-            border: 1px solid rgba(251, 197, 0, 0.15);
+            margin-bottom: 20px;
+            border: 1px solid rgba(251, 197, 0, 0.1);
             backdrop-filter: blur(8px);
         }
-        #hero h1 {
-            font-size: clamp(3.5rem, 12vw, 7rem);
-            font-weight: 800;
-            letter-spacing: -4px;
-            line-height: 1.02;
-            margin-bottom: 20px;
-            color: #fff;
+        #hero .hero-logo {
+            max-width: 200px;
+            width: 30%;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 40px rgba(251, 197, 0, 0.15));
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        #hero h1 .gold {
-            background: linear-gradient(135deg, #FBC500, #f5a623, #FBC500);
-            background-size: 300% 300%;
+        #hero .hero-logo:hover {
+            transform: scale(1.04);
+        }
+        #hero .hero-logo img {
+            width: 100%;
+            display: block;
+        }
+        #hero .hero-slogan {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+        #hero .hero-slogan .gold {
+            background: linear-gradient(135deg, #FBC500, #f5a623);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: shimmerGold 5s ease-in-out infinite;
         }
-        @keyframes shimmerGold {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        #hero .subtitle {
-            font-size: clamp(1rem, 2vw, 1.6rem);
-            color: rgba(255,255,255,0.6);
-            max-width: 600px;
-            margin: 0 auto 40px;
+        #hero .hero-sub {
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 3px;
             font-weight: 300;
-            letter-spacing: 2px;
+            margin-bottom: 24px;
         }
+
         #hero .hero-image-wrap {
             max-width: 760px;
             width: 94%;
             border-radius: 32px;
             overflow: hidden;
+            background: transparent;
             box-shadow: 0 60px 120px -40px rgba(251, 197, 0, 0.15), 0 0 80px rgba(251, 197, 0, 0.05);
             transform: perspective(1000px) rotateX(2deg);
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -164,9 +168,10 @@
             width: 100%;
             display: block;
             border-radius: 32px;
+            background: transparent;
         }
 
-        /* ===== 第2屏：视频（暗调沉浸） ===== */
+        /* ===== 第2屏：视频 ===== */
         #video-section {
             background: #0f0f0f;
         }
@@ -208,7 +213,7 @@
         .video-footer a { color: #FBC500; text-decoration: none; opacity: 0.6; transition: 0.3s; }
         .video-footer a:hover { opacity: 1; }
 
-        /* ===== 第3屏：公告（金色点缀） ===== */
+        /* ===== 第3屏：公告 ===== */
         #announcement-section {
             background: #0a0a0a;
         }
@@ -316,12 +321,12 @@
             transform: translateY(-2px);
         }
 
-        /* ===== 第4屏：作品（画廊质感） ===== */
-        #works-section {
+        /* ===== 第4屏：文章墙 ===== */
+        #articles-section {
             background: #0f0f0f;
         }
-        #works-section .section-bg {
-            background: radial-gradient(ellipse at 50% 30%, #1a1200 0%, #0a0a0a 80%);
+        #articles-section .section-bg {
+            background: radial-gradient(ellipse at 60% 40%, #1a1200 0%, #0a0a0a 80%);
         }
         .section-label {
             font-size: 0.7rem;
@@ -337,6 +342,127 @@
             font-weight: 700;
             margin-bottom: 30px;
             color: #fff;
+        }
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .article-card {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 24px 28px;
+            border: 1px solid rgba(251, 197, 0, 0.04);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+            color: #fff;
+        }
+        .article-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(251, 197, 0, 0.15);
+            box-shadow: 0 40px 80px -20px rgba(251, 197, 0, 0.04);
+        }
+        .article-card .article-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .article-card .article-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding-top: 12px;
+        }
+        .article-more-wrap {
+            text-align: right;
+            margin-top: 28px;
+        }
+        .article-more {
+            background: rgba(251, 197, 0, 0.05);
+            padding: 10px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.4s;
+            border: 1px solid rgba(251, 197, 0, 0.1);
+            color: #FBC500;
+            display: inline-block;
+        }
+        .article-more:hover {
+            background: #FBC500;
+            color: #0a0a0a;
+            box-shadow: 0 8px 40px rgba(251, 197, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ===== 第5屏：合作伙伴 ===== */
+        #partners-section {
+            background: #0a0a0a;
+        }
+        #partners-section .section-bg {
+            background: radial-gradient(ellipse at 50% 50%, #1a1200 0%, #0a0a0a 80%);
+        }
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .partner-card {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 36px 20px;
+            text-align: center;
+            border: 1px solid rgba(251, 197, 0, 0.04);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+        }
+        .partner-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            border-color: rgba(251, 197, 0, 0.15);
+            box-shadow: 0 40px 80px -20px rgba(251, 197, 0, 0.04);
+        }
+        .partner-card img {
+            max-width: 140px;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: brightness(0.7) saturate(0.5);
+            transition: all 0.5s;
+        }
+        .partner-card:hover img {
+            filter: brightness(1) saturate(1);
+        }
+        .partner-card .partner-name {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+            margin-top: 12px;
+            letter-spacing: 2px;
+            transition: color 0.4s;
+        }
+        .partner-card:hover .partner-name {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ===== 第6屏：作品 ===== */
+        #works-section {
+            background: #0f0f0f;
+        }
+        #works-section .section-bg {
+            background: radial-gradient(ellipse at 50% 30%, #1a1200 0%, #0a0a0a 80%);
         }
         .works-grid {
             display: grid;
@@ -376,7 +502,7 @@
             color: rgba(255,255,255,0.7);
         }
 
-        /* ===== 第5屏：吉祥物 ===== */
+        /* ===== 第7屏：吉祥物 ===== */
         #team-section {
             background: #0a0a0a;
         }
@@ -418,7 +544,7 @@
         .mascot-card p { color: rgba(255,255,255,0.4); font-size: 0.9rem; line-height: 1.7; }
         .mascot-card p strong { color: rgba(255,255,255,0.6); }
 
-        /* ===== 第6屏：关于 ===== */
+        /* ===== 第8屏：关于 ===== */
         #about-section {
             background: #0f0f0f;
         }
@@ -447,7 +573,7 @@
         .about-card a:hover { opacity: 1; }
         .gold-text { color: #FBC500; font-weight: 600; font-size: 1.05rem; margin-top: 16px; display: block; opacity: 0.7; }
 
-        /* ===== 底部备案（固定在最后一屏下方） ===== */
+        /* ===== 底部备案 ===== */
         .footer-beian {
             background: #050505;
             padding: 32px 5% 28px;
@@ -504,7 +630,7 @@
             z-index: 999;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 14px;
         }
         .nav-dot {
             width: 10px;
@@ -578,19 +704,25 @@
         /* ===== 响应式 ===== */
         @media (max-width: 768px) {
             .section { padding: 40px 4%; }
-            .nav-dots { right: 14px; gap: 14px; }
+            .nav-dots { right: 14px; gap: 10px; }
             .nav-dot { width: 8px; height: 8px; }
             .theme-fab { bottom: 20px; right: 20px; padding: 8px 16px; font-size: 0.75rem; }
             #hero .hero-image-wrap { width: 100%; }
+            #hero .hero-logo { width: 40%; }
             .notice-header { padding: 14px 20px; }
             .notice-list { padding: 8px 12px 12px 20px; }
             .notice-item { padding: 12px 8px; gap: 12px; }
+            .article-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .footer-beian .beian-inner { flex-direction: column; gap: 12px; }
             .footer-beian .divider { display: none; }
         }
         @media (max-width: 480px) {
             .works-grid { grid-template-columns: 1fr; }
             .mascot-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .partner-card { padding: 24px 12px; min-height: 120px; }
+            .partner-card img { max-width: 100px; max-height: 60px; }
         }
     </style>
 </head>
@@ -600,6 +732,8 @@
         <div class="nav-dot active" data-target="hero"><span class="tooltip">首页</span></div>
         <div class="nav-dot" data-target="video-section"><span class="tooltip">视频</span></div>
         <div class="nav-dot" data-target="announcement-section"><span class="tooltip">公告</span></div>
+        <div class="nav-dot" data-target="articles-section"><span class="tooltip">文章</span></div>
+        <div class="nav-dot" data-target="partners-section"><span class="tooltip">伙伴</span></div>
         <div class="nav-dot" data-target="works-section"><span class="tooltip">作品</span></div>
         <div class="nav-dot" data-target="team-section"><span class="tooltip">团队</span></div>
         <div class="nav-dot" data-target="about-section"><span class="tooltip">关于</span></div>
@@ -614,12 +748,14 @@
             </div>
         </div>
         <div class="section-inner visible">
-            <div class="badge">✦ 年轻视角 · 无限可能</div>
-            <h1>以年少之心<br><span class="gold">敬未来无限可能</span></h1>
-            <p class="subtitle">吉林海米尔文化传播有限公司 · 用创意与内容，重塑数字体验</p>
-            <div class="hero-image-wrap">
-                <img src="以年少之心敬未来无限可能.png" alt="海米尔文化 · 以年少之心敬未来无限可能">
+            <div class="hero-badge">✦ 年轻视角 · 无限可能</div>
+            <div class="hero-logo">
+                <img src="新LOGO.png" alt="海米尔文化">
             </div>
+              <div class="hero-image-wrap">
+                <img src="以年少之心敬未来无限可能.png" alt="海米尔文化">
+            </div>
+            <div class="hero-sub">海米尔文化 · 用创意与内容，重塑数字体验</div>
         </div>
     </section>
 
@@ -631,7 +767,7 @@
         <div class="section-inner">
             <div class="video-container">
                 <div class="video-header">
-                    <span style="font-size:1.4rem;">🎬</span>
+                    <span style="font-size:1.4rem;"></span>
                     <span class="title">官方视频 · 让创作有迹可循</span>
                     <span class="hint">▶ 点击播放</span>
                 </div>
@@ -639,8 +775,7 @@
                     <iframe src="//player.bilibili.com/player.html?bvid=BV1qFdGBTEdr&high_quality=1&autoplay=0&danmaku=1" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
                 </div>
                 <div class="video-footer">
-                    📌 来源：<a href="https://www.bilibili.com/video/BV1qFdGBTEdr/" target="_blank">B站 海米尔文化</a> 
-                    | 版权业务 <a href="https://thoy.top" target="_blank">科赛帝尔知识产权</a>
+                    来源：<a href="https://www.bilibili.com/video/BV1qFdGBTEdr/" target="_blank">B站 海米尔文化</a> 
                 </div>
             </div>
         </div>
@@ -655,7 +790,6 @@
         <div class="section-inner">
             <div class="notice-board">
                 <div class="notice-header">
-                    <div class="notice-icon">📌</div>
                     <div class="notice-title">最新公告</div>
                 </div>
                 <div class="notice-list">
@@ -663,47 +797,69 @@
                         <span class="notice-badge">最新</span>
                         <div class="notice-content">
                             <div><a href="https://haimier.top/announcementList/E260601001" target="_blank">关于版权免费登记服务的活动公告</a></div>
-                            <div class="notice-date">📅 2026-05-19</div>
+                            <div class="notice-date">2026-05-19</div>
                         </div>
                     </div>
                     <div class="notice-item">
                         <span class="notice-badge">重要</span>
                         <div class="notice-content">
                             <div><a href="https://haimier.top/announcementList/E260519001" target="_blank">关于封杀QQ用户的公告</a></div>
-                            <div class="notice-date">📅 2026-05-19</div>
+                            <div class="notice-date">2026-05-19</div>
                         </div>
                     </div>
                     <div class="notice-item">
                         <span class="notice-badge">普通</span>
                         <div class="notice-content">
                             <div><a href="https://haimier.top/announcementList/E260503001" target="_blank">关于海米尔文化更换LOGO的公告</a></div>
-                            <div class="notice-date">📅 2026-05-03</div>
+                            <div class="notice-date">2026-05-03</div>
                         </div>
                     </div>
                 </div>
                 <div class="notice-more-link">
-                    <a href="https://haimier.top/announcementList" target="_blank" class="notice-more">📌 查看更多公告 →</a>
+                    <a href="https://haimier.top/announcementList" target="_blank" class="notice-more">查看更多公告 →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== 第4屏：作品 ===== -->
-    <section class="section" id="works-section">
+    <!-- ===== 第4屏：文章墙 ===== -->
+    <section class="section" id="articles-section">
         <div class="section-bg"></div>
         <div class="section-inner">
-            <div class="section-label">✦ 创作案例</div>
-            <h2 class="section-headline">🎬 作品示例</h2>
-            <div class="works-grid" id="worksContainer"></div>
+            <div class="section-label">✦ 品牌动态</div>
+            <h2 class="section-headline">文章墙</h2>
+            <div class="article-grid" id="articleContainer"></div>
+            <div class="article-more-wrap">
+                <a href="https://mp.weixin.qq.com/" target="_blank" class="article-more">更多文章 →</a>
+            </div>
         </div>
     </section>
 
-    <!-- ===== 第5屏：吉祥物 ===== -->
+    <!-- ===== 第5屏：合作伙伴 ===== -->
+    <section class="section" id="partners-section">
+        <div class="section-bg"></div>
+        <div class="section-inner">
+            <div class="section-label">✦ 信任同行</div>
+            <h2 class="section-headline">合作伙伴</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <img src="/logo/白糖阿布.png" alt="白糖阿布">
+                    <span class="partner-name">白糖阿布</span>
+                </div>
+                <div class="partner-card">
+                    <img src="/logo/吉天行.png" alt="吉天行律所">
+                    <span class="partner-name">吉天行律所</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 第7屏：吉祥物 ===== -->
     <section class="section" id="team-section">
         <div class="section-bg"></div>
         <div class="section-inner">
             <div class="section-label">✦ 品牌形象</div>
-            <h2 class="section-headline">🧸 公司吉祥物</h2>
+            <h2 class="section-headline">公司吉祥物</h2>
             <div class="mascot-grid">
                 <div class="mascot-card">
                     <img src="霂水.jpg" alt="霂水">
@@ -719,29 +875,29 @@
         </div>
     </section>
 
-    <!-- ===== 第6屏：关于 ===== -->
+    <!-- ===== 第8屏：关于 ===== -->
     <section class="section" id="about-section">
         <div class="section-bg"></div>
         <div class="section-inner">
             <div class="about-grid">
                 <div class="about-card">
-                    <h3 style="font-size:1.6rem; margin-bottom:16px;">🏢 关于我们</h3>
+                    <h3 style="font-size:1.6rem; margin-bottom:16px;">关于我们</h3>
                     <p>吉林海米尔文化传播有限公司（简称海米尔文化）是一家MCN与版权代理结合的公司，成立于2025年8月21日，创始人吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
                     <span class="gold-text">✦ 与海米尔同行，共创内容新生态 ✦</span>
                 </div>
                 <div class="about-card">
-                    <h3 style="font-size:1.6rem; margin-bottom:16px;">📧 联系我们</h3>
-                    <p>📞 电话：16617152404</p>
-                    <p>📍 地址：吉林省长春市公主岭市铁北街兴华委第八中学家属楼7单元601室</p>
-                    <p>📧 邮箱：<a href="mailto:us@haimier.top">us@haimier.top</a> ｜ <a href="mailto:haimier@qq.com">haimier@qq.com</a></p>
-                    <p>📧 艺人合作：<a href="mailto:up@haimier.top">up@haimier.top</a></p>
+                    <h3 style="font-size:1.6rem; margin-bottom:16px;">联系我们</h3>
+                    <p>电话：16617152404</p>
+                    <p>地址：吉林省长春市公主岭市铁北街兴华委第八中学家属楼7单元601室</p>
+                    <p>邮箱：<a href="mailto:us@haimier.top">us@haimier.top</a> ｜ <a href="mailto:haimier@qq.com">haimier@qq.com</a></p>
+                    <p>艺人合作：<a href="mailto:up@haimier.top">up@haimier.top</a></p>
                     <span class="gold-text">海米尔文化期待与您合作</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== 底部备案（独立于全屏之外） ===== -->
+    <!-- ===== 底部备案 ===== -->
     <div class="footer-beian">
         <div class="beian-inner">
             <span class="copyright">©2025-2026 版权所有 吉林海米尔文化传播有限公司</span>
@@ -790,19 +946,46 @@
             });
         });
 
-        // ===== 渲染作品 =====
+        // ===== 文章数据 =====
+        const articles = [
+            { title: "关于公众号问题修改的公告", link: "https://mp.weixin.qq.com/s/zjFEMJ12tHbDoQtj59noLw", date: "2026年6月9日", author: "海米尔文化" },
+            { title: "祝各位高考顺利", link: "https://mp.weixin.qq.com/s/3ULJfNHvio0Z0l6NFVC6sA", date: "2026年6月6日", author: "海米尔文化" },
+            { title: "关于版权免费登记服务的活动公告", link: "https://mp.weixin.qq.com/s/6pEMOM0ckA--aAfm4WLIJQ", date: "2026年6月1日", author: "海米尔文化" },
+            { title: "海米尔文化与白糖阿布达成合作", link: "https://mp.weixin.qq.com/s/aXnO6q4viacXdpi9En3pWg", date: "2026年5月16日", author: "海米尔文化" },
+            { title: "海米尔文化与吉天行律所达成合作", link: "https://mp.weixin.qq.com/s/Xsv0EeJT7ocrUBH-0JYMQw", date: "2026年5月7日", author: "海米尔文化" },
+            { title: "海米尔文化关于更换LOGO的公告", link: "https://mp.weixin.qq.com/s/peiWOeCvUjs510pa2-w43w", date: "2026年5月3日", author: "海米尔文化" },
+        ];
+
+        const articleContainer = document.getElementById('articleContainer');
+        articles.forEach(a => {
+            const div = document.createElement('a');
+            div.className = 'article-card';
+            div.href = a.link;
+            div.target = '_blank';
+            div.rel = 'noopener';
+            div.innerHTML = `
+                <div class="article-title">${a.title}</div>
+                <div class="article-meta">
+                    <span> ${a.date}</span>
+                    <span> ${a.author}</span>
+                </div>
+            `;
+            articleContainer.appendChild(div);
+        });
+
+        // ===== 作品数据 =====
         const worksData = [
             { title: "2024amongus拜年祭", link: "https://www.bilibili.com/video/BV1Tx4y1f7Uw", image: "新封面.jpg", alt: "2024AmongUs拜年祭" },
             { title: "2025amongus拜年纪", link: "https://www.bilibili.com/video/BV1gPFpezEZP", image: "封面.jpg", alt: "2025AmongUs拜年纪" },
             { title: "2026amongus拜年纪", link: "https://www.bilibili.com/video/BV1WxcFzbEq9/", image: "二版封面.png", alt: "2026amongus拜年纪" },
         ];
 
-        const container = document.getElementById('worksContainer');
+        const worksContainer = document.getElementById('worksContainer');
         worksData.forEach(w => {
             const a = document.createElement('a');
             a.href = w.link; a.target = "_blank"; a.rel = "noopener";
             a.innerHTML = `<img src="${w.image}" alt="${w.alt}" loading="lazy"><p class="desc">${w.title}</p>`;
-            container.appendChild(a);
+            worksContainer.appendChild(a);
         });
 
         // ===== 主题切换 =====
@@ -811,19 +994,18 @@
 
         function toggleTheme() {
             darkMode = !darkMode;
-            const root = document.documentElement;
             if (darkMode) {
                 document.querySelectorAll('.section').forEach(s => { s.style.background = ''; });
                 document.querySelectorAll('.section-bg').forEach(bg => { bg.style.opacity = '1'; });
                 document.querySelectorAll('.section-inner').forEach(inr => { inr.style.color = ''; });
-                document.querySelectorAll('.notice-board, .video-container, .mascot-card, .about-card, .works-grid a').forEach(el => {
+                document.querySelectorAll('.notice-board, .video-container, .mascot-card, .about-card, .works-grid a, .article-card, .partner-card').forEach(el => {
                     el.style.background = '';
                     el.style.borderColor = '';
                 });
-                document.querySelectorAll('.notice-title, .section-headline, .mascot-card h4, .about-card h3').forEach(el => {
+                document.querySelectorAll('.notice-title, .section-headline, .mascot-card h4, .about-card h3, .article-card .article-title, .hero-slogan, .hero-sub, .hero-badge').forEach(el => {
                     el.style.color = '';
                 });
-                document.querySelectorAll('.mascot-card p, .about-card p, .works-grid .desc').forEach(el => {
+                document.querySelectorAll('.mascot-card p, .about-card p, .works-grid .desc, .article-card .article-meta, .partner-card .partner-name').forEach(el => {
                     el.style.color = '';
                 });
                 document.querySelectorAll('.notice-content a').forEach(el => {
@@ -832,16 +1014,16 @@
                 themeToggle.textContent = '🌓 主题';
             } else {
                 document.querySelectorAll('.section').forEach(s => { s.style.background = '#f5f2eb'; });
-                document.querySelectorAll('.section-bg').forEach(bg => { bg.style.opacity = '0.2'; });
+                document.querySelectorAll('.section-bg').forEach(bg => { bg.style.opacity = '0.15'; });
                 document.querySelectorAll('.section-inner').forEach(inr => { inr.style.color = '#1a1a1a'; });
-                document.querySelectorAll('.notice-board, .video-container, .mascot-card, .about-card, .works-grid a').forEach(el => {
+                document.querySelectorAll('.notice-board, .video-container, .mascot-card, .about-card, .works-grid a, .article-card, .partner-card').forEach(el => {
                     el.style.background = 'rgba(255,255,255,0.7)';
                     el.style.borderColor = 'rgba(0,0,0,0.04)';
                 });
-                document.querySelectorAll('.notice-title, .section-headline, .mascot-card h4, .about-card h3').forEach(el => {
+                document.querySelectorAll('.notice-title, .section-headline, .mascot-card h4, .about-card h3, .article-card .article-title, .hero-slogan, .hero-sub, .hero-badge').forEach(el => {
                     el.style.color = '#1a1a1a';
                 });
-                document.querySelectorAll('.mascot-card p, .about-card p, .works-grid .desc').forEach(el => {
+                document.querySelectorAll('.mascot-card p, .about-card p, .works-grid .desc, .article-card .article-meta, .partner-card .partner-name').forEach(el => {
                     el.style.color = '#4a3f36';
                 });
                 document.querySelectorAll('.notice-content a').forEach(el => {
