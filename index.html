@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海米尔文化 · 视觉叙事</title>
+    <title>海米尔文化 · 无限可能</title>
     <link rel="preload" href="以年少之心敬未来无限可能.png" as="image">
     <link rel="preload" href="新LOGO.png" as="image">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -101,7 +101,7 @@
             z-index: 2;
         }
 
-        /* Hero区域：LOGO + 标题 + 图片 */
+       /* Hero区域：LOGO + 标题 + 图片 */
         #hero .hero-badge {
             display: inline-block;
             background: rgba(251, 197, 0, 0.12);
@@ -117,7 +117,7 @@
             backdrop-filter: blur(8px);
         }
         #hero .hero-logo {
-            max-width: 200px;
+            max-width: 300px;
             width: 30%;
             margin-bottom: 16px;
             filter: drop-shadow(0 0 40px rgba(251, 197, 0, 0.15));
@@ -156,7 +156,7 @@
             width: 94%;
             border-radius: 32px;
             overflow: hidden;
-            background: transparent;
+            background: transparent;  /* 背景透明 */
             box-shadow: 0 60px 120px -40px rgba(251, 197, 0, 0.15), 0 0 80px rgba(251, 197, 0, 0.05);
             transform: perspective(1000px) rotateX(2deg);
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -168,7 +168,8 @@
             width: 100%;
             display: block;
             border-radius: 32px;
-            background: transparent;
+            background: transparent;  /* 图片背景透明 */
+            mix-blend-mode: normal;   /* 正常混合模式 */
         }
 
         /* ===== 第2屏：视频 ===== */
@@ -735,7 +736,7 @@
         <div class="nav-dot" data-target="articles-section"><span class="tooltip">文章</span></div>
         <div class="nav-dot" data-target="partners-section"><span class="tooltip">伙伴</span></div>
         <div class="nav-dot" data-target="works-section"><span class="tooltip">作品</span></div>
-        <div class="nav-dot" data-target="team-section"><span class="tooltip">团队</span></div>
+        <div class="nav-dot" data-target="team-section"><span class="tooltip">形象</span></div>
         <div class="nav-dot" data-target="about-section"><span class="tooltip">关于</span></div>
     </nav>
 
@@ -748,10 +749,10 @@
             </div>
         </div>
         <div class="section-inner visible">
-            <div class="hero-badge">✦ 年轻视角 · 无限可能</div>
-            <div class="hero-logo">
+             <div class="hero-logo">
                 <img src="新LOGO.png" alt="海米尔文化">
             </div>
+            <div class="hero-badge">✦ 让创作有迹可循 ✦</div>
               <div class="hero-image-wrap">
                 <img src="以年少之心敬未来无限可能.png" alt="海米尔文化">
             </div>
