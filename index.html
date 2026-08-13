@@ -143,6 +143,48 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        #hero .hero-sub {/* Hero区域：LOGO + 标题 + 图片 */
+        #hero .hero-badge {
+            display: inline-block;
+            background: rgba(251, 197, 0, 0.12);
+            color: #FBC500;
+            padding: 6px 28px;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid rgba(251, 197, 0, 0.1);
+            backdrop-filter: blur(8px);
+        }
+        #hero .hero-logo {
+            max-width: 300px;
+            width: 30%;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 40px rgba(251, 197, 0, 0.15));
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #hero .hero-logo:hover {
+            transform: scale(1.04);
+        }
+        #hero .hero-logo img {
+            width: 100%;
+            display: block;
+        }
+        #hero .hero-slogan {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+        #hero .hero-slogan .gold {
+            background: linear-gradient(135deg, #FBC500, #f5a623);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         #hero .hero-sub {
             font-size: clamp(0.9rem, 1.5vw, 1.2rem);
             color: rgba(255,255,255,0.4);
@@ -156,7 +198,7 @@
             width: 94%;
             border-radius: 32px;
             overflow: hidden;
-            background: transparent;  /* 背景透明 */
+            background: transparent !important;  /* 强制透明背景 */
             box-shadow: 0 60px 120px -40px rgba(251, 197, 0, 0.15), 0 0 80px rgba(251, 197, 0, 0.05);
             transform: perspective(1000px) rotateX(2deg);
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -168,8 +210,8 @@
             width: 100%;
             display: block;
             border-radius: 32px;
-            background: transparent;  /* 图片背景透明 */
-            mix-blend-mode: normal;   /* 正常混合模式 */
+            background: transparent !important;  /* 图片自身背景透明 */
+            /* 删除所有 mix-blend-mode，透明PNG不需要 */
         }
 
         /* ===== 第2屏：视频 ===== */
