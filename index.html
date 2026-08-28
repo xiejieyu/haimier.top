@@ -690,6 +690,38 @@
         }
         .theme-fab:hover { background: #FBC500; color: #0a0a0a; border-color: #FBC500; }
 
+        /* ===== 额外按钮组 (资质公示 & 代理案例) ===== */
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .action-btn {
+            background: rgba(251, 197, 0, 0.06);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(251, 197, 0, 0.15);
+            padding: 10px 32px;
+            border-radius: 60px;
+            font-weight: 500;
+            color: #FBC500;
+            text-decoration: none;
+            transition: all 0.4s;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-btn:hover {
+            background: #FBC500;
+            color: #0a0a0a;
+            box-shadow: 0 8px 40px rgba(251, 197, 0, 0.25);
+            transform: translateY(-3px);
+            border-color: #FBC500;
+        }
+
         /* ===== 滚动驱动动画 ===== */
         .section-inner {
             opacity: 0;
@@ -717,6 +749,8 @@
             .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .footer-beian .beian-inner { flex-direction: column; gap: 12px; }
             .footer-beian .divider { display: none; }
+            .action-bar { flex-direction: column; align-items: center; }
+            .action-btn { width: 80%; justify-content: center; }
         }
         @media (max-width: 480px) {
             .works-grid { grid-template-columns: 1fr; }
@@ -757,6 +791,11 @@
                 <img src="以年少之心敬未来无限可能.png" alt="海米尔文化">
             </div>
             <div class="hero-sub">海米尔文化 · 用创意与内容，重塑数字体验</div>
+            <!-- 新按钮组 -->
+            <div class="action-bar">
+                <a href="https://haimier.top/qualifications" target="_blank" class="action-btn">资质公示</a>
+                <a href="https://thoy.top/case" target="_blank" class="action-btn">代理案例</a>
+            </div>
         </div>
     </section>
 
@@ -893,13 +932,19 @@
             <div class="about-grid">
                 <div class="about-card">
                     <h3 style="font-size:1.6rem; margin-bottom:16px;">关于我们</h3>
-                    <p>吉林海米尔文化传播有限公司（简称海米尔文化）是一家MCN与版权代理结合的公司，成立于2025年8月21日，创始人吕健泽。我们致力于用年轻视角创造无限内容价值。</p>
+                    <p>吉林海米尔文化传播有限公司（简称海米尔文化）是一家MCN与版权代理结合的公司，成立于2025年8月21日，创始人吕健泽。我们致力于用年轻视角创造无限内容价值，让创作有迹可循</p>
+                    <p>让创作者能放心创作、放心展示自己的作品，让版权出售者授权者能放心出售，让购买者能放心买</p>
+                    <p>与律师合作，实现登记维权一站式服务、与同行合作，共同服务好创作者，全面科普版权意识</p>
+                    <p>致力达到版权服务新高度、征求更多合作</p>
                     <span class="gold-text">✦ 与海米尔同行，共创内容新生态 ✦</span>
                 </div>
                 <div class="about-card">
                     <h3 style="font-size:1.6rem; margin-bottom:16px;">联系我们</h3>
                     <p>电话：16617152404</p>
                     <p>地址：吉林省长春市公主岭市铁北街兴华委第八中学家属楼7单元601室</p>
+                    <p>官方QQ：1463578852</p>
+                    <p>合作专线：18544198048</p>
+                    <p>客服微信：haimier_jieyu</p>
                     <p>邮箱：<a href="mailto:us@haimier.top">us@haimier.top</a> ｜ <a href="mailto:haimier@qq.com">haimier@qq.com</a></p>
                     <p>艺人合作：<a href="mailto:up@haimier.top">up@haimier.top</a></p>
                     <span class="gold-text">海米尔文化期待与您合作</span>
