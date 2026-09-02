@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>海米尔文化 · 无限可能</title>
+    <!-- 强制升级所有HTTP请求为HTTPS -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!-- 预加载资源（使用相对路径，自动跟随协议） -->
     <link rel="preload" href="以年少之心敬未来无限可能.png" as="image">
     <link rel="preload" href="新LOGO.png" as="image">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -793,8 +796,8 @@
             <div class="hero-sub">海米尔文化 · 用创意与内容，重塑数字体验</div>
             <!-- 新按钮组 -->
             <div class="action-bar">
-                <a href="https://haimier.top/qualifications" target="_blank" class="action-btn">资质公示</a>
-                <a href="https://thoy.top/case" target="_blank" class="action-btn">代理案例</a>
+                <a href="https://haimier.top/qualifications" target="_blank" rel="noopener noreferrer" class="action-btn">资质公示</a>
+                <a href="https://thoy.top/case" target="_blank" rel="noopener noreferrer" class="action-btn">代理案例</a>
             </div>
         </div>
     </section>
@@ -812,10 +815,11 @@
                     <span class="hint">▶ 点击播放</span>
                 </div>
                 <div style="position:relative; padding-bottom:56.25%; height:0;">
-                    <iframe src="//player.bilibili.com/player.html?bvid=BV1qFdGBTEdr&high_quality=1&autoplay=0&danmaku=1" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+                    <!-- 使用协议相对URL，自动适配HTTPS -->
+                    <iframe src="//player.bilibili.com/player.html?bvid=BV1qFdGBTEdr&high_quality=1&autoplay=0&danmaku=1" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen loading="lazy"></iframe>
                 </div>
                 <div class="video-footer">
-                    来源：<a href="https://www.bilibili.com/video/BV1qFdGBTEdr/" target="_blank">B站 海米尔文化</a> 
+                    来源：<a href="https://www.bilibili.com/video/BV1qFdGBTEdr/" target="_blank" rel="noopener noreferrer">B站 海米尔文化</a> 
                 </div>
             </div>
         </div>
@@ -836,27 +840,27 @@
                     <div class="notice-item">
                         <span class="notice-badge">最新</span>
                         <div class="notice-content">
-                            <div><a href="https://haimier.top/announcementList/E260601001" target="_blank">关于版权免费登记服务的活动公告</a></div>
+                            <div><a href="https://haimier.top/announcementList/E260601001" target="_blank" rel="noopener noreferrer">关于版权免费登记服务的活动公告</a></div>
                             <div class="notice-date">2026-05-19</div>
                         </div>
                     </div>
                     <div class="notice-item">
                         <span class="notice-badge">重要</span>
                         <div class="notice-content">
-                            <div><a href="https://haimier.top/announcementList/E260519001" target="_blank">关于封杀QQ用户的公告</a></div>
+                            <div><a href="https://haimier.top/announcementList/E260519001" target="_blank" rel="noopener noreferrer">关于封杀QQ用户的公告</a></div>
                             <div class="notice-date">2026-05-19</div>
                         </div>
                     </div>
                     <div class="notice-item">
                         <span class="notice-badge">普通</span>
                         <div class="notice-content">
-                            <div><a href="https://haimier.top/announcementList/E260503001" target="_blank">关于海米尔文化更换LOGO的公告</a></div>
+                            <div><a href="https://haimier.top/announcementList/E260503001" target="_blank" rel="noopener noreferrer">关于海米尔文化更换LOGO的公告</a></div>
                             <div class="notice-date">2026-05-03</div>
                         </div>
                     </div>
                 </div>
                 <div class="notice-more-link">
-                    <a href="https://haimier.top/announcementList" target="_blank" class="notice-more">查看更多公告 →</a>
+                    <a href="https://haimier.top/announcementList" target="_blank" rel="noopener noreferrer" class="notice-more">查看更多公告 →</a>
                 </div>
             </div>
         </div>
@@ -870,7 +874,7 @@
             <h2 class="section-headline">文章墙</h2>
             <div class="article-grid" id="articleContainer"></div>
             <div class="article-more-wrap">
-                <a href="https://mp.weixin.qq.com/" target="_blank" class="article-more">更多文章 →</a>
+                <a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener noreferrer" class="article-more">更多文章 →</a>
             </div>
         </div>
     </section>
@@ -883,11 +887,11 @@
             <h2 class="section-headline">合作伙伴</h2>
             <div class="partners-grid">
                 <div class="partner-card">
-                    <img src="logo/白糖阿布.png" alt="白糖阿布">
+                    <img src="logo/白糖阿布.png" alt="白糖阿布" loading="lazy" onerror="this.style.display='none'">
                     <span class="partner-name">白糖阿布</span>
                 </div>
                 <div class="partner-card">
-                    <img src="logo/吉天行.png" alt="吉天行律所">
+                    <img src="logo/吉天行.png" alt="吉天行律所" loading="lazy" onerror="this.style.display='none'">
                     <span class="partner-name">吉天行律所</span>
                 </div>
             </div>
@@ -912,12 +916,12 @@
             <h2 class="section-headline">公司吉祥物</h2>
             <div class="mascot-grid">
                 <div class="mascot-card">
-                    <img src="霂水.jpg" alt="霂水">
+                    <img src="霂水.jpg" alt="霂水" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23333%22 width=%22120%22 height=%22120%22/%3E%3Ctext x=%2220%22 y=%2260%22 fill=%22%23FBC500%22 font-size=%2220%22%3E霂水%3C/text%3E%3C/svg%3E'">
                     <h4>霂水</h4>
                     <p><strong>性别</strong>：中性<br><strong>类别</strong>：人类<br>代表公司精神面貌，朝气蓬勃</p>
                 </div>
                 <div class="mascot-card">
-                    <img src="板泉.jpg" alt="板泉">
+                    <img src="板泉.jpg" alt="板泉" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23333%22 width=%22120%22 height=%22120%22/%3E%3Ctext x=%2220%22 y=%2260%22 fill=%22%23FBC500%22 font-size=%2220%22%3E板泉%3C/text%3E%3C/svg%3E'">
                     <h4>板泉</h4>
                     <p><strong>性别</strong>：无性<br><strong>类别</strong>：机器人<br>公司业务形象的代名词</p>
                 </div>
@@ -958,12 +962,12 @@
         <div class="beian-inner">
             <span class="copyright">©2025-2026 版权所有 吉林海米尔文化传播有限公司</span>
             <span class="divider">|</span>
-            <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
-                <img src="ICP.png" alt="ICP">吉ICP备2026000319号-1
+            <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer">
+                <img src="ICP.png" alt="ICP" loading="lazy" onerror="this.style.display='none'">吉ICP备2026000319号-1
             </a>
             <span class="divider">|</span>
-            <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank">
-                <img src="备案图标.png" alt="备案">吉公网安备22032302000081号
+            <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" rel="noopener noreferrer">
+                <img src="备案图标.png" alt="备案" loading="lazy" onerror="this.style.display='none'">吉公网安备22032302000081号
             </a>
         </div>
     </div>
@@ -1018,7 +1022,7 @@
             div.className = 'article-card';
             div.href = a.link;
             div.target = '_blank';
-            div.rel = 'noopener';
+            div.rel = 'noopener noreferrer';
             div.innerHTML = `
                 <div class="article-title">${a.title}</div>
                 <div class="article-meta">
@@ -1039,8 +1043,10 @@
         const worksContainer = document.getElementById('worksContainer');
         worksData.forEach(w => {
             const a = document.createElement('a');
-            a.href = w.link; a.target = "_blank"; a.rel = "noopener";
-            a.innerHTML = `<img src="${w.image}" alt="${w.alt}" loading="lazy"><p class="desc">${w.title}</p>`;
+            a.href = w.link; 
+            a.target = "_blank"; 
+            a.rel = "noopener noreferrer";
+            a.innerHTML = `<img src="${w.image}" alt="${w.alt}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22180%22%3E%3Crect fill=%22%23222%22 width=%22320%22 height=%22180%22/%3E%3Ctext x=%2240%22 y=%2290%22 fill=%22%23FBC500%22 font-size=%2220%22%3E${w.title}%3C/text%3E%3C/svg%3E'"><p class="desc">${w.title}</p>`;
             worksContainer.appendChild(a);
         });
 
