@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>海米尔信科 · 让创作有迹可循</title>
+  <style>
+    /* ========== 全局字体 ========== */
+    @font-face {
+      font-family: 'NanoTikBazHei';
+      src: url('NanoTikBazHei-Bold.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'NanoTikBazHei', 'Arial Black', sans-serif;
+      font-weight: bold;
+      line-height: 1.4;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #f5c542; border-radius: 6px; border: 2px solid #111; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 30px; width: 100%; }
+    .section { margin: 3rem 0; position: relative; }
+
+    /* ============================================================
+       多重鼠标框选动画 —— 核心
+       每层是一个"鼠标选框"：细边框 + 角点 + 错位延迟
+       外层还叠加 SVG 描边绘制动画（一笔画完）
+    ============================================================ */
+    .select-box {
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* 每一层选框 */
+    .select-box .sel {
+      position: absolute;
+      pointer-events: none;
+      border: 1.5px solid #f5c542;
+      border-radius: 4px;
+      opacity: 0;
+      z-index: 10;
+      animation: drawSelect 3.6s cubic-bezier(.45,0,.2,1) infinite;
+      will-change: opacity, transform;
+    }
+
+    /* 四个角点（像鼠标选框的把手） */
+    .select-box .sel::before,
+    .select-box .sel::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #f5c542;
+      border-radius: 1px;
+      box-shadow: 0 0 8px #f5c542;
+    }
+    .select-box .sel::before { top: -4px; left: -4px; }
+    .select-box .sel::after  { bottom: -4px; right: -4px; }
+
+    /* 多层级：逐层外扩、错位启动 */
+    .select-box .sel:nth-child(1) { inset: -6px;  animation-delay: 0s;   }
+    .select-box .sel:nth-child(2) { inset: -14px; animation-delay: 0.18s; border-color: #ffd966; }
+    .select-box .sel:nth-child(3) { inset: -22px; animation-delay: 0.36s; border-style: dashed; }
+    .select-box .sel:nth-child(4) { inset: -30px; animation-delay: 0.54s; border-color: #ffd966; opacity: .9; }
+
+    @keyframes drawSelect {
+      0%   { opacity: 0; transform: scale(0.94); }
+      8%   { opacity: 1; transform: scale(1); }
+      22%  { opacity: 1; transform: scale(1); }
+      60%  { opacity: .85; transform: scale(1.01); }
+      100% { opacity: 0; transform: scale(1.03); }
+    }
+
+    /* ---------- SVG 一笔描边（更强的"勾画"感） ---------- */
+    .select-svg {
+      position: absolute;
+      inset: -8px;
+      width: calc(100% + 16px);
+      height: calc(100% + 16px);
+      pointer-events: none;
+      z-index: 9;
+      overflow: visible;
+    }
+    .select-svg rect {
+      fill: none;
+      stroke: #f5c542;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      filter: drop-shadow(0 0 6px #f5c542) drop-shadow(0 0 16px rgba(245,197,66,.6));
+      animation: drawStroke 3.6s cubic-bezier(.45,0,.2,1) infinite;
+    }
+    @keyframes drawStroke {
+      0%   { stroke-dashoffset: 2000; opacity: 0; }
+      5%   { opacity: 1; }
+      55%  { stroke-dashoffset: 0; opacity: 1; }
+      80%  { stroke-dashoffset: 0; opacity: .8; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+
+    /* 给 select-box 里的内容加一点呼吸光，跟动画呼应 */
+    .select-box > .content {
+      position: relative;
+      z-index: 1;
+      animation: contentGlow 3.6s ease-in-out infinite;
+    }
+    @keyframes contentGlow {
+      0%, 100% { box-shadow: 0 0 0 rgba(245,197,66,0); }
+      20%, 60% { box-shadow: 0 0 24px rgba(245,197,66,.18); }
+    }
+
+    /* ========== 通用卡片 ========== */
+    .card {
+      background: #0d0d0d;
+      border: 1px solid rgba(245,197,66,.35);
+      border-radius: 24px;
+      padding: 2rem;
+    }
+    .yellow-gradient-line {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #f5c542, #ffd966, #f5c542, transparent);
+      width: 100%; margin: 1.5rem 0;
+    }
+
+    /* ========== 板块一：LOGO ========== */
+    .section-1 { text-align: center; padding: 3rem 0 1rem; }
+    .logo-wrapper { display: inline-block; max-width: 280px; margin: 0 auto; }
+
+    .logo-glow {
+      box-shadow: 0 0 15px #fff, 0 0 30px #fff, 0 0 45px #f5c542, 0 0 60px #f5c542;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      padding: 10px;
+      background: radial-gradient(circle, rgba(255,255,255,.15) 0%, rgba(0,0,0,0) 80%);
+      display: inline-block;
+      animation: whitePulse 2s infinite alternate;
+    }
+    .logo-glow img { display: block; max-width: 100%; height: auto; border-radius: 50%; }
+    @keyframes whitePulse {
+      0%   { box-shadow: 0 0 15px #fff, 0 0 30px #fff, 0 0 45px #f5c542, 0 0 60px #f5c542; }
+      100% { box-shadow: 0 0 25px #fff, 0 0 50px #fff, 0 0 75px #f5c542, 0 0 100px #f5c542; }
+    }
+
+    .sub-logo { margin-top: 1.5rem; display: inline-block; max-width: 220px; }
+    .sub-logo img { width: 100%; height: auto; }
+
+    .slogan {
+      font-size: 1.2rem; margin-top: 1.2rem; letter-spacing: 4px;
+      color: #f5c542; text-shadow: 0 0 10px rgba(245,197,66,.6); text-align: center;
+    }
+
+    /* ========== 板块二：公告 ========== */
+    .notice-section { display: flex; gap: 2rem; align-items: stretch; position: relative; }
+    .notice-left {
+      flex: 0 0 40%; padding: 2rem; border-radius: 24px;
+      background: #0d0d0d; border: 1px solid rgba(245,197,66,.4);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .notice-left p { font-size: 2rem; color: #f5c542; text-shadow: 0 0 15px rgba(245,197,66,.6); margin-bottom: .5rem; }
+    .notice-left small { color: #aaa; font-size: .9rem; letter-spacing: 1px; }
+
+    .notice-divider {
+      flex: 0 0 3px; background: linear-gradient(180deg, transparent, #f5c542, #ffd966, #f5c542, transparent);
+      margin: 0 1rem; box-shadow: 0 0 20px #f5c542;
+    }
+
+    .notice-right { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; }
+    .notice-item {
+      background: #0d0d0d; border: 1px solid rgba(245,197,66,.4); border-radius: 20px;
+      padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
+    }
+    .notice-item .notice-text { font-size: 1.2rem; }
+    .notice-item .notice-date { color: #f5c542; font-size: .9rem; white-space: nowrap; }
+    .more-link { text-align: right; margin-top: .5rem; }
+    .more-link a {
+      color: #f5c542; text-decoration: none; font-size: 1rem;
+      border-bottom: 2px solid transparent; transition: .3s; padding-bottom: 2px;
+    }
+    .more-link a:hover { border-bottom-color: #f5c542; text-shadow: 0 0 10px #f5c542; }
+
+    /* ========== 板块三：管理层 ========== */
+    .team-grid { display: flex; gap: 2rem; align-items: stretch; }
+    .team-left { flex: 0 0 60%; }
+    .team-right { flex: 1; display: flex; flex-direction: column; gap: 2rem; }
+
+    .team-card {
+      background: #0d0d0d; border: 1px solid rgba(245,197,66,.4); border-radius: 24px;
+      padding: 1.8rem; display: flex; align-items: center; gap: 1.5rem; height: 100%;
+    }
+    .team-card .photo { flex: 0 0 40%; max-width: 40%; }
+    .team-card .photo img {
+      width: 100%; height: auto; border-radius: 16px; border: 2px solid #f5c542;
+      box-shadow: 0 0 20px rgba(245,197,66,.4); display: block;
+    }
+    .team-card .info { flex: 1; }
+    .team-card .info h3 { font-size: 2rem; color: #f5c542; text-shadow: 0 0 15px rgba(245,197,66,.6); margin-bottom: .5rem; }
+    .team-card .info p { color: #ccc; font-size: .95rem; }
+
+    .team-card.small { padding: 1.2rem; }
+    .team-card.small .photo { flex: 0 0 50%; max-width: 50%; }
+    .team-card.small .info h3 { font-size: 1.5rem; }
+
+    .view-more-team { text-align: center; margin-top: 2rem; }
+    .btn-more {
+      display: inline-block; padding: .9rem 3rem; background: transparent;
+      border: 2px solid #f5c542; border-radius: 40px; color: #f5c542;
+      font-size: 1.1rem; text-decoration: none; transition: .3s;
+      font-family: inherit; font-weight: bold; letter-spacing: 2px;
+      box-shadow: 0 0 15px rgba(245,197,66,.3);
+    }
+    .btn-more:hover { background: #f5c542; color: #000; box-shadow: 0 0 40px #f5c542; }
+
+    /* ========== 板块四：合作伙伴 ========== */
+    .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-top: 1.5rem; }
+    .partner-card {
+      background: #0d0d0d; border: 1px solid rgba(245,197,66,.4); border-radius: 20px;
+      padding: 1.5rem; text-align: center; transition: .3s;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .partner-card .partner-logo {
+      width: 100px; height: 100px; border-radius: 50%; background: #1a1a1a;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid #f5c542; margin-bottom: 1rem; font-size: 2rem; color: #f5c542;
+      box-shadow: 0 0 20px rgba(245,197,66,.4);
+    }
+    .partner-card h4 { color: #fff; font-size: 1.1rem; }
+    .partner-card p { color: #aaa; font-size: .8rem; margin-top: .3rem; }
+
+    /* ========== 板块五：关于/联系 ========== */
+    .about-contact-wrapper { display: flex; gap: 2rem; align-items: stretch; }
+    .about-card, .contact-card {
+      background: #0d0d0d; border: 1px solid rgba(245,197,66,.4); border-radius: 24px; padding: 2rem;
+    }
+    .about-card { flex: 1; }
+    .contact-card { flex: 0 0 40%; }
+    .about-card h2, .contact-card h2 {
+      font-size: 2rem; color: #f5c542; text-shadow: 0 0 20px rgba(245,197,66,.5); margin-bottom: 1.5rem;
+    }
+    .about-card p { color: #ddd; font-size: .95rem; line-height: 1.7; margin-bottom: 1rem; }
+    .about-card .highlight {
+      color: #f5c542; font-size: 1.1rem; text-align: center; margin-top: 1.5rem; padding: 1rem;
+      border-top: 1px dashed #f5c542; border-bottom: 1px dashed #f5c542;
+    }
+    .contact-card .contact-item {
+      margin-bottom: 1rem; font-size: .95rem; color: #ddd; display: flex; align-items: flex-start; gap: .5rem;
+    }
+    .contact-card .contact-item .label { color: #f5c542; white-space: nowrap; min-width: 70px; }
+    .contact-card .contact-item .value { word-break: break-all; }
+    .contact-card .contact-item .value a { color: #fff; text-decoration: none; border-bottom: 1px solid #f5c542; }
+    .contact-card .contact-item .value a:hover { color: #f5c542; }
+
+    /* ========== footer ========== */
+    .footer {
+      margin-top: 4rem; padding: 2rem 0; border-top: 1px solid rgba(245,197,66,.6); background: #050505;
+    }
+    .footer-logo { text-align: center; margin-bottom: 1.5rem; }
+    .footer-logo img { max-width: 120px; height: auto; filter: drop-shadow(0 0 15px #f5c542); }
+    .footer-beian { text-align: center; color: #aaa; font-size: .8rem; }
+    .beian-inner { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem 1rem; }
+    .beian-inner .divider { color: #f5c542; opacity: .7; }
+    .beian-link { color: #aaa; text-decoration: none; display: inline-flex; align-items: center; gap: .3rem; transition: .3s; }
+    .beian-link:hover { color: #f5c542; }
+    .beian-link img { width: 16px; height: auto; }
+
+    /* ========== 响应式 ========== */
+    @media (max-width: 1024px) {
+      .notice-section { flex-direction: column; }
+      .notice-divider { display: none; }
+      .notice-left { flex: 1; }
+      .team-grid { flex-direction: column; }
+      .team-left { flex: 1; }
+      .about-contact-wrapper { flex-direction: column; }
+      .contact-card { flex: 1; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 15px; }
+      .team-card { flex-direction: column; }
+      .team-card .photo { flex: 0 0 auto; max-width: 200px; margin: 0 auto; }
+      .team-card.small { flex-direction: row; }
+      .team-card.small .photo { flex: 0 0 50%; max-width: 50%; }
+      .notice-left p { font-size: 1.5rem; }
+      .logo-wrapper { max-width: 200px; }
+    }
+    @media (max-width: 480px) {
+      .team-card.small { flex-direction: column; }
+      .team-card.small .photo { flex: 0 0 auto; max-width: 180px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 板块一：LOGO -->
+  <section class="section section-1">
+    <div class="container">
+      <div class="logo-wrapper select-box">
+        <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+        <svg class="select-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+          <rect x="1" y="1" width="98" height="98" rx="12"></rect>
+        </svg>
+        <div class="content logo-glow">
+          <img src="海米尔信科logo.png" alt="海米尔信科Logo" style="max-width: 260px;">
+        </div>
+      </div>
+      <div style="margin-top: 2rem;">
+        <div class="sub-logo select-box" style="max-width: 220px; margin: 0 auto;">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <div class="content">
+            <img src="信科字体.png" alt="信科字体" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+      <p class="slogan">让创作有迹可循</p>
+    </div>
+  </section>
+
+  <!-- 板块二：公司公告 -->
+  <section class="section">
+    <div class="container">
+      <div class="notice-section">
+        <div class="notice-left select-box">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <svg class="select-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+            <rect x="1" y="1" width="98" height="98" rx="6"></rect>
+          </svg>
+          <div class="content" style="padding:0;">
+            <p>公司公告</p>
+            <small>ANNOUNCEMENT</small>
+          </div>
+        </div>
+        <div class="notice-divider"></div>
+        <div class="notice-right">
+          <div class="notice-item select-box">
+            <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+            <div class="content" style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+              <span class="notice-text">海米尔信科正式发布版权服务2.0系统</span>
+              <span class="notice-date">2026-11-10</span>
+            </div>
+          </div>
+          <div class="notice-item select-box">
+            <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+            <div class="content" style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+              <span class="notice-text">与长春市律师协会达成版权维权战略合作</span>
+              <span class="notice-date">2026-10-28</span>
+            </div>
+          </div>
+          <div class="notice-item select-box">
+            <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+            <div class="content" style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+              <span class="notice-text">关于2026年第四季度版权登记补贴的通知</span>
+              <span class="notice-date">2026-10-15</span>
+            </div>
+          </div>
+          <div class="more-link">
+            <a href="#all-notices">更多公告 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 板块三：管理层人员公示 -->
+  <section class="section">
+    <div class="container">
+      <div class="team-grid">
+        <div class="team-left">
+          <div class="team-card select-box" style="height:100%;">
+            <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+            <svg class="select-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+              <rect x="1" y="1" width="98" height="98" rx="6"></rect>
+            </svg>
+            <div class="content" style="display:flex;align-items:center;gap:1.5rem;width:100%;">
+              <div class="photo">
+                <img src="吕健泽照片.png" alt="创始人 吕健泽" onerror="this.style.display='none'">
+                <div style="background:#1a1a1a;width:100%;height:200px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#f5c542;border:2px solid #f5c542;">创始人照片</div>
+              </div>
+              <div class="info">
+                <h3>吕健泽</h3>
+                <p style="color:#f5c542;margin-bottom:.5rem;">创始人 / CEO</p>
+                <p>吉林海米尔信息科技有限公司创始人，致力于用年轻视角创造无限内容价值，推动版权服务新高度。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-right">
+          <div class="team-card small select-box">
+            <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+            <div class="content" style="display:flex;align-items:center;gap:1.2rem;width:100%;">
+              <div class="photo">
+                <img src="张薇照片.png" alt="张薇" onerror="this.style.display='none'">
+                <div style="background:#1a1a1a;width:100%;height:120px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#f5c542;border:2px solid #f5c542;">照片</div>
+              </div>
+              <div class="info">
+                <h3>张薇</h3>
+                <p>运营总监</p>
+              </div>
+            </div>
+          </div>
+          <div class="team-card small select-box">
+            <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+            <div class="content" style="display:flex;align-items:center;gap:1.2rem;width:100%;">
+              <div class="photo">
+                <img src="李铭照片.png" alt="李铭" onerror="this.style.display='none'">
+                <div style="background:#1a1a1a;width:100%;height:120px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#f5c542;border:2px solid #f5c542;">照片</div>
+              </div>
+              <div class="info">
+                <h3>李铭</h3>
+                <p>法务总监</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="view-more-team">
+        <a href="#all-team" class="btn-more">查看更多人物</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 板块四：合作伙伴 -->
+  <section class="section">
+    <div class="container">
+      <h2 style="color:#f5c542;font-size:2rem;margin-bottom:1.5rem;text-shadow:0 0 15px rgba(245,197,66,.5);">合作伙伴</h2>
+      <div class="partners-grid">
+        <div class="partner-card select-box">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <div class="content" style="display:flex;flex-direction:column;align-items:center;width:100%;">
+            <div class="partner-logo">律</div>
+            <h4>长春正大律师事务所</h4>
+            <p>版权维权 · 法律支持</p>
+          </div>
+        </div>
+        <div class="partner-card select-box">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <div class="content" style="display:flex;flex-direction:column;align-items:center;width:100%;">
+            <div class="partner-logo">创</div>
+            <h4>吉林省创意设计协会</h4>
+            <p>行业协作 · 资源互通</p>
+          </div>
+        </div>
+        <div class="partner-card select-box">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <div class="content" style="display:flex;flex-direction:column;align-items:center;width:100%;">
+            <div class="partner-logo">数</div>
+            <h4>北方数字版权中心</h4>
+            <p>版权登记 · 数据服务</p>
+          </div>
+        </div>
+        <div class="partner-card select-box">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <div class="content" style="display:flex;flex-direction:column;align-items:center;width:100%;">
+            <div class="partner-logo">媒</div>
+            <h4>吉林广电传媒</h4>
+            <p>内容分发 · 品牌推广</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 板块五：关于我们 & 联系我们 -->
+  <section class="section">
+    <div class="container">
+      <div class="about-contact-wrapper">
+        <div class="about-card select-box">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <svg class="select-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+            <rect x="1" y="1" width="98" height="98" rx="6"></rect>
+          </svg>
+          <div class="content">
+            <h2>关于我们</h2>
+            <p>吉林海米尔信息科技有限公司（简称海米尔信科）是一家信息科技与版权代理结合的公司，成立于2026年11月10日，创始人吕健泽。我们致力于用年轻视角创造无限内容价值，让创作有迹可循。</p>
+            <p>让创作者能放心创作、放心展示自己的作品，让版权出售者授权者能放心出售，让购买者能放心买。</p>
+            <p>与律师合作，实现登记维权一站式服务、与同行合作，共同服务好创作者，全面科普版权意识。</p>
+            <p>致力达到版权服务新高度、征求更多合作。</p>
+            <div class="highlight">✦ 与海米尔同行，共创内容新生态 ✦</div>
+          </div>
+        </div>
+        <div class="contact-card select-box">
+          <div class="sel"></div><div class="sel"></div><div class="sel"></div><div class="sel"></div>
+          <svg class="select-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+            <rect x="1" y="1" width="98" height="98" rx="6"></rect>
+          </svg>
+          <div class="content">
+            <h2>联系我们</h2>
+            <div class="contact-item"><span class="label">电话：</span><span class="value">16617152404</span></div>
+            <div class="contact-item"><span class="label">地址：</span><span class="value">吉林省长春市公主岭市铁北街兴华委第八中学家属楼7单元601室</span></div>
+            <div class="contact-item"><span class="label">官方QQ：</span><span class="value">1463578852</span></div>
+            <div class="contact-item"><span class="label">合作专线：</span><span class="value">18544198048</span></div>
+            <div class="contact-item"><span class="label">客服微信：</span><span class="value">haimier_jieyu</span></div>
+            <div class="contact-item"><span class="label">邮箱：</span><span class="value"><a href="mailto:us@haimier.top">us@haimier.top</a> ｜ <a href="mailto:haimier@qq.com">haimier@qq.com</a></span></div>
+            <div class="contact-item"><span class="label">艺人合作：</span><span class="value"><a href="mailto:up@haimier.top">up@haimier.top</a></span></div>
+            <p style="color:#f5c542;margin-top:1.2rem;font-size:1rem;text-align:center;">海米尔文化期待与您合作</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 最终板块：footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <img src="海米尔信科logo.png" alt="海米尔信科" onerror="this.style.display='none'">
+      </div>
+      <div class="footer-beian">
+        <div class="beian-inner">
+          <span class="copyright">©2025-2026 版权所有 吉林海米尔文化传播有限公司</span>
+          <span class="divider">|</span>
+          <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer">
+            <img src="ICP.png" alt="ICP" loading="lazy" onerror="this.style.display='none'">吉ICP备2026000319号-1
+          </a>
+          <span class="divider">|</span>
+          <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank" rel="noopener noreferrer">
+            <img src="备案图标.png" alt="备案" loading="lazy" onerror="this.style.display='none'">吉公网安备22032302000081号
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
